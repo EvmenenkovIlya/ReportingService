@@ -79,5 +79,9 @@
     <None Include="Stored Procedures\Account_GetAll.sql" />
     <None Include="Stored Procedures\Account_GetById.sql" />
     <None Include="Stored Procedures\Account_Update.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Add.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetAll.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetById.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Update.sql" />
   </ItemGroup>
 </Project>
