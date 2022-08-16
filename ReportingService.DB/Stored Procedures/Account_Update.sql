@@ -6,7 +6,7 @@
 	
 AS
 BEGIN
-	INSERT INTO dbo.LeadInformation
+	INSERT INTO dbo.Account
 	(
 		[Currency],
 		[Status],
@@ -18,7 +18,7 @@ BEGIN
 		@Status,
 		@LeadId
 	)
-	UPDATE [dbo].[LeadInformation]
+	UPDATE [dbo].Account
 	SET 
 		[Currency] = @Currency,
 		[Status] = @Status,

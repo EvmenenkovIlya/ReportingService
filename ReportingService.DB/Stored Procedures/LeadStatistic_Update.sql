@@ -12,7 +12,7 @@
 	
 AS
 BEGIN
-	INSERT INTO dbo.LeadInformation
+	INSERT INTO dbo.LeadStatistic
 	(
 		[DateStatistic],
 		[LeadId],
@@ -36,7 +36,7 @@ BEGIN
 		@WithdrawCount,
 		@TransferCount
 	)
-	UPDATE [dbo].[LeadInformation]
+	UPDATE [dbo].LeadStatistic
 	SET 
 		[DateStatistic] = @DateStatistic,
 		[LeadId] = @LeadId,
