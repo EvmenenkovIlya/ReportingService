@@ -66,5 +66,25 @@
     <Build Include="dbo\Tables\Transaction.sql" />
     <Build Include="dbo\Tables\LeadStatistic.sql" />
     <Build Include="dbo\Tables\Account.sql" />
+    <Build Include="Stored Procedures\LeadInformation_Add.sql" />
+    <Build Include="Stored Procedures\Transaction_Add.sql" />
+    <Build Include="Stored Procedures\Transaction_GetById.sql" />
+    <Build Include="Stored Procedures\Transaction_GetAll.sql" />
+    <Build Include="Stored Procedures\LeadInformation_GetById.sql" />
+    <Build Include="Stored Procedures\LeadInformation_GetAll.sql" />
+    <Build Include="Stored Procedures\LeadInformation_Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\Accounr_Add.sql" />
+    <None Include="Stored Procedures\Account_GetAll.sql" />
+    <None Include="Stored Procedures\Account_GetById.sql" />
+    <None Include="Stored Procedures\Account_Update.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Add.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetAll.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetById.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Update.sql" />
+    <None Include="Stored Procedures\Statistic_Add.sql" />
+    <None Include="Stored Procedures\Statistic_GetAll.sql" />
+    <None Include="Stored Procedures\Statistic_GetById.sql" />
   </ItemGroup>
 </Project>
