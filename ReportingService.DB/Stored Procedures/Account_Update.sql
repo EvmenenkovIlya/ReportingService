@@ -1,23 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[Account_Update]
-	@Id bigint,
+	@Id int,
 	@Currency tinyint,	
 	@Status tinyint,	
-	@LeadId bigint
+	@LeadId int
 	
 AS
 BEGIN
-	INSERT INTO dbo.Account
-	(
-		[Currency],
-		[Status],
-		[LeadId]
-	)
-    VALUES 
-	(
-		@Currency,
-		@Status,
-		@LeadId
-	)
 	UPDATE [dbo].Account
 	SET 
 		[Currency] = @Currency,

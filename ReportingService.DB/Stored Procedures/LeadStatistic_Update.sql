@@ -3,39 +3,15 @@
 	@DateStatistic date,
 	@LeadId bigint,
 	@TransactionCountForTwoMontht int,
-	@DepositsSum decimal,
-	@WithdrawSum decimal,
-	@TransferSum decimal,
-	@DepositCount bigint,
-	@WithdrawCount bigint,
-	@TransferCount bigint
+	@DepositsSum decimal(14,4),
+	@WithdrawSum decimal(14,4),
+	@TransferSum decimal(14,4),
+	@DepositCount int,
+	@WithdrawCount int,
+	@TransferCount int
 	
 AS
 BEGIN
-	INSERT INTO dbo.LeadStatistic
-	(
-		[DateStatistic],
-		[LeadId],
-		[TransactionCountForTwoMonth],
-		[DepositsSum],
-		[WithdrawSum],
-		[TransferSum],
-		[DepositCount],
-		[WithdrawCount],
-		[TransferCount]
-	)
-    VALUES 
-	(
-		@DateStatistic,
-		@LeadId,
-		@TransactionCountForTwoMontht,
-		@DepositsSum,
-		@WithdrawSum,
-		@TransferSum,
-		@DepositCount,
-		@WithdrawCount,
-		@TransferCount
-	)
 	UPDATE [dbo].LeadStatistic
 	SET 
 		[DateStatistic] = @DateStatistic,

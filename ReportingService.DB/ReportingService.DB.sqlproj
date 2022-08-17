@@ -75,7 +75,7 @@
     <Build Include="Stored Procedures\LeadInformation_Update.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Stored Procedures\Accounr_Add.sql" />
+    <None Include="Stored Procedures\Account_Add.sql" />
     <None Include="Stored Procedures\Account_GetAll.sql" />
     <None Include="Stored Procedures\Account_GetById.sql" />
     <None Include="Stored Procedures\Account_Update.sql" />

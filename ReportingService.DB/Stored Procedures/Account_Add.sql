@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Account_Add]
 	@Currency tinyint,	
 	@Status tinyint,	
-	@LeadId bigint
+	@LeadId int
 	
 AS
 BEGIN

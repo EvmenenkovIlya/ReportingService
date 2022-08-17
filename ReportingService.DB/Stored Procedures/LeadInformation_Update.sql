@@ -1,14 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[LeadInformation_Update]
-	@Id bigint,
-	@LeadId bigint,
-	@FirstName nvarchar(50),
-	@LastName nvarchar(50),
-	@Patranomyc nvarchar(50),
+	@Id int,
+	@LeadId int,
+	@FirstName nvarchar(20),
+	@LastName nvarchar(20),
+	@Patronymic nvarchar(20),
 	@BirthDate date,
-	@Phone nvarchar(50),
+	@Phone nvarchar(20),
 	@Email nvarchar(50),
 	@Passport nvarchar(10),
-	@City nvarchar(50),
+	@City tinyint,
 	@Address nvarchar(50),
 	@Role tinyint,
 	@RegistrationDate date,
@@ -16,44 +16,12 @@
 	
 AS
 BEGIN
-	INSERT INTO dbo.LeadInformation
-	(
-		[LeadId],
-		[FirstName],
-		[LastName],
-		[Patranomyc],
-		[Phone],
-		[Email],
-		[BirthDate],
-		[Passport],
-		[City],
-		[Address],
-		[Role],
-		[RegistrationDate],
-		[IsDeleted]
-	)
-    VALUES 
-	(
-		@LeadId,
-		@FirstName,
-		@LastName,
-		@Patranomyc,
-		@Phone,
-		@Email,
-		@BirthDate,
-		@Passport,
-		@City,
-		@Address,
-		@Role,
-		@RegistrationDate,
-		@IsDeleted	
-	)
 	UPDATE [dbo].[LeadInformation]
 	SET 
 		[LeadId] = @LeadId,
 		[FirstName] = @FirstName,
 		[LastName] = @LastName,
-		[Patranomyc] = @Patranomyc,
+		[Patronymic] = @Patronymic,
 		[Phone] = @Phone,
 		[Email] = @Email,
 		[BirthDate] = @BirthDate,

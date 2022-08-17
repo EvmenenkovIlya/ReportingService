@@ -6,7 +6,7 @@ BEGIN
 		[LeadId],
 		[FirstName],
 		[LastName],
-		[Patranomyc],
+		[Patronymic],
 		[Phone],
 		[Email],
 		[BirthDate],
