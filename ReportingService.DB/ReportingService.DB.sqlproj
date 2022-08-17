@@ -74,4 +74,17 @@
     <Build Include="Stored Procedures\LeadInformation_GetAll.sql" />
     <Build Include="Stored Procedures\LeadInformation_Update.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\Accounr_Add.sql" />
+    <None Include="Stored Procedures\Account_GetAll.sql" />
+    <None Include="Stored Procedures\Account_GetById.sql" />
+    <None Include="Stored Procedures\Account_Update.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Add.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetAll.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetById.sql" />
+    <None Include="Stored Procedures\LeadStatistic_Update.sql" />
+    <None Include="Stored Procedures\Statistic_Add.sql" />
+    <None Include="Stored Procedures\Statistic_GetAll.sql" />
+    <None Include="Stored Procedures\Statistic_GetById.sql" />
+  </ItemGroup>
 </Project>
