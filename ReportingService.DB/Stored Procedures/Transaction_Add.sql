@@ -2,9 +2,13 @@
 	@AccountId bigint,
 	@Date datetime2,
 	@TransactionType tinyint,
-	@Ammount decimal(14,4),
-	@Currency smallint,
-	@Rate decimal(6,4)
+	@Amount decimal(14,4),
+	@Currency tinyint,
+	@Rate decimal(7,4),
+	@RecipentId int,
+	@RecipientAccountId int,
+	@RecipientAmount decimal(14,4),
+	@RecipientCurrency tinyint
 AS
 BEGIN
 	INSERT INTO dbo.[Transaction]
@@ -12,9 +16,13 @@ BEGIN
 		[AccountId],
 		[Date],
 		[TransactionType],
-		[Ammount],
+		[Amount],
 		[Currency],
-		[Rate]
+		[Rate],
+		[RecipentId],
+		[RecipientAccountId],
+		[RecipientAmount],
+		[RecipientCurrency]
 	)
 
     VALUES 
@@ -22,9 +30,13 @@ BEGIN
 		@AccountId,
 		@Date,
 		@TransactionType,
-		@Ammount,
+		@Amount,
 		@Currency,
-		@Rate
+		@Rate,
+		@RecipentId,
+		@RecipientAccountId,
+		@RecipientAmount,
+		@RecipientCurrency
 	)
 
 SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]	

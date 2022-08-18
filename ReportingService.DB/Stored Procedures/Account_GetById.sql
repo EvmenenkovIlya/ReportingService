@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Account_GetById]
-	@Id bigint
+	@Id int
 AS
 BEGIN
 	SELECT 

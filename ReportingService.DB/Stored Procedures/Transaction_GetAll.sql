@@ -6,8 +6,12 @@ BEGIN
 		[AccountId],
 		[Date],
 		[TransactionType],
-		[Ammount],
+		[Amount],
 		[Currency],
-		[Rate]
+		[Rate],
+		[RecipentId],
+		[RecipientAccountId],
+		[RecipientAmount],
+		[RecipientCurrency]
 	FROM [dbo].[Transaction]
 END
