@@ -8,4 +8,8 @@ public class StoredProcedures
     public const string LeadInformation_GetAll = "LeadInformation_GetAll";
     public const string LeadInformation_GetById = "LeadInformation_GetById";
     public const string LeadInformation_Update = "LeadInformation_Update";
+    public const string Account_Add = "Account_Add";
+    public const string Account_GetAll = "Account_GetAll";
+    public const string Account_GetById = "Account_GetById";
+    public const string Account_Update = "Account_Update";
 }
