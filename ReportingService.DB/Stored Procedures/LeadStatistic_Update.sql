@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[LeadStatistic_Update]
 	@Id bigint,
 	@DateStatistic date,
-	@LeadId bigint,
+	@LeadId int,
 	@TransactionCountForTwoMontht int,
 	@DepositsSum decimal(14,4),
 	@WithdrawSum decimal(14,4),
