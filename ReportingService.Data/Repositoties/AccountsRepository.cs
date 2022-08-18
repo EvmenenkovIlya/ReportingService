@@ -8,13 +8,13 @@ public class AccountsRepository
 {
     public string connectionString = ServerOptions.ConnectionOption;
 
-    public string AddAccount(AccountDto accountDto)
+    public void AddAccount(AccountDto accountDto)
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
-            return connection.QuerySingle<string>
+            connection.QuerySingle
                    (StoredProcedures.Account_Add,
                    param: new
                    {
@@ -23,7 +23,7 @@ public class AccountsRepository
                        Status = accountDto.Status
                    },
                    commandType: System.Data.CommandType.StoredProcedure
-                   ).ToString();
+                   );
         }
     }
 
