@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace ReportingService.Data.Repositoties;
 
-public class LeadInformationsRepository
+public class LeadInformationsRepository : ILeadInformationsRepository
 {
 
     public string connectionString = ServerOptions.ConnectionOption;
@@ -38,13 +38,25 @@ public class LeadInformationsRepository
         }
     }
 
+    public List<int> GetAllBirthdayIds()
+    {
+        using (var connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            return connection.Query<int>
+                (StoredProcedures.LeadInformation_GetTodayBirthdayIds,
+                   commandType: System.Data.CommandType.StoredProcedure)
+                   .ToList();
+        }
+    }
+
     public string AddLeadInformation(LeadInformationDto leadInformationDto)
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
-            return connection.QuerySingle<string>
+            return connection.QuerySingle<long>
                    (StoredProcedures.LeadInformation_Add,
                    param: new
                    {

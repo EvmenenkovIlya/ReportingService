@@ -73,6 +73,7 @@
     <Build Include="Stored Procedures\LeadInformation_GetById.sql" />
     <Build Include="Stored Procedures\LeadInformation_GetAll.sql" />
     <Build Include="Stored Procedures\LeadInformation_Update.sql" />
+    <Build Include="Stored Procedures\Leadinformation_GetTodayBirthdayIds.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\Account_Add.sql" />
