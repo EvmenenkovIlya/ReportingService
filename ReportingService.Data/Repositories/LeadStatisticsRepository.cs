@@ -2,9 +2,9 @@
 using ReportingService.Data.Dto;
 using System.Data.SqlClient;
 
-namespace ReportingService.Data.Repositoties;
+namespace ReportingService.Data.Repositories;
 
-public class LeadStatisticsRepository
+public class LeadStatisticsRepository : ILeadStatisticsRepository
 {
     public string connectionString = ServerOptions.ConnectionOption;
 
@@ -26,7 +26,7 @@ public class LeadStatisticsRepository
                        DepositCount = leadStatisticDto.DepositCount,
                        WithdrawCount = leadStatisticDto.WithdrawCount,
                        TransferCount = leadStatisticDto.TransferCount,
-                       TransactionCountForTwoMontht = leadStatisticDto.TransactionCountForTwoMontht
+                       TransactionCountForTwoMonth = leadStatisticDto.TransactionCountForTwoMonth
                    },
                    commandType: System.Data.CommandType.StoredProcedure
                    );
@@ -78,7 +78,7 @@ public class LeadStatisticsRepository
                     DepositCount = leadStatisticDto.DepositCount,
                     WithdrawCount = leadStatisticDto.WithdrawCount,
                     TransferCount = leadStatisticDto.TransferCount,
-                    TransactionCountForTwoMontht = leadStatisticDto.TransactionCountForTwoMontht
+                    TransactionCountForTwoMonth = leadStatisticDto.TransactionCountForTwoMonth
                 },
                 commandType: System.Data.CommandType.StoredProcedure
                 );

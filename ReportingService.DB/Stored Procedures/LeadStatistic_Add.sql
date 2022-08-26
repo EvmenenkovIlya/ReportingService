@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[LeadStatistic_Add]
 	@DateStatistic date,
 	@LeadId int,
-	@TransactionCountForTwoMontht int,
+	@TransactionCountForTwoMonth int,
 	@DepositsSum decimal(14,4),
 	@WithdrawSum decimal(14,4),
 	@TransferSum decimal(14,4),

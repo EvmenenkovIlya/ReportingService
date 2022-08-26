@@ -1,24 +1,21 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
-using ReportingService.Data.Enums;
 using System.Data.SqlClient;
-using System.Net;
-using System.Numerics;
 
-namespace ReportingService.Data.Repositoties;
+namespace ReportingService.Data.Repositories;
 
-public class LeadInformationsRepository
+public class LeadInformationsRepository : ILeadInformationsRepository
 {
 
     public string connectionString = ServerOptions.ConnectionOption;
 
-    public LeadInformationDto GetLeadInformationDtoById(int id)
+    public async Task<LeadInformationDto> GetLeadInformationDtoById(int id)
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
-            return connection.QuerySingle<LeadInformationDto>(
+            return await connection.QuerySingleAsync<LeadInformationDto>(
                 StoredProcedures.LeadInformation_GetById,
                 param: new { id = id },
                 commandType: System.Data.CommandType.StoredProcedure
@@ -26,25 +23,37 @@ public class LeadInformationsRepository
         }
     }
 
-    public List<LeadInformationDto> GetAllLeadInformationDto()
+    public async Task<List<LeadInformationDto>> GetAllLeadInformationDto()
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            return connection.Query<LeadInformationDto>
+            return (await connection.QueryAsync<LeadInformationDto>
                 (StoredProcedures.LeadInformation_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure)
+                   commandType: System.Data.CommandType.StoredProcedure))
                    .ToList();
         }
     }
 
-    public string AddLeadInformation(LeadInformationDto leadInformationDto)
+    public async Task<List<int>> GetAllBirthdayIds()
+    {
+        using (var connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            return (await connection.QueryAsync<int>
+                (StoredProcedures.LeadInformation_GetTodayBirthdayIds,
+                   commandType: System.Data.CommandType.StoredProcedure))
+                   .ToList();
+        }
+    }
+
+    public async Task<string> AddLeadInformation(LeadInformationDto leadInformationDto)
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
-            return connection.QuerySingle<string>
+            return (await connection.QuerySingleAsync<long>
                    (StoredProcedures.LeadInformation_Add,
                    param: new
                    {
@@ -63,17 +72,17 @@ public class LeadInformationsRepository
                        IsDeleted = leadInformationDto.IsDeleted
                    },
                    commandType: System.Data.CommandType.StoredProcedure
-                   ).ToString();
+                   )).ToString();
         }
     }
 
-    public LeadInformationDto UpdateLeadInformation(LeadInformationDto leadInformationDto)
+    public async Task<LeadInformationDto> UpdateLeadInformation(LeadInformationDto leadInformationDto)
     {
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
-            return connection.QuerySingleOrDefault(
+            return await connection.QuerySingleOrDefaultAsync(
                 StoredProcedures.LeadInformation_Update,
                 param: new
                 {

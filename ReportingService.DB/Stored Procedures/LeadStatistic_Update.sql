@@ -2,7 +2,7 @@
 	@Id bigint,
 	@DateStatistic date,
 	@LeadId int,
-	@TransactionCountForTwoMontht int,
+	@TransactionCountForTwoMonth int,
 	@DepositsSum decimal(14,4),
 	@WithdrawSum decimal(14,4),
 	@TransferSum decimal(14,4),
@@ -16,7 +16,7 @@ BEGIN
 	SET 
 		[DateStatistic] = @DateStatistic,
 		[LeadId] = @LeadId,
-		[TransactionCountForTwoMonth] = @TransactionCountForTwoMontht,
+		[TransactionCountForTwoMonth] = @TransactionCountForTwoMonth,
 		[DepositsSum] = @DepositsSum,
 		[WithdrawSum] = @WithdrawSum,
 		[TransferSum] = @TransferSum,
