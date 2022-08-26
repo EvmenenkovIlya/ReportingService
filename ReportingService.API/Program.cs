@@ -1,9 +1,17 @@
 using ReportingService.API;
+using ReportingService.API.Infastructure;
 using ReportingService.Business;
 using ReportingService.Data.Repositories;
+using System.Data.SqlClient;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigurationManager configuration = builder.Configuration;
+IWebHostEnvironment environment = builder.Environment;
 
+var connectionOption = new ConnectionOption();
+builder.Configuration.Bind(connectionOption);
+builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionOption.REPORTINGSERVICE_DB_CONNECTION_STRING));
 // Add services to the container.
 
 builder.Services.AddControllers();

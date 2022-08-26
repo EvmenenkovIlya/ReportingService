@@ -1,36 +1,28 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
-using System.Data.SqlClient;
+using System.Data;
 
 namespace ReportingService.Data.Repositories;
 
-public class TransactionsRepositiry : ITransactionsRepositiry
+public class TransactionsRepositiry : BaseRepositories, ITransactionsRepositiry
 {
-    public string connectionString = ServerOptions.ConnectionOption;
+    public TransactionsRepositiry(IDbConnection dbConnection)
+        : base(dbConnection) { }
 
-    public TransactionDto GetTransactionById(int id)
+    public async Task<TransactionDto> GetTransactionById(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            return connection.QuerySingle<TransactionDto>(
+        return await Connection.QuerySingleAsync<TransactionDto>(
                 StoredProcedures.Transaction_GetById,
                 param: new { id = id },
                 commandType: System.Data.CommandType.StoredProcedure
                 );
-        }
     }
 
-    public List<TransactionDto> GetAllTransactions()
+    public async Task<List<TransactionDto>> GetAllTransactions()
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-            return connection.Query<TransactionDto>
+        return (await Connection.QueryAsync<TransactionDto>
                 (StoredProcedures.Transaction_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure)
+                   commandType: System.Data.CommandType.StoredProcedure))
                    .ToList();
-        }
     }
 }

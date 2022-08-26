@@ -1,6 +1,9 @@
-﻿namespace ReportingService.Data.Repositories;
+﻿using System.Data;
 
-public class StatisticsRepository : IStatisticsRepository
+namespace ReportingService.Data.Repositories;
+
+public class StatisticsRepository : BaseRepositories, IStatisticsRepository
 {
-
+    public StatisticsRepository(IDbConnection dbConnection)
+        : base(dbConnection) { }
 }

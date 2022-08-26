@@ -4,8 +4,8 @@ namespace ReportingService.Data.Repositories;
 
 public interface ILeadStatisticsRepository
 {
-    void AddLeadStatistic(LeadStatisticDto leadStatisticDto);
-    List<LeadStatisticDto> GetAllLeadStatisticDto();
-    LeadStatisticDto GetLeadStatisticDtoById(int id);
-    void UpdateLeadStatisticDto(LeadStatisticDto leadStatisticDto);
+    Task AddLeadStatistic(LeadStatisticDto leadStatisticDto);
+    Task<List<LeadStatisticDto>> GetAllLeadStatisticDto();
+    Task<LeadStatisticDto> GetLeadStatisticDtoById(int id);
+    Task UpdateLeadStatisticDto(LeadStatisticDto leadStatisticDto);
 }

@@ -4,6 +4,6 @@ namespace ReportingService.Data.Repositories;
 
 public interface ITransactionsRepositiry
 {
-    TransactionDto GetTransactionById(int id);
-    List<TransactionDto> GetAllTransactions();
+    Task<TransactionDto> GetTransactionById(int id);
+    Task<List<TransactionDto>> GetAllTransactions();
 }
