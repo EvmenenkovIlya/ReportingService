@@ -2,9 +2,9 @@
 using ReportingService.Data.Dto;
 using System.Data.SqlClient;
 
-namespace ReportingService.Data.Repositoties;
+namespace ReportingService.Data.Repositories;
 
-public class TransactionsRepositiry
+public class TransactionsRepositiry : ITransactionsRepositiry
 {
     public string connectionString = ServerOptions.ConnectionOption;
 

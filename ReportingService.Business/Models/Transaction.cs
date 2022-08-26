@@ -1,8 +1,7 @@
 ﻿using ReportingService.Data.Enums;
 
-namespace ReportingService.Data.Dto;
-
-public class TransactionDto
+namespace ReportingService.Business.Models;
+public class Transaction
 {
     public long Id { get; set; }
     public long AccountId { get; set; }

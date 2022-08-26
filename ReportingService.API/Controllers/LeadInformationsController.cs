@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ReportingService.Data.Repositoties;
+using ReportingService.Data.Repositories;
 
 namespace ReportingService.API.Controllers;
 
@@ -18,8 +18,9 @@ public class LeadInformationsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<int>> GetLeadsIdsWithBirthday()
+    [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<int>>> GetLeadsIdsWithBirthday()
     {
-        return _leadInformationsRepository.GetAllBirthdayIds();
+        return Ok(await _leadInformationsRepository.GetAllBirthdayIds());
     }
 }

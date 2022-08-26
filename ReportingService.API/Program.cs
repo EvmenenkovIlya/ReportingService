@@ -1,4 +1,6 @@
-using ReportingService.Data.Repositoties;
+using ReportingService.API;
+using ReportingService.Business;
+using ReportingService.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
 builder.Services.AddScoped<ILeadInformationsRepository, LeadInformationsRepository>();
+builder.Services.AddScoped<ILeadStatisticsRepository, LeadStatisticsRepository>();
+builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+builder.Services.AddScoped<ITransactionsRepositiry, TransactionsRepositiry>();
+
+builder.Services.AddAutoMapper(typeof(MapperConfigStorageAPI));
+builder.Services.AddAutoMapper(typeof(MapperConfigStorageBusiness));
 
 var app = builder.Build();
 
