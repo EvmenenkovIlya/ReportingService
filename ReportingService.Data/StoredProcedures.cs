@@ -17,4 +17,7 @@ public class StoredProcedures
     public const string LeadStatistic_GetAll = "LeadStatistic_GetAll";
     public const string LeadStatistic_GetById = "LeadStatistic_GetById";
     public const string LeadStatistic_Update = "LeadStatistic_Update";
+    public const string Statistic_Add = "Statistic_Add";
+    public const string Statistic_GetAll = "Statistic_GetAll";
+    public const string Statistic_GetById = "Statistic_GetById";
 }
