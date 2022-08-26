@@ -1,6 +1,6 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using ReportingService.Data.Dto;
-using System.Data.SqlClient;
 
 namespace ReportingService.Data.Repositories;
 
@@ -8,15 +8,10 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
 {
     public StatisticsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
-    public string connectionString = ServerOptions.ConnectionOption;
 
-    public void AddStatistic(StatisticDto StatisticDto)
+    public async Task AddStatistic(StatisticDto StatisticDto)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.QuerySingle
+        await Connection.QuerySingleAsync
                    (StoredProcedures.Statistic_Add,
                    param: new
                    {
@@ -28,32 +23,22 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
                    },
                    commandType: System.Data.CommandType.StoredProcedure
                    );
-        }
     }
 
-    public List<StatisticDto> GetAllStatisticDto()
+    public async Task<List<StatisticDto>> GetAllStatisticDto()
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-            return connection.Query<StatisticDto>
+        return (await Connection.QueryAsync<StatisticDto>
                 (StoredProcedures.Statistic_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure)
+                   commandType: System.Data.CommandType.StoredProcedure))
                    .ToList();
-        }
     }
 
-    public StatisticDto GetStatisticDtoById(int id)
+    public async Task<StatisticDto> GetStatisticDtoById(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            return connection.QuerySingle<StatisticDto>(
+        return await Connection.QuerySingleAsync<StatisticDto>(
                 StoredProcedures.Statistic_GetById,
                 param: new { id = id },
                 commandType: System.Data.CommandType.StoredProcedure
                 );
-        }
     }
 }

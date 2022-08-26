@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportingService.API", "Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingService.API.Tests", "ReportingService.API.Tests\ReportingService.API.Tests.csproj", "{2FB7620F-B02F-4086-94CC-1493B49AC0FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingService.Business.Tests", "ReportingService.Business.Tests\ReportingService.Business.Tests.csproj", "{031E17F7-C929-4BC9-99C6-EB4246F55238}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{2FB7620F-B02F-4086-94CC-1493B49AC0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FB7620F-B02F-4086-94CC-1493B49AC0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FB7620F-B02F-4086-94CC-1493B49AC0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031E17F7-C929-4BC9-99C6-EB4246F55238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031E17F7-C929-4BC9-99C6-EB4246F55238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031E17F7-C929-4BC9-99C6-EB4246F55238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031E17F7-C929-4BC9-99C6-EB4246F55238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

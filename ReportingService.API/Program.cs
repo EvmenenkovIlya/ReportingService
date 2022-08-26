@@ -25,17 +25,15 @@ builder.Services.AddScoped<ILeadStatisticsRepository, LeadStatisticsRepository>(
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<ITransactionsRepositiry, TransactionsRepositiry>();
 
-builder.Services.AddAutoMapper(typeof(MapperConfigStorageAPI));
-builder.Services.AddAutoMapper(typeof(MapperConfigStorageBusiness));
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
