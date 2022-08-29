@@ -1,20 +1,18 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace ReportingService.Data.Repositories;
 
-public class LeadStatisticsRepository : ILeadStatisticsRepository
+public class LeadStatisticsRepository : BaseRepositories, ILeadStatisticsRepository
 {
-    public string connectionString = ServerOptions.ConnectionOption;
+    public LeadStatisticsRepository(IDbConnection dbConnection)
+        : base(dbConnection) { }
 
-    public void AddLeadStatistic(LeadStatisticDto leadStatisticDto)
+    public async Task AddLeadStatistic(LeadStatisticDto leadStatisticDto)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.QuerySingle
+        await Connection.QuerySingleAsync
                    (StoredProcedures.LeadStatistic_Add,
                    param: new
                    {
@@ -30,42 +28,44 @@ public class LeadStatisticsRepository : ILeadStatisticsRepository
                    },
                    commandType: System.Data.CommandType.StoredProcedure
                    );
-        }
     }
 
-    public List<LeadStatisticDto> GetAllLeadStatisticDto()
+    public async Task<List<LeadStatisticDto>> GetAllLeadStatisticDto()
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-            return connection.Query<LeadStatisticDto>
+        return (await Connection.QueryAsync<LeadStatisticDto>
                 (StoredProcedures.LeadStatistic_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure)
+                   commandType: System.Data.CommandType.StoredProcedure))
                    .ToList();
-        }
     }
 
-    public LeadStatisticDto GetLeadStatisticDtoById(int id)
+    public async Task<List<int>> GetLeadsIdsWith42Transactions()
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
+        return (await Connection.QueryAsync<int>
+                (StoredProcedures.LeadStatistic_GetLeadsIdsWith42Transactions,
+                   commandType: System.Data.CommandType.StoredProcedure))
+                   .ToList();
+    }
 
-            return connection.QuerySingle<LeadStatisticDto>(
+    public async Task<List<int>> GetLeadsIdsWithDifferenceOfMore13000()
+    {
+        return (await Connection.QueryAsync<int>
+               (StoredProcedures.LeadStatistic_GetLeadsIdsWithDifferenceOfMore13000,
+                  commandType: System.Data.CommandType.StoredProcedure))
+                  .ToList();
+    }
+
+    public async Task<LeadStatisticDto> GetLeadStatisticDtoById(int id)
+    {
+        return await Connection.QuerySingleAsync<LeadStatisticDto>(
                 StoredProcedures.LeadStatistic_GetById,
                 param: new { id = id },
                 commandType: System.Data.CommandType.StoredProcedure
                 );
-        }
     }
 
-    public void UpdateLeadStatisticDto(LeadStatisticDto leadStatisticDto)
+    public async Task UpdateLeadStatisticDto(LeadStatisticDto leadStatisticDto)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.QuerySingleOrDefault(
+        await Connection.QuerySingleOrDefaultAsync(
             StoredProcedures.LeadStatistic_Update,
                 param: new
                 {
@@ -82,6 +82,5 @@ public class LeadStatisticsRepository : ILeadStatisticsRepository
                 },
                 commandType: System.Data.CommandType.StoredProcedure
                 );
-        }
     }
 }

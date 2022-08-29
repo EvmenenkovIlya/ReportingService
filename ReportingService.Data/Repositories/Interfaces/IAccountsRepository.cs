@@ -4,8 +4,8 @@ namespace ReportingService.Data.Repositories;
 
 public interface IAccountsRepository
 {
-    void AddAccount(AccountDto accountDto);
-    List<AccountDto> GetAllAccountDto();
-    AccountDto GetAccountDtoById(int id);
-    void UpdateAccount(AccountDto accountDto);
+    Task AddAccount(AccountDto accountDto);
+    Task<List<AccountDto>> GetAllAccountDto();
+    Task<AccountDto> GetAccountDtoById(int id);
+    Task UpdateAccount(AccountDto accountDto);
 }

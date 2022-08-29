@@ -1,6 +1,6 @@
 ﻿namespace ReportingService.Business.Services;
 
-public class LeadInformationsStatistic
+public class LeadInformationsService
 {
 
 }

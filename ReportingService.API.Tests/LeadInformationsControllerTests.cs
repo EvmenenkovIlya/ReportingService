@@ -20,7 +20,7 @@ namespace ReportingService.API.Tests
         {
             _mockLeadInformationsRepository = new Mock<ILeadInformationsRepository>();
             _logger = new Mock<ILogger<LeadInformationsController>>();
-            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<MapperConfigStorageAPI>()));
+            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<MapperConfig>()));
             _sut = new LeadInformationsController(_logger.Object, _mockLeadInformationsRepository.Object);
         }
 

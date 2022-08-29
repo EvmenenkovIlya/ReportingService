@@ -16,7 +16,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7093;http://localhost:5093",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "REPORTINGSERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;"
       }
     },
     "IIS Express": {
@@ -24,7 +25,18 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "REPORTINGSERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;"
+      }
+    },
+    "Local": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7274;http://localhost:5274",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "REPORTINGSERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;"
       }
     }
   }

@@ -1,20 +1,17 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
-using System.Data.SqlClient;
+using System.Data;
 
 namespace ReportingService.Data.Repositories;
 
-public class AccountsRepository : IAccountsRepository
+public class AccountsRepository : BaseRepositories, IAccountsRepository
 {
-    public string connectionString = ServerOptions.ConnectionOption;
+    public AccountsRepository(IDbConnection dbConnection)
+        : base(dbConnection) { }
 
-    public void AddAccount(AccountDto accountDto)
+    public async Task AddAccount(AccountDto accountDto)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.QuerySingle
+        await Connection.QuerySingleAsync
                    (StoredProcedures.Account_Add,
                    param: new
                    {
@@ -24,42 +21,25 @@ public class AccountsRepository : IAccountsRepository
                    },
                    commandType: System.Data.CommandType.StoredProcedure
                    );
-        }
     }
 
-    public List<AccountDto> GetAllAccountDto()
+    public async Task<List<AccountDto>> GetAllAccountDto()
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-            return connection.Query<AccountDto>
-                (StoredProcedures.Account_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure)
-                   .ToList();
-        }
+        return (await Connection.QueryAsync<AccountDto>
+            (StoredProcedures.Account_GetAll, commandType: System.Data.CommandType.StoredProcedure)).ToList();
     }
 
-    public AccountDto GetAccountDtoById(int id)
+    public async Task<AccountDto> GetAccountDtoById(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            return connection.QuerySingle<AccountDto>(
+        return await Connection.QuerySingleAsync<AccountDto>(
                 StoredProcedures.Account_GetById,
                 param: new { id = id },
-                commandType: System.Data.CommandType.StoredProcedure
-                );
-        }
+                commandType: System.Data.CommandType.StoredProcedure);
     }
 
-    public void UpdateAccount(AccountDto accountDto)
+    public async Task UpdateAccount(AccountDto accountDto)
     {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.QuerySingleOrDefault(
+        await Connection.QuerySingleOrDefaultAsync(
             StoredProcedures.Account_Update,
                 param: new
                 {
@@ -68,8 +48,6 @@ public class AccountsRepository : IAccountsRepository
                     Currency = accountDto.Currency,
                     Status = accountDto.Status
                 },
-                commandType: System.Data.CommandType.StoredProcedure
-                );
-        }
+                commandType: System.Data.CommandType.StoredProcedure);
     }
 }
