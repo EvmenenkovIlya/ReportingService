@@ -1,8 +1,8 @@
 ﻿using ReportingService.Data.Enums;
 
-namespace ReportingService.Business.Models;
+namespace ReportingService.Data.Dto;
 
-public class LeadInformation
+public class LeadInfoDto
 {
     public int Id { get; set; }
     public int LeadId { get; set; }

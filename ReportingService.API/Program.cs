@@ -1,17 +1,14 @@
 using ReportingService.API;
 using ReportingService.API.Infastructure;
-using ReportingService.Business;
 using ReportingService.Data.Repositories;
 using System.Data.SqlClient;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-ConfigurationManager configuration = builder.Configuration;
-IWebHostEnvironment environment = builder.Environment;
 
-var connectionOption = new ConnectionOption();
+var connectionOption = new ConnectionOptions();
 builder.Configuration.Bind(connectionOption);
-builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionOption.REPORTINGSERVICE_DB_CONNECTION_STRING));
+builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionOption.REPORTING_SERVICE_DB_CONNECTION_STRING));
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,13 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// move to extension method
 builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
-builder.Services.AddScoped<ILeadInformationsRepository, LeadInformationsRepository>();
-builder.Services.AddScoped<ILeadStatisticsRepository, LeadStatisticsRepository>();
+builder.Services.AddScoped<ILeadInfoRepository, LeadInfoRepository>();
+builder.Services.AddScoped<ILeadOverallStatisticsRepository, LeadOverallStatisticsRepository>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
-builder.Services.AddScoped<ITransactionsRepositiry, TransactionsRepositiry>();
+builder.Services.AddScoped<ITransactionsRepository, TransactionsRepository>();
 
-builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddAutoMapper(typeof(BusinessModelsMapperConfig));
 
 
 var app = builder.Build();

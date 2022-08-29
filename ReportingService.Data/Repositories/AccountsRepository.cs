@@ -15,26 +15,26 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
                    (StoredProcedures.Account_Add,
                    param: new
                    {
-                       LeadId = accountDto.LeadId,
-                       Currency = accountDto.Currency,
-                       Status = accountDto.Status
+                       accountDto.LeadId,
+                       accountDto.Currency,
+                       accountDto.Status
                    },
-                   commandType: System.Data.CommandType.StoredProcedure
+                   commandType: CommandType.StoredProcedure
                    );
     }
 
     public async Task<List<AccountDto>> GetAllAccountDto()
     {
         return (await Connection.QueryAsync<AccountDto>
-            (StoredProcedures.Account_GetAll, commandType: System.Data.CommandType.StoredProcedure)).ToList();
+            (StoredProcedures.Account_GetAll, commandType: CommandType.StoredProcedure)).ToList();
     }
 
     public async Task<AccountDto> GetAccountDtoById(int id)
     {
         return await Connection.QuerySingleAsync<AccountDto>(
                 StoredProcedures.Account_GetById,
-                param: new { id = id },
-                commandType: System.Data.CommandType.StoredProcedure);
+                param: new { id },
+                commandType: CommandType.StoredProcedure);
     }
 
     public async Task UpdateAccount(AccountDto accountDto)
@@ -43,11 +43,11 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
             StoredProcedures.Account_Update,
                 param: new
                 {
-                    Id = accountDto.Id,
-                    LeadId = accountDto.LeadId,
-                    Currency = accountDto.Currency,
-                    Status = accountDto.Status
+                    accountDto.Id,
+                    accountDto.LeadId,
+                    accountDto.Currency,
+                    accountDto.Status
                 },
-                commandType: System.Data.CommandType.StoredProcedure);
+                commandType: CommandType.StoredProcedure);
     }
 }

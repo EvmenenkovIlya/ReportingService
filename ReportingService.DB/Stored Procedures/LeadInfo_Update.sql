@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LeadInformation_Update]
+﻿CREATE PROCEDURE [dbo].[LeadInfo_Update]
 	@Id int,
 	@LeadId int,
 	@FirstName nvarchar(20),
@@ -16,7 +16,7 @@
 	
 AS
 BEGIN
-	UPDATE [dbo].[LeadInformation]
+	UPDATE [dbo].[LeadInfo]
 	SET 
 		[LeadId] = @LeadId,
 		[FirstName] = @FirstName,

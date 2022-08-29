@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LeadInformation_Add]
+﻿CREATE PROCEDURE [dbo].[LeadInfo_Add]
 	@LeadId int,
 	@FirstName nvarchar(20),
 	@LastName nvarchar(20),
@@ -15,7 +15,7 @@
 	
 AS
 BEGIN
-	INSERT INTO dbo.LeadInformation
+	INSERT INTO dbo.LeadInfo
 	(
 		[LeadId],
 		[FirstName],

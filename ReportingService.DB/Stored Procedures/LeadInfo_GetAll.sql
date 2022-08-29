@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LeadInformation_GetAll]
+﻿CREATE PROCEDURE [dbo].[LeadInfo_GetAll]
 AS
 BEGIN
 	SELECT 
@@ -17,6 +17,6 @@ BEGIN
 		[RegistrationDate],
 		[IsDeleted]
 		
-	FROM [dbo].[LeadInformation]
+	FROM [dbo].[LeadInfo]
 END
 

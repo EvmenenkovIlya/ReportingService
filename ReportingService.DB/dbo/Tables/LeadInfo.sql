@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[LeadInformation]
+﻿CREATE TABLE [dbo].[LeadInfo]
 (
 	Id int NOT NULL,
 	LeadId int NOT NULL,

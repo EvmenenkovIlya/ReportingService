@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LeadInformation_GetById]
+﻿CREATE PROCEDURE [dbo].[LeadInfo_GetById]
 	@Id bigint
 AS
 BEGIN
@@ -18,6 +18,6 @@ BEGIN
 		[RegistrationDate],
 		[IsDeleted]
 		
-	FROM [dbo].[LeadInformation]
+	FROM [dbo].[LeadInfo]
 	WHERE Id = @Id
 END

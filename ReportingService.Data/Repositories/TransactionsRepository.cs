@@ -4,9 +4,9 @@ using System.Data;
 
 namespace ReportingService.Data.Repositories;
 
-public class TransactionsRepositiry : BaseRepositories, ITransactionsRepositiry
+public class TransactionsRepository : BaseRepositories, ITransactionsRepository
 {
-    public TransactionsRepositiry(IDbConnection dbConnection)
+    public TransactionsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
     public async Task<TransactionDto> GetTransactionById(int id)
@@ -14,7 +14,7 @@ public class TransactionsRepositiry : BaseRepositories, ITransactionsRepositiry
         return await Connection.QuerySingleAsync<TransactionDto>(
                 StoredProcedures.Transaction_GetById,
                 param: new { id = id },
-                commandType: System.Data.CommandType.StoredProcedure
+                commandType: CommandType.StoredProcedure
                 );
     }
 
@@ -22,7 +22,7 @@ public class TransactionsRepositiry : BaseRepositories, ITransactionsRepositiry
     {
         return (await Connection.QueryAsync<TransactionDto>
                 (StoredProcedures.Transaction_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure))
+                   commandType: CommandType.StoredProcedure))
                    .ToList();
     }
 }
