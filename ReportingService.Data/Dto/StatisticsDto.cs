@@ -1,8 +1,9 @@
-﻿using ReportingService.Data.Enums;
+﻿
+using ReportingService.Data.Enums;
 
-namespace ReportingService.Business.Models;
+namespace ReportingService.Data.Dto;
 
-public class Statistic
+public class StatisticsDto
 {
     public long Id { get; set; }
     public DateOnly DateStatistic { get; set; }

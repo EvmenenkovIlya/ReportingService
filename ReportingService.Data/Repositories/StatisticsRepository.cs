@@ -9,36 +9,36 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
     public StatisticsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
-    public async Task AddStatistic(StatisticDto StatisticDto)
+    public async Task AddStatistic(StatisticsDto StatisticDto)
     {
         await Connection.QuerySingleAsync
                    (StoredProcedures.Statistic_Add,
                    param: new
                    {
-                       Сurrency = StatisticDto.Сurrency,
-                       ActiveAccountCount = StatisticDto.ActiveAccountCount,
-                       AllAccountCount = StatisticDto.AllAccountCount,
-                       ActiveLeadCount = StatisticDto.ActiveLeadCount,
-                       DateStatistic = StatisticDto.DateStatistic,
+                       StatisticDto.Сurrency,
+                       StatisticDto.ActiveAccountCount,
+                       StatisticDto.AllAccountCount,
+                       StatisticDto.ActiveLeadCount,
+                       StatisticDto.DateStatistic,
                    },
-                   commandType: System.Data.CommandType.StoredProcedure
+                   commandType: CommandType.StoredProcedure
                    );
     }
 
-    public async Task<List<StatisticDto>> GetAllStatisticDto()
+    public async Task<List<StatisticsDto>> GetAllStatisticDto()
     {
-        return (await Connection.QueryAsync<StatisticDto>
+        return (await Connection.QueryAsync<StatisticsDto>
                 (StoredProcedures.Statistic_GetAll,
-                   commandType: System.Data.CommandType.StoredProcedure))
+                   commandType: CommandType.StoredProcedure))
                    .ToList();
     }
 
-    public async Task<StatisticDto> GetStatisticDtoById(int id)
+    public async Task<StatisticsDto> GetStatisticDtoById(int id)
     {
-        return await Connection.QuerySingleAsync<StatisticDto>(
+        return await Connection.QuerySingleAsync<StatisticsDto>(
                 StoredProcedures.Statistic_GetById,
-                param: new { id = id },
-                commandType: System.Data.CommandType.StoredProcedure
+                param: new { id },
+                commandType: CommandType.StoredProcedure
                 );
     }
 }

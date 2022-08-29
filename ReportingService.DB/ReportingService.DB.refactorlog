@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="0622cdbb-fe12-4947-ace3-4b02974ffc1b" ChangeDateTime="08/29/2022 20:49:39">
+    <Property Name="ElementName" Value="[dbo].[LeadStatistic].[WithdrawalsSum]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[LeadStatistic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WithdrawSum" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0a0b61db-ed65-4298-92a0-4fd38304ba5b" ChangeDateTime="08/29/2022 20:49:45">
+    <Property Name="ElementName" Value="[dbo].[LeadStatistic].[TransfersSum]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[LeadStatistic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransferSum" />
+  </Operation>
+</Operations>
