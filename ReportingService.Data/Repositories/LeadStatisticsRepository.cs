@@ -38,6 +38,22 @@ public class LeadStatisticsRepository : BaseRepositories, ILeadStatisticsReposit
                    .ToList();
     }
 
+    public async Task<List<int>> GetLeadsIdsWith42Transactions()
+    {
+        return (await Connection.QueryAsync<int>
+                (StoredProcedures.LeadStatistic_GetLeadsIdsWith42Transactions,
+                   commandType: System.Data.CommandType.StoredProcedure))
+                   .ToList();
+    }
+
+    public async Task<List<int>> GetLeadsIdsWithDifferenceOfMore13000()
+    {
+        return (await Connection.QueryAsync<int>
+               (StoredProcedures.LeadStatistic_GetLeadsIdsWithDifferenceOfMore13000,
+                  commandType: System.Data.CommandType.StoredProcedure))
+                  .ToList();
+    }
+
     public async Task<LeadStatisticDto> GetLeadStatisticDtoById(int id)
     {
         return await Connection.QuerySingleAsync<LeadStatisticDto>(

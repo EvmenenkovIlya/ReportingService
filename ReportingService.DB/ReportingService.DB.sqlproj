@@ -87,5 +87,7 @@
     <None Include="Stored Procedures\Statistic_Add.sql" />
     <None Include="Stored Procedures\Statistic_GetAll.sql" />
     <None Include="Stored Procedures\Statistic_GetById.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetLeadsIdsWith42Transactions.sql" />
+    <None Include="Stored Procedures\LeadStatistic_GetLeadsIdsWithDifferenceOfMore13000.sql" />
   </ItemGroup>
 </Project>

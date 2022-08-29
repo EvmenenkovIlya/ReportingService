@@ -20,4 +20,6 @@ public class StoredProcedures
     public const string Statistic_Add = "Statistic_Add";
     public const string Statistic_GetAll = "Statistic_GetAll";
     public const string Statistic_GetById = "Statistic_GetById";
+    public const string LeadStatistic_GetLeadsIdsWith42Transactions = "LeadStatistic_GetLeadsIdsWith42Transactions";
+    public const string LeadStatistic_GetLeadsIdsWithDifferenceOfMore13000 = "LeadStatistic_GetLeadsIdsWithDifferenceOfMore13000";
 }

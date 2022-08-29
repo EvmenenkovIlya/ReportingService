@@ -8,4 +8,6 @@ public interface ILeadStatisticsRepository
     Task<List<LeadStatisticDto>> GetAllLeadStatisticDto();
     Task<LeadStatisticDto> GetLeadStatisticDtoById(int id);
     Task UpdateLeadStatisticDto(LeadStatisticDto leadStatisticDto);
+    Task<List<int>> GetLeadsIdsWith42Transactions();
+    Task<List<int>> GetLeadsIdsWithDifferenceOfMore13000();
 }
