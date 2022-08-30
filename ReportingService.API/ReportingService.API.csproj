@@ -17,8 +17,4 @@
     <ProjectReference Include="..\ReportingService.Data\ReportingService.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>

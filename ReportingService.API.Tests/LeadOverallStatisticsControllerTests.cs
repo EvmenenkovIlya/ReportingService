@@ -8,14 +8,14 @@ using ReportingService.Data.Repositories;
 
 namespace ReportingService.API.Tests;
 
-public class LeadStatisticsControllerTests
+public class LeadOverallStatisticsControllerTests
 {
     private LeadStatisticsController _sut;
     private Mock<ILeadOverallStatisticsRepository> _mockLeadStatisticsRepository;
     private Mock<ILogger<LeadStatisticsController>> _logger;
     private IMapper _mapper;
 
-    public LeadStatisticsControllerTests()
+    public LeadOverallStatisticsControllerTests()
     {
         _mockLeadStatisticsRepository = new Mock<ILeadOverallStatisticsRepository>();
         _logger = new Mock<ILogger<LeadStatisticsController>>();

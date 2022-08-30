@@ -1,8 +1,8 @@
 using ReportingService.API;
 using ReportingService.API.Infastructure;
-using ReportingService.Data.Repositories;
 using System.Data.SqlClient;
 using System.Data;
+using ReportingService.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,15 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// move to extension method
-builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
-builder.Services.AddScoped<ILeadInfoRepository, LeadInfoRepository>();
-builder.Services.AddScoped<ILeadOverallStatisticsRepository, LeadOverallStatisticsRepository>();
-builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
-builder.Services.AddScoped<ITransactionsRepository, TransactionsRepository>();
+builder.Services.AddDataLayerRepositotories();
+builder.Services.AddBusinessLayerServices();
 
-builder.Services.AddAutoMapper(typeof(BusinessModelsMapperConfig));
-
+builder.Services.AddAutoMapper();
 
 var app = builder.Build();
 

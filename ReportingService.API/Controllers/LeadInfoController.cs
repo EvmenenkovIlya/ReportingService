@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ReportingService.Data.Repositories;
+using ReportingService.Business.Services;
 
 namespace ReportingService.API.Controllers;
 
@@ -7,13 +7,12 @@ namespace ReportingService.API.Controllers;
 [Route("[controller]")]
 public class LeadInfoController : ControllerBase
 {
-    private readonly ILeadInfoRepository _leadInformationsRepository;
-
+    private readonly ILeadInfoService _leadInfoService;
     private readonly ILogger<LeadInfoController> _logger;
 
-    public LeadInfoController(ILogger<LeadInfoController> logger, ILeadInfoRepository leadInformationsRepository)
+    public LeadInfoController(ILogger<LeadInfoController> logger, ILeadInfoService leadInfoService)
     {
-        _leadInformationsRepository = leadInformationsRepository;
+        _leadInfoService = leadInfoService;
         _logger = logger;
     }
 
@@ -22,6 +21,6 @@ public class LeadInfoController : ControllerBase
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetCelebrantsFromDateToNow([FromQuery] DateTime fromDate)
     {
-        return Ok(await _leadInformationsRepository.GetCelebrateIdsByDate(DateTime.Now));
+        return Ok(await _leadInfoService.GetCelebrantsFromDateToNow(fromDate));
     }
 }
