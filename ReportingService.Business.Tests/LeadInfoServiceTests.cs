@@ -23,7 +23,6 @@ namespace ReportingService.Business.Tests
             var date = DateTime.Now;
             List<int> expectedResult = new List<int>() { 1, 2, 3 };
             var listDates = new List<DateTime>() { DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), DateTime.Now };
-            
             _mockLeadInfoRepository.Setup(o => o.GetCelebrateIdsByDate(It.Is<DateTime>(x => x.Date == listDates[0].Date))).ReturnsAsync(new List<int>() { expectedResult[0] });
             _mockLeadInfoRepository.Setup(o => o.GetCelebrateIdsByDate(It.Is<DateTime>(x => x.Date == listDates[1].Date))).ReturnsAsync(new List<int>() { expectedResult[1] });
             _mockLeadInfoRepository.Setup(o => o.GetCelebrateIdsByDate(It.Is<DateTime>(x => x.Date == listDates[2].Date))).ReturnsAsync(new List<int>() { expectedResult[2] });

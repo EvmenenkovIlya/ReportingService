@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Transaction_Add]
+	@TransactionId bigint,
 	@AccountId bigint,
 	@Date datetime2,
 	@TransactionType tinyint,
@@ -13,6 +14,7 @@ AS
 BEGIN
 	INSERT INTO dbo.[Transaction]
 	(
+		[TransactionId],
 		[AccountId],
 		[Date],
 		[TransactionType],
@@ -27,6 +29,7 @@ BEGIN
 
     VALUES 
 	(
+		@TransactionId,
 		@AccountId,
 		@Date,
 		@TransactionType,

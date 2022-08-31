@@ -2,7 +2,8 @@
 AS
 BEGIN
 	SELECT 
-		[Id]
+		[Id],
+		[TransactionId],
 		[AccountId],
 		[Date],
 		[TransactionType],
