@@ -1,4 +1,6 @@
-﻿using ReportingService.Data.Repositories;
+﻿using Microsoft.Extensions.Options;
+using ReportingService.Business.Exceptions;
+using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
 
@@ -13,6 +15,7 @@ public class LeadInfoService : ILeadInfoService
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate)
     {
+        ValidateDate(fromDate);
         var listDates = GetDatesFromDateToNow(fromDate);
         var results = await Task.WhenAll(listDates.Select(async date =>
         {
@@ -33,5 +36,13 @@ public class LeadInfoService : ILeadInfoService
         return Enumerable.Range(0, (DateTime.Now - fromDate).Days + 1)
         .Select(i => fromDate.AddDays(i))
         .ToList();
+    }
+
+    private void ValidateDate(DateTime fromDate)
+    {
+        if (fromDate.Date > DateTime.Now.Date)
+        {
+            throw new BadRequestException("Date must be less or equal than today");
+        }
     }
 }

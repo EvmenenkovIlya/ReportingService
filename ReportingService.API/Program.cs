@@ -3,6 +3,7 @@ using ReportingService.API.Infastructure;
 using System.Data.SqlClient;
 using System.Data;
 using ReportingService.API.Extensions;
+using ReportingService.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddAutoMapper();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 
