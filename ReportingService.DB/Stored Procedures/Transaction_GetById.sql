@@ -4,13 +4,14 @@ AS
 BEGIN
 	SELECT 
 		[Id]
+		[TransactionId],
 		[AccountId],
 		[Date],
 		[TransactionType],
 		[Amount],
 		[Currency],
 		[Rate],
-		[RecipentId],
+		[RecipientId],
 		[RecipientAccountId],
 		[RecipientAmount],
 		[RecipientCurrency]

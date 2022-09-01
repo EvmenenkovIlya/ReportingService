@@ -2,14 +2,15 @@
 AS
 BEGIN
 	SELECT 
-		[Id]
+		[Id],
+		[TransactionId],
 		[AccountId],
 		[Date],
 		[TransactionType],
 		[Amount],
 		[Currency],
 		[Rate],
-		[RecipentId],
+		[RecipientId],
 		[RecipientAccountId],
 		[RecipientAmount],
 		[RecipientCurrency]

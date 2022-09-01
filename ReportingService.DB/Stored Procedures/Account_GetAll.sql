@@ -3,6 +3,7 @@ AS
 BEGIN
 	SELECT 
 		[Id],
+		[AccountId],
 		[Currency],
 		[Status],
 		[LeadId]

@@ -8,11 +8,10 @@
 	BirthDate date NOT NULL,
 	Email nvarchar(50) NOT NULL,
 	Phone nvarchar(15) NOT NULL,
-	Passport nvarchar(10) NOT NULL,
+	Passport nvarchar(11) NOT NULL,
 	City tinyint NOT NULL,
 	Address nvarchar(50) NOT NULL,
 	Role tinyint NOT NULL,
-	Password nvarchar(50) NOT NULL,
 	RegistrationDate date NOT NULL,
 	IsDeleted bit NOT NULL,
   CONSTRAINT [PK_LEADINFORMATION] PRIMARY KEY CLUSTERED
