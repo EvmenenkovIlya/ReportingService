@@ -58,14 +58,9 @@ public class Reader
             int index = 0;
             while ((line = sr.ReadLine()) != null)
             {
-                //if (index <= 2)
-                //    index++;
-                //else
-                //{
-                    var transaction = new TransactionFromCsv(line);
+                var transaction = new TransactionFromCsv(line);
                     transactions.Add(transaction);
                     index++;
-                //}
             }
         }
         return transactions;

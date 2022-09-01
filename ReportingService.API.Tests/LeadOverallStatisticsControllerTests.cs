@@ -33,7 +33,7 @@ public class LeadOverallStatisticsControllerTests
         _mockLeadStatisticsRepository.Setup(o => o.GetLeadsIdsWith42Transactions()).ReturnsAsync(expectedList);
 
         // when
-        var actual = await _sut.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount);
+        var actual = await _sut.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, 60);
 
         // then
         var actualResult = actual.Result as ObjectResult;
