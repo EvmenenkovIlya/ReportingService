@@ -11,7 +11,7 @@ BEGIN
 		[Amount],
 		[Currency],
 		[Rate],
-		[RecipentId],
+		[RecipientId],
 		[RecipientAccountId],
 		[RecipientAmount],
 		[RecipientCurrency]

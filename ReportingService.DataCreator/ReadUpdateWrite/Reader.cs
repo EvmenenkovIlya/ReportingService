@@ -71,6 +71,24 @@ public class Reader
         return transactions;
     }
 
+    public List<TransactionToDb> GetTransactionsForDb(string filename)
+    {
+        string line;
+        var transactions = new List<TransactionToDb>();
+
+        using (StreamReader sr = new StreamReader(filename))
+        {
+            int index = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                var transaction = new TransactionToDb(line);
+                transactions.Add(transaction);
+                index++;
+            }
+        }
+        return transactions;
+    }
+
     public List<int> GetAccountsId(string filename)
     {
         string line;

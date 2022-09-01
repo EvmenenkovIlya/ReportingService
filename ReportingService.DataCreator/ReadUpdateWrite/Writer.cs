@@ -120,4 +120,85 @@ public class Writer
         objbulk.WriteToServer(tbl);
         con.Close();
     }
+
+    //[Test]
+    public void BulkInsertTransactions()
+    {
+        DataTable tbl = new DataTable();
+        tbl.Columns.Add(new DataColumn("Id", typeof(int)));
+        tbl.Columns.Add(new DataColumn("TransactionId", typeof(long)));
+        tbl.Columns.Add(new DataColumn("AccountId", typeof(long)));
+        tbl.Columns.Add(new DataColumn("Date", typeof(DateTime)));
+        tbl.Columns.Add(new DataColumn("TransactionType", typeof(byte)));
+        tbl.Columns.Add(new DataColumn("Amount", typeof(decimal)));
+        tbl.Columns.Add(new DataColumn("Currency", typeof(short)));
+        var c1 = new DataColumn("Rate", typeof(short));
+        c1.AllowDBNull = true;
+        tbl.Columns.Add(c1);
+        var c2 = new DataColumn("RecipientId", typeof(int));
+        c2.AllowDBNull = true;
+        tbl.Columns.Add(c2);
+        var c3 = new DataColumn("RecipientAccountId", typeof(int));
+        c3.AllowDBNull = true;
+        tbl.Columns.Add(c3);
+        var c4 = new DataColumn("RecipientAmount", typeof(decimal));
+        c4.AllowDBNull = true;
+        tbl.Columns.Add(c4);
+        var c5 = new DataColumn("RecipientCurrency", typeof(short));
+        tbl.Columns.Add(c5);
+
+        var transactions = _reader.GetTransactionsForDb((@"D:\Курсы\С#\TransactionModified.csv"));
+        for (int i = 15000000; i < transactions.Count; i++)
+        {
+            var transaction = transactions[i];
+            DataRow dr = tbl.NewRow();
+            dr["Id"] = i + 1;
+            dr["TransactionId"] = transaction.TransactionId;
+            dr["AccountId"] = transaction.AccountId;
+            dr["Date"] = transaction.Date;
+            dr["TransactionType"] = transaction.TransactionType;
+            dr["Amount"] = transaction.Amount;
+            dr["Currency"] = transaction.Currency;
+            if (transaction.Rate == null)
+            {
+                dr["Rate"] = DBNull.Value;
+                dr["RecipientId"] = DBNull.Value;
+                dr["RecipientAccountId"] = DBNull.Value;
+                dr["RecipientAmount"] = DBNull.Value;
+                dr["RecipientCurrency"] = DBNull.Value;
+            }
+            else
+            {
+                dr["Rate"] = transaction.Rate; 
+                dr["RecipientId"] = transaction.RecipientId;
+                dr["RecipientAccountId"] = transaction.RecipientAccountId;
+                dr["RecipientAmount"] = transaction.RecipientAmount;
+                dr["RecipientCurrency"] = transaction.RecipientCurrency;
+            }
+
+            tbl.Rows.Add(dr);
+        }
+
+        string connection = @"Server=.;Database=ReportingService.DB;Trusted_Connection=True;";
+        SqlConnection con = new SqlConnection(connection);
+        SqlBulkCopy objbulk = new SqlBulkCopy(con);
+
+        objbulk.DestinationTableName = "[ReportingService.DB].[dbo].[Transaction]";
+        objbulk.ColumnMappings.Add("Id", "Id");
+        objbulk.ColumnMappings.Add("TransactionId", "TransactionId");
+        objbulk.ColumnMappings.Add("AccountId", "AccountId");
+        objbulk.ColumnMappings.Add("Date", "Date");
+        objbulk.ColumnMappings.Add("TransactionType", "TransactionType");
+        objbulk.ColumnMappings.Add("Amount", "Amount");
+        objbulk.ColumnMappings.Add("Currency", "Currency");
+        objbulk.ColumnMappings.Add("Rate", "Rate");
+        objbulk.ColumnMappings.Add("RecipientId", "RecipientId");
+        objbulk.ColumnMappings.Add("RecipientAccountId", "RecipientAccountId");
+        objbulk.ColumnMappings.Add("RecipientAmount", "RecipientAmount");
+        objbulk.ColumnMappings.Add("RecipientCurrency", "RecipientCurrency");
+
+        con.Open();
+        objbulk.WriteToServer(tbl);
+        con.Close();
+    }
 }

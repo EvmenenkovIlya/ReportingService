@@ -6,7 +6,7 @@
 	@Amount decimal(14,4),
 	@Currency tinyint,
 	@Rate decimal(7,4),
-	@RecipentId int,
+	@RecipientId int,
 	@RecipientAccountId int,
 	@RecipientAmount decimal(14,4),
 	@RecipientCurrency tinyint
@@ -21,7 +21,7 @@ BEGIN
 		[Amount],
 		[Currency],
 		[Rate],
-		[RecipentId],
+		[RecipientId],
 		[RecipientAccountId],
 		[RecipientAmount],
 		[RecipientCurrency]
@@ -36,7 +36,7 @@ BEGIN
 		@Amount,
 		@Currency,
 		@Rate,
-		@RecipentId,
+		@RecipientId,
 		@RecipientAccountId,
 		@RecipientAmount,
 		@RecipientCurrency

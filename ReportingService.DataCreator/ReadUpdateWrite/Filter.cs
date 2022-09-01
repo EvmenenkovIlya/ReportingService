@@ -41,13 +41,13 @@ public class Filter
         var accountsId = _reader.GetAccountsId(@"D:\Курсы\С#\AccountFiltered.csv");
 
         var hash = new HashSet<int>(accountsId);
-        transactions = transactions.Where(x => hash.Contains(x.AccountId)).ToList();
+        transactions = transactions.Where(x => hash.Contains(x.AccountId) || x.TransactionType == 3).ToList();
 
         _reader.ConvertToCsv(transactions, @"D:\Курсы\С#\TransactionFiltered.csv");
 
     }
 
-    [Test]
+    //[Test]
     public void ModifyTransactions()
     {
         var transactions = _reader.GetTransactions(@"D:\Курсы\С#\TransactionFiltered.csv");
@@ -60,21 +60,39 @@ public class Filter
     {
         List<IModel> newTransactions = new List<IModel>();
         var transactionsDictionary = transactions.GroupBy(a => a.Date).ToDictionary(d => d.Key, d => d.ToList());
+        int i = 0;
         foreach (var (key, value) in transactionsDictionary)
         {
-            if (value.Count == 2)
+            i++;
+            if (i == 4)
             {
-                var sender = value.Where(x => x.Amount < 0) as TransactionFromCsv;
-                var recipient = value.Where(x => x.Amount > 0) as TransactionFromCsv;
-                var newTransaction = new TransactionToDb(sender, recipient);
-                newTransactions.Add(newTransaction);
-                //TransferConstructor
+                i = 0;
+                continue;
+            }
+
+            var first = value.Find(x => x.Amount < 0 && x.TransactionType == 3) as TransactionFromCsv;
+            if (first != null && value.Count == 2)
+            {
+                value.Remove(first);
+                value.Insert(0, first);
+                var a = value[0] as TransactionFromCsv;
+                var b = value[1] as TransactionFromCsv;
+                if (a.TransactionType == 3 && b.Amount > 0)
+                {
+                    var sender = value.Find(x => x.Amount < 0) as TransactionFromCsv;
+                    var recipient = value.Find(x => x.Amount > 0) as TransactionFromCsv;
+                    var newTransaction = new TransactionToDb(sender, recipient);
+                    newTransactions.Add(newTransaction);
+                    //TransferConstructor
+                }
             }
             else
             {
-                var sender = value[0] as TransactionFromCsv;
-                var newTransaction = new TransactionToDb(sender);
-                newTransactions.Add(newTransaction);
+                var k = value[0] as TransactionFromCsv;
+                if (k.TransactionType != 3)
+                {
+                    newTransactions.Add(k);
+                }
                 //Ordinary constructor
             }
         }
