@@ -27,7 +27,6 @@ public class LeadInfoService : ILeadInfoService
         return Concat(results);
     }
 
-        
 
     private List<TType> Concat<TType>(params List<TType>[] lists)
     {
@@ -45,7 +44,7 @@ public class LeadInfoService : ILeadInfoService
     private void ValidateDate(DateTime fromDate)
     {
         var today = DateTime.Now.Date;
-        if (fromDate.Date > today && (today - fromDate.Date).TotalDays < 366) 
+        if (fromDate.Date > today || (today - fromDate.Date).TotalDays > 366) 
         {
             throw new BadRequestException("Date must be less or equal than today");
         }

@@ -6,7 +6,7 @@ namespace ReportingService.DataCreator.Models
 
     {
         public int? Id { get; set; }
-        public int LeadId { get; set; }
+        //public int LeadId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }
@@ -24,24 +24,24 @@ namespace ReportingService.DataCreator.Models
         {
             string[] parts = line.Split(';');
             Id = null;
-            LeadId = Int32.Parse(parts[1]);
-            FirstName = parts[2];
-            LastName = parts[3];
-            Patronymic = parts[4];
-            BirthDate = DateTime.Parse(parts[5]);
-            Email = parts[6];
-            Phone = parts[7];
-            Passport = parts[8];
-            City = Int16.Parse(parts[9]);
-            Address = parts[10];
-            Role = Int16.Parse(parts[11]);
-            RegistrationDate = DateTime.Parse(parts[12]);
-            IsDeleted = Boolean.Parse(parts[13]);
+            LeadId = Int32.Parse(parts[0]);
+            FirstName = parts[1];
+            LastName = parts[2];
+            Patronymic = parts[3];
+            BirthDate = DateTime.Parse(parts[4]);
+            Email = parts[5];
+            Phone = parts[6];
+            Passport = parts[7];
+            City = Int16.Parse(parts[8]);
+            Address = parts[9];
+            Role = Int16.Parse(parts[10]);
+            RegistrationDate = DateTime.Parse(parts[11]);
+            IsDeleted = Boolean.Parse(parts[12]);
         }
 
         public override string ToCsvRow()
         {
-            return $"{null};{LeadId};{FirstName};{LastName};{Patronymic};{BirthDate};{Email};{Phone};{Passport};{City};{Address};{Role};{RegistrationDate};{IsDeleted}";
+            return $"{LeadId};{FirstName};{LastName};{Patronymic};{BirthDate};{Email};{Phone};{Passport};{City};{Address};{Role};{RegistrationDate};{IsDeleted}";
         }
     }
 }

@@ -2,10 +2,10 @@
 
 public class Account: IModel
 {
-    public int AccountId { get; set; }
+    //public int AccountId { get; set; }
     public int Currency { get; set; }
     public int Status { get; set; }
-    public int LeadId { get; set; }
+    //public int LeadId { get; set; }
     public bool IsDeleted { get; set; }
 
     public Account(string line)

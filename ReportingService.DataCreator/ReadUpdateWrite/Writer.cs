@@ -32,8 +32,8 @@ public class Writer
         tbl.Columns.Add(new DataColumn("RegistrationDate", typeof(DateTime)));
         tbl.Columns.Add(new DataColumn("IsDeleted", typeof(bool)));
 
-        var leads = _reader.GetLeads(@"D:\Курсы\С#\LeadFiltered.csv");
-        for (int i = 0; i < leads.Count; i++)
+        var leads = _reader.GetLeads(@"FilePath");
+        for (int i = 1600000; i < leads.Count; i++)
         {
             var lead = (Lead)leads[i];
             DataRow dr = tbl.NewRow();
@@ -42,21 +42,20 @@ public class Writer
             dr["FirstName"] = lead.FirstName;
             dr["LastName"] = lead.LastName;
             dr["Patronymic"] = lead.Patronymic;
-            var bd = lead.BirthDate;
-            dr["BirthDate"] = bd;
+            dr["BirthDate"] = lead.BirthDate;
             dr["Email"] = lead.Email;
             dr["Phone"] = lead.Phone;
             dr["Passport"] = lead.Passport;
             dr["City"] = lead.City;
             dr["Address"] = lead.Address;
             dr["Role"] = lead.Role;
-            var rg = lead.RegistrationDate;
+            var rg = lead.RegistrationDate.AddYears(20);
             dr["RegistrationDate"] = rg;
             dr["IsDeleted"] = lead.IsDeleted;
             tbl.Rows.Add(dr);
         }
 
-        string connection = @"Server=.;Database=ReportingService.DB;Trusted_Connection=True;";
+        string connection = @"ConnectionString";
         SqlConnection con = new SqlConnection(connection);
         SqlBulkCopy objbulk = new SqlBulkCopy(con);
 
@@ -81,7 +80,7 @@ public class Writer
         con.Close();
     }
 
-    //[Test]
+    [Test]
     public void BulkInsertAccounts()
     {
         DataTable tbl = new DataTable();
@@ -92,7 +91,7 @@ public class Writer
         tbl.Columns.Add(new DataColumn("LeadId", typeof(int)));
 
 
-        var accounts = _reader.GetAccounts((@"D:\Курсы\С#\AccountFiltered.csv"));
+        var accounts = _reader.GetAccounts((@"FilePath"));
         for (int i = 0; i < accounts.Count; i++)
         {
             var account = (Account)accounts[i];
@@ -105,7 +104,7 @@ public class Writer
             tbl.Rows.Add(dr);
         }
 
-        string connection = @"Server=.;Database=ReportingService.DB;Trusted_Connection=True;";
+        string connection = @"ConnectionString";
         SqlConnection con = new SqlConnection(connection);
         SqlBulkCopy objbulk = new SqlBulkCopy(con);
 
@@ -148,7 +147,7 @@ public class Writer
         tbl.Columns.Add(c5);
 
         var transactions = _reader.GetTransactionsForDb((@"D:\Курсы\С#\TransactionModified.csv"));
-        for (int i = 15000000; i < transactions.Count; i++)
+        for (int i = 0; i < transactions.Count; i++)
         {
             var transaction = transactions[i];
             DataRow dr = tbl.NewRow();

@@ -22,7 +22,6 @@ public class Filter
     public async Task ReadLeads()
     {
         var leads = _reader.GetLeads(@"D:\Курсы\С#\Lead.csv");
-        leads = leads.Where(x => x.LeadId < 1800000 || x.LeadId > 4500000).ToList();
         _reader.ConvertToCsv(leads, @"D:\Курсы\С#\LeadFiltered.csv");
     }
 
@@ -30,21 +29,14 @@ public class Filter
     public async Task ReadAccounts()
     {
         var accounts = _reader.GetAccounts(@"D:\Курсы\С#\Account.csv");
-        accounts = accounts.Where(x => x.LeadId < 1800000 || x.LeadId > 4500000).ToList();
         _reader.ConvertToCsv(accounts, @"D:\Курсы\С#\AccountFiltered.csv");
     }
 
     //[Test]
     public async Task ReadTransaction()
     {
-        var transactions = _reader.GetTransactions(@"D:\Курсы\С#\Transaction2.csv");
-        var accountsId = _reader.GetAccountsId(@"D:\Курсы\С#\AccountFiltered.csv");
-
-        var hash = new HashSet<int>(accountsId);
-        transactions = transactions.Where(x => hash.Contains(x.AccountId) || x.TransactionType == 3).ToList();
-
+        var transactions = _reader.GetTransactions(@"D:\Курсы\С#\Transaction.csv");
         _reader.ConvertToCsv(transactions, @"D:\Курсы\С#\TransactionFiltered.csv");
-
     }
 
     //[Test]
@@ -63,13 +55,6 @@ public class Filter
         int i = 0;
         foreach (var (key, value) in transactionsDictionary)
         {
-            i++;
-            if (i == 4)
-            {
-                i = 0;
-                continue;
-            }
-
             var first = value.Find(x => x.Amount < 0 && x.TransactionType == 3) as TransactionFromCsv;
             if (first != null && value.Count == 2)
             {

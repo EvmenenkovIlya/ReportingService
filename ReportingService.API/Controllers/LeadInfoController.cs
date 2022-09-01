@@ -21,6 +21,7 @@ public class LeadInfoController : ControllerBase
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetCelebrantsFromDateToNow([FromQuery] DateTime fromDate)
     {
+        _logger.LogInformation("Hello world");
         return Ok(await _leadInfoService.GetCelebrantsFromDateToNow(fromDate));
     }
 }

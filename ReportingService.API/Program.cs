@@ -4,11 +4,16 @@ using System.Data.SqlClient;
 using System.Data;
 using ReportingService.API.Extensions;
 using ReportingService.API.Middleware;
+using NLog;
+using System;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionOption = new ConnectionOptions();
 builder.Configuration.Bind(connectionOption);
+builder.Host.UseNLog();
+LogManager.Configuration.Variables[$"{builder.Environment: LOG_DIRECTORY}"] = "Logs";
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionOption.REPORTING_SERVICE_DB_CONNECTION_STRING));
 // Add services to the container.
 
