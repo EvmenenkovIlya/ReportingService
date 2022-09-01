@@ -19,7 +19,7 @@ public class LeadStatisticsController : Controller
 
     [HttpGet("transactionsCount")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount)
+    public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
         return Ok(await _leadStatisticsRepository.GetLeadsIdsWith42Transactions());
     }

@@ -16,9 +16,6 @@ public class LeadInfoService : ILeadInfoService
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate)
     {
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
-
         ValidateDate(fromDate);
         var listDates = GetDatesFromDateToNow(fromDate);
         var results = await Task.WhenAll(listDates.Select(async date =>
@@ -26,10 +23,6 @@ public class LeadInfoService : ILeadInfoService
             var list = await _leadInfoRepository.GetCelebrateIdsByDate(date);
             return list;
         }));
-
-        stopWatch.Stop();
-
-        TimeSpan ts = stopWatch.Elapsed;
 
         return Concat(results);
     }
