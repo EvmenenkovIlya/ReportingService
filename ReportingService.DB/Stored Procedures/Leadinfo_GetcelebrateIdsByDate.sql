@@ -2,7 +2,7 @@
     @Date date
 AS
     BEGIN
-        SELECT [Id]
+        SELECT [LeadId]
     FROM dbo.LeadInfo AS Info
 WHERE MONTH(Info.BirthDate) = MONTH(@Date) AND DAY(Info.BirthDate) = DAY(@Date)
 END

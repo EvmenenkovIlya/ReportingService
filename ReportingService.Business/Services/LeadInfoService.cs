@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
+using System.Diagnostics;
 
 namespace ReportingService.Business.Services;
 
@@ -15,6 +16,9 @@ public class LeadInfoService : ILeadInfoService
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate)
     {
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+
         ValidateDate(fromDate);
         var listDates = GetDatesFromDateToNow(fromDate);
         var results = await Task.WhenAll(listDates.Select(async date =>
@@ -22,8 +26,15 @@ public class LeadInfoService : ILeadInfoService
             var list = await _leadInfoRepository.GetCelebrateIdsByDate(date);
             return list;
         }));
+
+        stopWatch.Stop();
+
+        TimeSpan ts = stopWatch.Elapsed;
+
         return Concat(results);
     }
+
+        
 
     private List<TType> Concat<TType>(params List<TType>[] lists)
     {
@@ -40,7 +51,8 @@ public class LeadInfoService : ILeadInfoService
 
     private void ValidateDate(DateTime fromDate)
     {
-        if (fromDate.Date > DateTime.Now.Date)
+        var today = DateTime.Now.Date;
+        if (fromDate.Date > today && (today - fromDate.Date).TotalDays < 366) 
         {
             throw new BadRequestException("Date must be less or equal than today");
         }
