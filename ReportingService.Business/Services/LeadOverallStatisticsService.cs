@@ -28,7 +28,7 @@ public class LeadOverallStatisticsService : ILeadOveralStatisticsService
         return result;
     }
 
-    private DateTime GetDateFromDaysCount(int daysCount) => DateTime.Now.AddDays(daysCount);
+    private DateTime GetDateFromDaysCount(int daysCount) => DateTime.Now.AddDays(-daysCount);
 
     private void ValidateDate(DateTime fromDate)
     {
