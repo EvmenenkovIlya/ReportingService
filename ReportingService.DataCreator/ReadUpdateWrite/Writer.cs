@@ -80,7 +80,7 @@ public class Writer
         con.Close();
     }
 
-    [Test]
+    //[Test]
     public void BulkInsertAccounts()
     {
         DataTable tbl = new DataTable();
@@ -146,7 +146,7 @@ public class Writer
         var c5 = new DataColumn("RecipientCurrency", typeof(short));
         tbl.Columns.Add(c5);
 
-        var transactions = _reader.GetTransactionsForDb((@"D:\Курсы\С#\TransactionModified.csv"));
+        var transactions = _reader.GetTransactionsForDb((@"FilePath"));
         for (int i = 0; i < transactions.Count; i++)
         {
             var transaction = transactions[i];
@@ -178,7 +178,7 @@ public class Writer
             tbl.Rows.Add(dr);
         }
 
-        string connection = @"Server=.;Database=ReportingService.DB;Trusted_Connection=True;";
+        string connection = @"ConnectionString";
         SqlConnection con = new SqlConnection(connection);
         SqlBulkCopy objbulk = new SqlBulkCopy(con);
 
