@@ -21,6 +21,7 @@ public class LeadStatisticsController : Controller
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
+        _logger.LogInformation("Get leads ids whith necessary transactions count");
         return Ok(await _leadStatisticsService.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount));
     }
 
@@ -28,6 +29,7 @@ public class LeadStatisticsController : Controller
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, int daysCount)
     {
+        _logger.LogInformation("Get leads ids whith necessary amount difference");
         return Ok(await _leadStatisticsService.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount));
     }
 }
