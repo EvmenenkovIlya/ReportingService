@@ -4,7 +4,7 @@ using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
 
-public class LeadOverallStatisticsService : ILeadOveralStatisticsService
+public class LeadOverallStatisticsService : ILeadOverallStatisticsService
 {
     private readonly ILeadOverallStatisticsRepository _leadOverallStatisticRepository;
     private readonly ILogger<LeadOverallStatisticsService> _logger;

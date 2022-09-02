@@ -7,11 +7,11 @@ namespace ReportingService.API.Controllers;
 [Route("[controller]")]
 public class LeadStatisticsController : Controller
 {
-    private readonly ILeadOveralStatisticsService _leadStatisticsService;
+    private readonly ILeadOverallStatisticsService _leadStatisticsService;
 
     private readonly ILogger<LeadStatisticsController> _logger;
 
-    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOveralStatisticsService leadStatisticsService)
+    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOverallStatisticsService leadStatisticsService)
     {
         _leadStatisticsService = leadStatisticsService;
         _logger = logger;
