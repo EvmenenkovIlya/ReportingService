@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReportingService.Data.Repositories;
+using ReportingService.Business.Services;
 
 namespace ReportingService.API.Controllers;
 
@@ -7,21 +7,21 @@ namespace ReportingService.API.Controllers;
 [Route("[controller]")]
 public class LeadStatisticsController : Controller
 {
-    private readonly ILeadOverallStatisticsRepository _leadStatisticsRepository;
+    private readonly ILeadOveralStatisticsService _leadStatisticsRepository;
 
     private readonly ILogger<LeadStatisticsController> _logger;
 
-    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOverallStatisticsRepository leadStatisticsRepository)
+    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOveralStatisticsService leadStatisticsRepository)
     {
         _leadStatisticsRepository = leadStatisticsRepository;
         _logger = logger;
     }
 
-    [HttpGet("transactionsCount")]
+    [HttpGet("transactions-count")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
-        return Ok(await _leadStatisticsRepository.GetLeadsIdsWith42Transactions());
+        return Ok(await _leadStatisticsRepository.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount));
     }
 
     [HttpGet]

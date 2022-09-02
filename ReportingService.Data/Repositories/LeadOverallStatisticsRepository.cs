@@ -37,11 +37,16 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
                    .ToList();
     }
 
-    public async Task<List<int>> GetLeadsIdsWith42Transactions()
+    public async Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, DateTime date)
     {
         return (await Connection.QueryAsync<int>
-                (StoredProcedures.LeadOverallStatistic_GetLeadsIdsWith42Transactions,
-                   commandType: CommandType.StoredProcedure))
+                (StoredProcedures.LeadOverallStatistic_GetLeadIdsWithNecessaryTransactionsCount,
+                param: new
+                {
+                    date,
+                    transactionsCount,
+                },
+                commandType: CommandType.StoredProcedure))
                    .ToList();
     }
 
