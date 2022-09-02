@@ -88,7 +88,7 @@
     <None Include="Stored Procedures\Statistic_GetAll.sql" />
     <None Include="Stored Procedures\Statistic_GetById.sql" />
     <None Include="Stored Procedures\LeadOverallStatistic_GetLeadIdsWithNecessaryTransactionsCount.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_GetLeadsIdsWithDifferenceOfMore13000.sql" />
+    <None Include="Stored Procedures\LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ReportingService.DB.refactorlog" />

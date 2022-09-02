@@ -9,5 +9,5 @@ public interface ILeadOverallStatisticsRepository
     Task<LeadOverallStatisticsDto> GetLeadStatisticDtoById(int id);
     Task UpdateLeadStatisticDto(LeadOverallStatisticsDto leadStatisticDto);
     Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, DateTime date);
-    Task<List<int>> GetLeadsIdsWithDifferenceOfMore13000();
+    Task<List<int>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, DateTime date);
 }

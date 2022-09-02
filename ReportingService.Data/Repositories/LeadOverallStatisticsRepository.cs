@@ -50,10 +50,15 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
                    .ToList();
     }
 
-    public async Task<List<int>> GetLeadsIdsWithDifferenceOfMore13000()
+    public async Task<List<int>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, DateTime date)
     {
         return (await Connection.QueryAsync<int>
-               (StoredProcedures.LeadOverallStatistic_GetLeadsIdsWithDifferenceOfMore13000,
+               (StoredProcedures.LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference,
+               param: new
+               {
+                   date,
+                   amountDifference,
+               },
                   commandType: CommandType.StoredProcedure))
                   .ToList();
     }

@@ -7,27 +7,27 @@ namespace ReportingService.API.Controllers;
 [Route("[controller]")]
 public class LeadStatisticsController : Controller
 {
-    private readonly ILeadOveralStatisticsService _leadStatisticsRepository;
+    private readonly ILeadOveralStatisticsService _leadStatisticsService;
 
     private readonly ILogger<LeadStatisticsController> _logger;
 
-    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOveralStatisticsService leadStatisticsRepository)
+    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOveralStatisticsService leadStatisticsService)
     {
-        _leadStatisticsRepository = leadStatisticsRepository;
+        _leadStatisticsService = leadStatisticsService;
         _logger = logger;
     }
 
-    [HttpGet("transactions-count")]
+    [HttpGet("{transactionsCount}/{daysCount}/transactions-count")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
-        return Ok(await _leadStatisticsRepository.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount));
+        return Ok(await _leadStatisticsService.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount));
     }
 
-    [HttpGet]
+    [HttpGet("{amountDifference}/{daysCount}/")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<int>>> GetLeadsIdsWithNecessaryAmountDifference()
+    public async Task<ActionResult<List<int>>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, int daysCount)
     {
-        return Ok(await _leadStatisticsRepository.GetLeadsIdsWithDifferenceOfMore13000());
+        return Ok(await _leadStatisticsService.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount));
     }
 }

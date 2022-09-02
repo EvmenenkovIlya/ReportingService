@@ -20,14 +20,20 @@ public class LeadOverallStatisticsService : ILeadOveralStatisticsService
         return result;
     }
 
-    private DateTime GetDateFromDaysCount(int daysCount)
+    public Task<List<int>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, int daysCount)
     {
-        return DateTime.Now.AddDays(daysCount);
+        var date = GetDateFromDaysCount(daysCount);
+        ValidateDate(date);
+        var result = _leadOverallStatisticRepository.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, date);
+        return result;
     }
+
+    private DateTime GetDateFromDaysCount(int daysCount) => DateTime.Now.AddDays(daysCount);
 
     private void ValidateDate(DateTime fromDate)
     {
         var today = DateTime.Now.Date;
+
         if (fromDate.Date > today || (today - fromDate.Date).TotalDays > 366)
         {
             throw new BadRequestException("Date must be less or equal than today");
