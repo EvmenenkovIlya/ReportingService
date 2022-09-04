@@ -2,16 +2,19 @@
 using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace ReportingService.Business.Services;
 
 public class LeadInfoService : ILeadInfoService
 {
     private readonly ILeadInfoRepository _leadInfoRepository;
+    private readonly ILogger _logger;
 
-    public LeadInfoService(ILeadInfoRepository leadInfoRepository)
+    public LeadInfoService(ILeadInfoRepository leadInfoRepository, ILogger<LeadInfoService> logger)
     {
         _leadInfoRepository = leadInfoRepository;
+        _logger = logger;
     }
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate)
@@ -23,8 +26,9 @@ public class LeadInfoService : ILeadInfoService
             var list = await _leadInfoRepository.GetCelebrateIdsByDate(date);
             return list;
         }));
-
-        return Concat(results);
+        var result = Concat(results);
+        _logger.LogInformation($"Db returned {results.Count()} lists with {result.Count} id");
+        return result;
     }
 
 
