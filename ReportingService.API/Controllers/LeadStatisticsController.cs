@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReportingService.Data.Repositories;
+using ReportingService.Business.Services;
 
 namespace ReportingService.API.Controllers;
 
@@ -7,27 +7,35 @@ namespace ReportingService.API.Controllers;
 [Route("[controller]")]
 public class LeadStatisticsController : Controller
 {
-    private readonly ILeadOverallStatisticsRepository _leadStatisticsRepository;
+    private readonly ILeadOverallStatisticsService _leadStatisticsService;
 
     private readonly ILogger<LeadStatisticsController> _logger;
 
-    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOverallStatisticsRepository leadStatisticsRepository)
+    public LeadStatisticsController(ILogger<LeadStatisticsController> logger, ILeadOverallStatisticsService leadStatisticsService)
     {
-        _leadStatisticsRepository = leadStatisticsRepository;
+        _leadStatisticsService = leadStatisticsService;
         _logger = logger;
     }
 
-    [HttpGet("transactionsCount")]
+    [HttpGet("{transactionsCount}/{daysCount}/transactions-count")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
-        return Ok(await _leadStatisticsRepository.GetLeadsIdsWith42Transactions());
+        _logger.LogInformation($"Controller: Request to get users who have made transactions greater than {transactionsCount}");
+        var result = await _leadStatisticsService.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount);
+
+        _logger.LogInformation($"Controller: users who have made transactions greater than {transactionsCount} returned");
+        return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("{amountDifference}/{daysCount}/amount-difference")]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<int>>> GetLeadsIdsWithNecessaryAmountDifference()
+    public async Task<ActionResult<List<int>>> GetLeadsIdsWithNecessaryAmountDifference(decimal amountDifference, int daysCount)
     {
-        return Ok(await _leadStatisticsRepository.GetLeadsIdsWithDifferenceOfMore13000());
+        _logger.LogInformation($"Controller: Request to get users whose difference between deposits and withdrawals is {amountDifference}");
+        var result = await _leadStatisticsService.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount);
+
+        _logger.LogInformation($"Controller: users whose difference between deposits and withdrawals is {amountDifference}");
+        return Ok(result);
     }
 }
