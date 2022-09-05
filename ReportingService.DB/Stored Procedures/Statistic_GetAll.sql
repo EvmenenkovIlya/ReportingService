@@ -1,18 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[Statistic_GetAll]
+﻿CREATE PROCEDURE [dbo].[AccountsStatistic_Add]
 AS
 BEGIN
 	SELECT 
 		[Id]	
 		[DateStatistic],
-		[DepositCount],
-		[WithdrawCount],
-		[TransferCount],
-		[DepositSum],
-		[WithdrawSum],
-		[TransferSum],
-		[ActiveAccountCount],
 		[AllAccountCount],
-		[ActiveLeadCount]
+		[VipLeadsCount],
+		[DeletedLeadsCount],
+		[DeletedVipLeadsCount]
 		
 	FROM [dbo].[Statistic]
 END

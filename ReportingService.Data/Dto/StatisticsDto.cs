@@ -1,14 +1,11 @@
-﻿
-using ReportingService.Data.Enums;
-
-namespace ReportingService.Data.Dto;
+﻿namespace ReportingService.Data.Dto;
 
 public class StatisticsDto
 {
     public long Id { get; set; }
     public DateOnly DateStatistic { get; set; }
-    public Currency Currency { get; set; }
-    public int ActiveAccountCount { get; set; }
-    public int AllAccountCount { get; set; }
-    public int ActiveLeadCount { get; set; }
+    public int AllLeadsCount { get; set; }
+    public int VipLeadsCount { get; set; }
+    public int DeletedLeadsCount { get; set; }
+    public int DeletedVipsCount { get; set; }
 }

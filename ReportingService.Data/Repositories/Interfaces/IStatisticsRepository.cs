@@ -6,5 +6,5 @@ public interface IStatisticsRepository
 {
     Task AddStatistic(StatisticsDto StatisticDto);
     Task<List<StatisticsDto>> GetAllStatistic();
-    Task<StatisticsDto> GetStatisticById(int id);
+    Task<StatisticsDto> GetStatisticByDate(DateTime date);
 }

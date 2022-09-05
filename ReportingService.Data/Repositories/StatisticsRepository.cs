@@ -15,12 +15,11 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
                    (StoredProcedures.Statistic_Add,
                    param: new
                    {
-                       StatisticDto.Currency,
-                       StatisticDto.ActiveAccountCount,
-                       StatisticDto.AllAccountCount,
-                       StatisticDto.ActiveLeadCount,
-                       StatisticDto.DateStatistic,
-                       StatisticDto.VipCount
+                       StatisticDto.AllLeadsCount,
+                       StatisticDto.VipLeadsCount,
+                       StatisticDto.DeletedLeadsCount,
+                       StatisticDto.DeletedVipsCount,
+                       StatisticDto.DateStatistic
                    },
                    commandType: CommandType.StoredProcedure
                    );
@@ -34,11 +33,11 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
                    .ToList();
     }
 
-    public async Task<StatisticsDto> GetStatisticById(int id)
+    public async Task<StatisticsDto> GetStatisticByDate(DateTime date)
     {
         return await Connection.QuerySingleAsync<StatisticsDto>(
-                StoredProcedures.Statistic_GetById,
-                param: new { id },
+                StoredProcedures.Statistic_GetByDate,
+                param: new { date },
                 commandType: CommandType.StoredProcedure
                 );
     }

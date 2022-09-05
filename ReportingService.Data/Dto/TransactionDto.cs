@@ -1,4 +1,4 @@
-﻿using ReportingService.Data.Enums;
+﻿using IncredibleBackendContracts.Enums;
 
 namespace ReportingService.Data.Dto;
 

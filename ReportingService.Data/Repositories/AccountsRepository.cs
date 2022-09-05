@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
 using System.Data;
-using ReportingService.Data.Enums;
 
 namespace ReportingService.Data.Repositories;
 
@@ -30,11 +29,11 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
             (StoredProcedures.Account_GetAll, commandType: CommandType.StoredProcedure)).ToList();
     }
 
-    public async Task<int> Account_GetCountByCurrency(List<Currency> currencies)
-    {
-            new NotImplementedException();
-            return 1;
-    }
+    //public async Task<int> Account_GetCountByCurrency(List<Currency> currencies)
+    //{
+    //        new NotImplementedException();
+    //        return 1;
+    //}
 
     public async Task<AccountDto> GetAccountById(int id)
     {
