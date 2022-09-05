@@ -42,7 +42,7 @@ public class Filter
     //[Test]
     public void ModifyTransactions()
     {
-        var transactions = _reader.GetTransactions(@"D:\Курсы\С#\TransactionFiltered.csv");
+        var transactions = _reader.GetTransactions(@"D:\Курсы\С#\Transaction3.csv");
         var transactionsModified = RebuildTransactions(transactions);
         _reader.ConvertToCsv(transactionsModified, @"D:\Курсы\С#\TransactionModified.csv");
     }

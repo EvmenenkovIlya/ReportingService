@@ -5,6 +5,6 @@ namespace ReportingService.Data.Repositories;
 public interface IStatisticsRepository
 {
     Task AddStatistic(StatisticsDto StatisticDto);
-    Task<List<StatisticsDto>> GetAllStatisticDto();
-    Task<StatisticsDto> GetStatisticDtoById(int id);
+    Task<List<StatisticsDto>> GetAllStatistic();
+    Task<StatisticsDto> GetStatisticByDate(DateTime date);
 }

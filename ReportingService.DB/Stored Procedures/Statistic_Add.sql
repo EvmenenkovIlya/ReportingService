@@ -1,42 +1,27 @@
 ﻿CREATE PROCEDURE [dbo].[Statistic_Add]
 	@DateStatistic date,
-	@DepositCount bigint,
-	@WithdrawCount bigint,
-	@TransferCount bigint,
-	@DepositSum decimal,
-	@WithdrawSum decimal,
-	@TransferSum decimal,
-	@ActiveAccountCount bigint,
-	@AllAccountCount bigint,
-	@ActiveLeadCount bigint
+	@AllLeadsCount int,
+	@VipLeadsCount int,
+	@DeletedLeadsCount int,
+	@DeletedVipLeadsCount int
 	
 AS
 BEGIN
 	INSERT INTO dbo.Statistic
 	(
 		[DateStatistic],
-		[DepositCount],
-		[WithdrawCount],
-		[TransferCount],
-		[DepositSum],
-		[WithdrawSum],
-		[TransferSum],
-		[ActiveAccountCount],
 		[AllAccountCount],
-		[ActiveLeadCount]
+		[VipLeadsCount],
+		[DeletedLeadsCount],
+		[DeletedVipLeadsCount]
 	)
     VALUES 
 	(
 		@DateStatistic,
-		@DepositCount,
-		@WithdrawCount,
-		@TransferCount,
-		@DepositSum,
-		@WithdrawSum,
-		@TransferSum,
-		@ActiveAccountCount,
-		@AllAccountCount,
-		@ActiveLeadCount
+		@AllLeadsCount,
+		@VipLeadsCount,
+		@DeletedLeadsCount,
+		@DeletedVipLeadsCount
 	)
 SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]	
 

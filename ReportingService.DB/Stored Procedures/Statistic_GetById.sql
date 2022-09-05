@@ -1,20 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[Statistic_GetById]
-	@Id bigint
+﻿CREATE PROCEDURE [dbo].[Statistic_GetByDate]
+	@Date date
 AS
 BEGIN
 	SELECT 
 		[Id],
 		[DateStatistic],
-		[DepositCount],
-		[WithdrawCount],
-		[TransferCount],
-		[DepositSum],
-		[WithdrawSum],
-		[TransferSum],
-		[ActiveAccountCount],
 		[AllAccountCount],
-		[ActiveLeadCount]
+		[VipLeadsCount],
+		[DeletedLeadsCount],
+		[DeletedVipLeadsCount]
 		
 	FROM [dbo].[Statistic]
-	WHERE Id = @Id
+	WHERE [DateStatistic] = @Date
 END

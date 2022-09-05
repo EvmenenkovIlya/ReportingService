@@ -17,7 +17,7 @@
       "applicationUrl": "https://localhost:7093;http://localhost:5093",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "REPORTING_SERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;",
+        "REPORTING_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;",
         "LOG_DIRECTORY": "$(MSBuildProjectDirectory)\\Logs"
       }
     },
@@ -27,7 +27,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "REPORTING_SERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;"
+        "REPORTING_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;"
       }
     },
     "Local": {
@@ -37,7 +37,7 @@
       "applicationUrl": "https://localhost:7274;http://localhost:5274",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "REPORTING_SERVICE_DB_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;",
+        "REPORTING_CONNECTION_STRING": "Server=.;Database=ReportingService.DB;Trusted_Connection=True;",
         "LOG_DIRECTORY": "$(MSBuildProjectDirectory)\\Logs"
       }
     }

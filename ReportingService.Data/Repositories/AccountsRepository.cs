@@ -23,13 +23,19 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
                    );
     }
 
-    public async Task<List<AccountDto>> GetAllAccountDto()
+    public async Task<List<AccountDto>> GetAllAccounts()
     {
         return (await Connection.QueryAsync<AccountDto>
             (StoredProcedures.Account_GetAll, commandType: CommandType.StoredProcedure)).ToList();
     }
 
-    public async Task<AccountDto> GetAccountDtoById(int id)
+    //public async Task<int> Account_GetCountByCurrency(List<Currency> currencies)
+    //{
+    //        new NotImplementedException();
+    //        return 1;
+    //}
+
+    public async Task<AccountDto> GetAccountById(int id)
     {
         return await Connection.QuerySingleAsync<AccountDto>(
                 StoredProcedures.Account_GetById,

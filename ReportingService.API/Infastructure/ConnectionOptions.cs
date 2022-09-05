@@ -2,5 +2,5 @@
 
 public class ConnectionOptions
 {
-    public string REPORTING_SERVICE_DB_CONNECTION_STRING { get; set; }
+    public string REPORTING_CONNECTION_STRING { get; set; }
 }

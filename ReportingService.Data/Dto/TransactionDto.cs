@@ -1,4 +1,4 @@
-﻿using ReportingService.Data.Enums;
+﻿using IncredibleBackendContracts.Enums;
 
 namespace ReportingService.Data.Dto;
 
@@ -10,7 +10,7 @@ public class TransactionDto
     public TransactionType TransactionType { get; set; }
     public decimal Amount { get; set; }
     public short Currency { get; set; }
-    public decimal Rate { get; set; }
+    public decimal? Rate { get; set; }
     public int? RecipientId { get; set; }
     public int? RecipientAccountId { get; set; }
     public decimal? RecipientAmount { get; set; }

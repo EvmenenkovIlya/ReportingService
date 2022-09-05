@@ -1,12 +1,12 @@
-﻿CREATE TABLE [dbo].[Statistic]
+﻿CREATE TABLE [dbo].[AccountsStatistic]
 (
 	Id bigint NOT NULL,
 	DateStatistic date NOT NULL,
-	Currency tinyint NOT NULL,
-	ActiveAccountCount bigint NOT NULL,
-	AllAccountCount bigint NOT NULL,
-	ActiveLeadCount bigint NOT NULL,
-  CONSTRAINT [PK_STASTIC] PRIMARY KEY CLUSTERED
+	AllLeadsCount int NOT NULL,
+	VipLeadsCount int NOT NULL,
+	DeletedLeadsCount int NOT NULL,
+	DeletedVipsCount int NOT NUll
+  CONSTRAINT [PK_ACCOUNTSSTASTIC] PRIMARY KEY CLUSTERED
   (
   [Id] ASC
   ) WITH (IGNORE_DUP_KEY = OFF)

@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Logging;
 using Moq;
+using NLog;
 using ReportingService.Business.Exceptions;
 using ReportingService.Business.Services;
 using ReportingService.Data.Repositories;
@@ -7,13 +9,15 @@ namespace ReportingService.Business.Tests
 {
     public class LeadInfoServiceTests
     {
-        private readonly LeadInfoService _sut;
         private readonly Mock<ILeadInfoRepository> _mockLeadInfoRepository;
+        private readonly Mock<ILogger<LeadInfoService>> _mockLogger;
+        private readonly LeadInfoService _sut;
 
         public LeadInfoServiceTests()
         {
             _mockLeadInfoRepository = new Mock<ILeadInfoRepository>();
-            _sut = new LeadInfoService(_mockLeadInfoRepository.Object);
+            _mockLogger = new Mock<ILogger<LeadInfoService>>();
+            _sut = new LeadInfoService(_mockLeadInfoRepository.Object, _mockLogger.Object);
         }
 
         [Fact]

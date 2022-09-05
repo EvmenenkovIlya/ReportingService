@@ -16,12 +16,13 @@ public class LeadInfoController : ControllerBase
         _logger = logger;
     }
 
-    // add period for request
     [HttpGet]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetCelebrantsFromDateToNow([FromQuery] DateTime fromDate)
     {
-        _logger.LogInformation("Hello world");
-        return Ok(await _leadInfoService.GetCelebrantsFromDateToNow(fromDate));
+        _logger.LogInformation($"GetCelebrantsFromDateToNow with date {fromDate}");
+        var result = await _leadInfoService.GetCelebrantsFromDateToNow(fromDate);
+        _logger.LogInformation($"GetCelebrantsFromDateToNow returned list with {result.Count} Id");
+        return Ok(result);
     }
 }

@@ -4,6 +4,7 @@ public class StoredProcedures
 {
     public const string Transaction_GetAll = "Transaction_GetAll";
     public const string Transaction_GetById = "Transaction_GetById";
+    public const string Transaction_GetTransactionsByYesterday = "Transaction_GetTransactionsByYesterday";
     public const string LeadInfo_Add = "LeadInfo_Add";
     public const string LeadInfo_GetAll = "LeadInfo_GetAll";
     public const string LeadInfo_GetById = "LeadInfo_GetById";
@@ -13,6 +14,9 @@ public class StoredProcedures
     public const string Account_GetAll = "Account_GetAll";
     public const string Account_GetById = "Account_GetById";
     public const string Account_Update = "Account_Update";
+    public const string AccountsStatistic_Add = "AccountsStatistic_Add";
+    public const string AccountsStatistic_GetAll = "AccountsStatistic_GetAll";
+    public const string AccountsStatistic_GetByDate = "AccountsStatistic_GetByDate";
     public const string LeadOverallStatistic_Add = "LeadOverallStatistic_Add";
     public const string LeadOverallStatistic_GetAll = "LeadOverallStatistic_GetAll";
     public const string LeadOverallStatistic_GetById = "LeadOverallStatistic_GetById";
@@ -21,5 +25,5 @@ public class StoredProcedures
     public const string LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference = "LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference";
     public const string Statistic_Add = "Statistic_Add";
     public const string Statistic_GetAll = "Statistic_GetAll";
-    public const string Statistic_GetById = "Statistic_GetById";
+    public const string Statistic_GetByDate = "Statistic_GetByDate";
 }

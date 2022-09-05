@@ -9,6 +9,14 @@ public class TransactionsRepository : BaseRepositories, ITransactionsRepository
     public TransactionsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
+    public async Task<List<TransactionDto>> GetTransactionsByYesterday()
+    {
+        return (await Connection.QueryAsync<TransactionDto>
+            (StoredProcedures.Transaction_GetTransactionsByYesterday,
+                commandType: CommandType.StoredProcedure))
+            .ToList();
+    }
+
     public async Task<TransactionDto> GetTransactionById(int id)
     {
         return await Connection.QuerySingleAsync<TransactionDto>(
