@@ -9,8 +9,11 @@ public class LeadInfoRepository : BaseRepositories, ILeadInfoRepository
 {
     private readonly ILogger<LeadInfoRepository> _logger;
 
-    public LeadInfoRepository(IDbConnection dbConnection)
-        : base(dbConnection) { }
+    public LeadInfoRepository(IDbConnection dbConnection, ILogger<LeadInfoRepository> logger)
+        : base(dbConnection)
+    {
+        _logger = logger;
+    }
 
     public async Task<LeadInfoDto> GetLeadInformationDtoById(int id)
     {

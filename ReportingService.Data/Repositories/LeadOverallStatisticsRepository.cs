@@ -9,8 +9,11 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
 {
     private readonly ILogger<LeadOverallStatisticsRepository> _logger;
 
-    public LeadOverallStatisticsRepository(IDbConnection dbConnection)
-        : base(dbConnection) { }
+    public LeadOverallStatisticsRepository(IDbConnection dbConnection, ILogger<LeadOverallStatisticsRepository> logger)
+        : base(dbConnection)
+    {
+        _logger = logger;
+    }
 
     public async Task AddLeadStatistic(LeadOverallStatisticsDto leadStatisticDto)
     {
