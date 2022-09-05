@@ -78,6 +78,8 @@
     <Build Include="Stored Procedures\LeadInfo_GetAll.sql" />
     <Build Include="Stored Procedures\LeadInfo_Update.sql" />
     <Build Include="Stored Procedures\Leadinfo_GetcelebrateIdsByDate.sql" />
+    <Build Include="Stored Procedures\Transaction_GetTransactionsByYesterday.sql" />
+    <None Include="Stored Procedures\Account_GetCountByCurrency.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Stored Procedures\Account_Add.sql" />
