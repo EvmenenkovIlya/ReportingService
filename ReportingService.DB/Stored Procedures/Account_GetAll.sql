@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Account_Add]
+﻿CREATE PROCEDURE [dbo].[Account_GetAll]
 AS
 BEGIN
 	SELECT 

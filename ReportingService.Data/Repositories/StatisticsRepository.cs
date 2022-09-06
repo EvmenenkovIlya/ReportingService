@@ -9,17 +9,17 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
     public StatisticsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
-    public async Task AddStatistic(StatisticsDto StatisticDto)
+    public async Task AddStatistic(StatisticsDto statisticDto)
     {
         await Connection.QuerySingleAsync
                    (StoredProcedures.Statistic_Add,
                    param: new
                    {
-                       StatisticDto.AllLeadsCount,
-                       StatisticDto.VipLeadsCount,
-                       StatisticDto.DeletedLeadsCount,
-                       StatisticDto.DeletedVipsCount,
-                       StatisticDto.DateStatistic
+                       statisticDto.AllLeadsCount,
+                       statisticDto.VipLeadsCount,
+                       statisticDto.DeletedLeadsCount,
+                       statisticDto.DeletedVipsCount,
+                       statisticDto.DateStatistic
                    },
                    commandType: CommandType.StoredProcedure
                    );

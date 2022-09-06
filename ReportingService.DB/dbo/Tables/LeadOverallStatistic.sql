@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[LeadOverallStatistic]
 (
-	Id bigint NOT NULL,
+	Id bigint IDENTITY(1,1) NOT NULL,
 	DateStatistics date NOT NULL,
 	LeadId int NOT NULL,
 	DepositsSum decimal(14,4) NOT NULL,

@@ -5,7 +5,7 @@ BEGIN
 	SELECT 
 		[Id],
 		[DateStatistic],
-		[AllAccountCount],
+		[RegularLeadsCount],
 		[VipLeadsCount],
 		[DeletedLeadsCount],
 		[DeletedVipLeadsCount]

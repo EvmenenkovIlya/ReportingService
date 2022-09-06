@@ -17,6 +17,7 @@ public class StoredProcedures
     public const string AccountsStatistic_Add = "AccountsStatistic_Add";
     public const string AccountsStatistic_GetAll = "AccountsStatistic_GetAll";
     public const string AccountsStatistic_GetByDate = "AccountsStatistic_GetByDate";
+    public const string AccountsStatistic_GetByPeriod = "AccountsStatistic_GetByPeriod";
     public const string LeadOverallStatistic_Add = "LeadOverallStatistic_Add";
     public const string LeadOverallStatistic_GetAll = "LeadOverallStatistic_GetAll";
     public const string LeadOverallStatistic_GetById = "LeadOverallStatistic_GetById";

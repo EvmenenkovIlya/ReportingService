@@ -9,7 +9,7 @@
 	@TransfersCount int
 AS
 BEGIN
-	INSERT INTO dbo.LeadOverallStatistic
+	INSERT INTO [dbo].[LeadOverallStatistic]
 	(
 		[DateStatistics],
 		[LeadId],

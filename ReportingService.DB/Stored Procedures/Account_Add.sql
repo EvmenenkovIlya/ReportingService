@@ -6,7 +6,7 @@
 	
 AS
 BEGIN
-	INSERT INTO dbo.Account
+	INSERT INTO [dbo].[Account]
 	(
 		[AccountId],
 		[Currency],
