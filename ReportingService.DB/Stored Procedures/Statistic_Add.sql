@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Statistic_Add]
 	@DateStatistic date,
-	@AllLeadsCount int,
+	@RegularLeadsCount int,
 	@VipLeadsCount int,
 	@DeletedLeadsCount int,
 	@DeletedVipLeadsCount int
@@ -10,7 +10,7 @@ BEGIN
 	INSERT INTO dbo.Statistic
 	(
 		[DateStatistic],
-		[AllAccountCount],
+		[RegularLeadsCount],
 		[VipLeadsCount],
 		[DeletedLeadsCount],
 		[DeletedVipLeadsCount]
@@ -18,7 +18,7 @@ BEGIN
     VALUES 
 	(
 		@DateStatistic,
-		@AllLeadsCount,
+		@RegularLeadsCount,
 		@VipLeadsCount,
 		@DeletedLeadsCount,
 		@DeletedVipLeadsCount

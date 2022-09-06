@@ -1,11 +1,11 @@
-﻿CREATE TABLE [dbo].[AccountsStatistic]
+﻿CREATE TABLE [dbo].[Statistic]
 (
-	Id bigint NOT NULL,
+	Id bigint IDENTITY(1,1) NOT NULL,
 	DateStatistic date NOT NULL,
-	AllLeadsCount int NOT NULL,
+	RegularLeadsCount int NOT NULL,
 	VipLeadsCount int NOT NULL,
 	DeletedLeadsCount int NOT NULL,
-	DeletedVipsCount int NOT NUll
+	DeletedVipLeadsCount int NOT NUll
   CONSTRAINT [PK_ACCOUNTSSTASTIC] PRIMARY KEY CLUSTERED
   (
   [Id] ASC

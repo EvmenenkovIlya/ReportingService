@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Transaction]
 (
-	Id bigint NOT NULL,
+	Id bigint IDENTITY(1,1) NOT NULL,
 	TransactionId bigint NOT NULL,
 	AccountId int NOT NULL,
 	Date datetime2 NOT NULL,

@@ -22,7 +22,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDataLayerRepositotories();
+builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
 
 builder.Services.AddAutoMapper();

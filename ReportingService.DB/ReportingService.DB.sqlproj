@@ -79,26 +79,27 @@
     <Build Include="Stored Procedures\LeadInfo_Update.sql" />
     <Build Include="Stored Procedures\Leadinfo_GetcelebrateIdsByDate.sql" />
     <Build Include="Stored Procedures\Transaction_GetTransactionsByYesterday.sql" />
-    <None Include="Stored Procedures\Account_GetCountByCurrency.sql" />
+    <Build Include="Stored Procedures\Account_GetCountByCurrency.sql" />
     <Build Include="dbo\Tables\AccountsStatistic.sql" />
-    <None Include="Stored Procedures\AccountsStatistic_Add.sql" />
-    <None Include="Stored Procedures\Copy of Statistic_GetAll.sql" />
-    <None Include="Stored Procedures\AccountsStatistic_GetByDate.sql" />
+    <Build Include="Stored Procedures\AccountsStatistic_Add.sql" />
+    <Build Include="Stored Procedures\AccountsStatistic_GetByDate.sql" />
+    <Build Include="Stored Procedures\AccountsStatistic_GetAll.sql" />
+    <Build Include="Stored Procedures\AccountsStatistic_GetByPeriod.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Stored Procedures\Account_Add.sql" />
-    <None Include="Stored Procedures\Account_GetAll.sql" />
-    <None Include="Stored Procedures\Account_GetById.sql" />
-    <None Include="Stored Procedures\Account_Update.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_GetAll.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_GetById.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_Update.sql" />
-    <None Include="Stored Procedures\Statistic_Add.sql" />
-    <None Include="Stored Procedures\Statistic_GetAll.sql" />
-    <None Include="Stored Procedures\Statistic_GetById.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_GetLeadIdsWithNecessaryTransactionsCount.sql" />
-    <None Include="Stored Procedures\LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference.sql" />
+    <Build Include="Stored Procedures\Account_Add.sql" />
+    <Build Include="Stored Procedures\Account_GetAll.sql" />
+    <Build Include="Stored Procedures\Account_GetById.sql" />
+    <Build Include="Stored Procedures\Account_Update.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_GetAll.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_GetById.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_Update.sql" />
+    <Build Include="Stored Procedures\Statistic_Add.sql" />
+    <Build Include="Stored Procedures\Statistic_GetAll.sql" />
+    <Build Include="Stored Procedures\Statistic_GetById.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_GetLeadIdsWithNecessaryTransactionsCount.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ReportingService.DB.refactorlog" />
