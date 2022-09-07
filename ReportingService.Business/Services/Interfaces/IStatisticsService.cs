@@ -3,4 +3,5 @@
 public interface IStatisticsService
 {
     Task CreateAccountStatistics();
+    Task Execute();
 }
