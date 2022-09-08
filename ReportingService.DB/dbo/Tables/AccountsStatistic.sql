@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[Statistic]
+﻿CREATE TABLE [dbo].[AccountsStatistic]
 (
-	Id bigint NOT NULL,
+	Id bigint IDENTITY(1,1) NOT NULL,
 	DateStatistic date NOT NULL,
 	Currency tinyint NOT NULL,
 	ActiveAccountCount int NOT NULL,

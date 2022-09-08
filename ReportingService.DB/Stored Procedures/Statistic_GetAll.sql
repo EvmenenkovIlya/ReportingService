@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[AccountsStatistic_Add]
+﻿CREATE PROCEDURE [dbo].[Statistic_GetAll]
 AS
 BEGIN
 	SELECT 
 		[Id]	
 		[DateStatistic],
-		[AllAccountCount],
+		[RegularLeadsCount],
 		[VipLeadsCount],
 		[DeletedLeadsCount],
 		[DeletedVipLeadsCount]

@@ -1,16 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[AccountsStatistic_Add]
+﻿Create PROCEDURE [dbo].[AccountsStatistic_Add]
 	@DateStatistic date,
-	@Currency tinyint,
-	@ActiveAccountCount int,
-	@FrozenAccountCount int,
-	@DeletedAccountCount int
+	@Currency tinyint
 	
 AS
 BEGIN
-	INSERT INTO dbo.AccountsStatistic
+
+	INSERT INTO [dbo].[AccountsStatistic]
 	(
 		[DateStatistic],
-		[Currency tinyint],
+		[Currency],
 		[ActiveAccountCount],
 		[FrozenAccountCount],
 		[DeletedAccountCount]
@@ -19,9 +17,10 @@ BEGIN
 	(
 		@DateStatistic,
 		@Currency,
-		@ActiveAccountCount,
-		@FrozenAccountCount,
-		@DeletedAccountCount
+		(Select Count([Id]) As ActiveAccountCount From Account Where [Account].Currency = @Currency and [Account].[Status] = 1 and [Account].IsDeleted = 0) ,
+		(Select Count([Id]) As FrozenAccountCount From Account Where [Account].Currency = @Currency and [Account].[Status] = 2 and [Account].IsDeleted = 0) ,
+		(Select Count([Id]) As DeletedAccountCount From Account Where [Account].Currency = @Currency and [Account].IsDeleted = 1 )
+
 	)
 SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]	
 

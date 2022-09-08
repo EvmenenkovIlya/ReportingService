@@ -5,10 +5,10 @@ using System.Data;
 using ReportingService.API.Extensions;
 using ReportingService.API.Middleware;
 using NLog;
-using System;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 var connectionOption = new ConnectionOptions();
 builder.Configuration.Bind(connectionOption);
@@ -22,8 +22,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDataLayerRepositotories();
+builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
+builder.Services.AddHostedService<Worker>();
 
 builder.Services.AddAutoMapper();
 

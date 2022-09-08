@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[LeadInfo]
 (
-	Id int NOT NULL,
+	Id int IDENTITY(1,1) NOT NULL,
 	LeadId int NOT NULL,
 	FirstName nvarchar(20) NOT NULL,
 	LastName nvarchar(20) NOT NULL,

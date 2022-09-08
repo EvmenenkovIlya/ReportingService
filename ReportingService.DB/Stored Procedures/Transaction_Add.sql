@@ -12,7 +12,7 @@
 	@RecipientCurrency tinyint
 AS
 BEGIN
-	INSERT INTO dbo.[Transaction]
+	INSERT INTO [dbo].[Transaction]
 	(
 		[TransactionId],
 		[AccountId],

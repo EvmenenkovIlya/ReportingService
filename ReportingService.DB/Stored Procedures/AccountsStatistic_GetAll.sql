@@ -2,13 +2,11 @@
 AS
 BEGIN
 	SELECT 
-		[Id]	
+		[Id],
 		[DateStatistic],
-		[Currency tinyint],
+		[Currency],
 		[ActiveAccountCount],
 		[FrozenAccountCount],
-		[DeletedAccountCount]
-		
+		[DeletedAccountCount]		
 	FROM [dbo].[AccountsStatistic]
 END
-

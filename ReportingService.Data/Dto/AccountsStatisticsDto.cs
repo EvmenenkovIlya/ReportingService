@@ -3,6 +3,7 @@
 namespace ReportingService.Data.Dto;
 public class AccountsStatisticsDto
 {
+    public long Id { get; set; }
     public DateTime DateStatistic { get; set; }
     public Currency Currency { get; set; }
     public int ActiveAccountCount { get; set; }
