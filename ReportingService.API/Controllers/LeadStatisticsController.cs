@@ -38,4 +38,13 @@ public class LeadStatisticsController : Controller
         _logger.LogInformation($"Controller: users whose difference between deposits and withdrawals is {amountDifference}");
         return Ok(result);
     }
+
+    [HttpGet()]
+    [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
+    public async Task<ActionResult> Test()
+    {
+        var result = _leadStatisticsService.CreateLeadsOverallStatistics();
+
+        return NoContent();
+    }
 }

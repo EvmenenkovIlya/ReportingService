@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReportingService.Business.Exceptions;
+using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
@@ -13,6 +14,16 @@ public class LeadOverallStatisticsService : ILeadOverallStatisticsService
     {
         _leadOverallStatisticRepository = leadOverallStatisticRepository;
         _logger = logger;
+    }
+
+    public async Task Execute()
+    {
+        await CreateLeadsOverallStatistics();
+    }
+
+    public async Task CreateLeadsOverallStatistics()
+    {
+        var result = await _leadOverallStatisticRepository.GetLeadOverallStatisticsDto(DateTime.Now);
     }
 
     public Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)

@@ -104,4 +104,7 @@
   <ItemGroup>
     <RefactorLog Include="ReportingService.DB.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Stored Procedures\LeadOverallStatistic_GetLeadOverallStatistics.sql" />
+  </ItemGroup>
 </Project>
