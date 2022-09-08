@@ -31,9 +31,6 @@ public class Worker : BackgroundService
         {
             IStatisticsService statisticsService = scope.ServiceProvider.GetRequiredService<IStatisticsService>();
             await statisticsService.Execute();
-
-            ILeadOverallStatisticsService leadOverallStatisticsService = scope.ServiceProvider.GetRequiredService<ILeadOverallStatisticsService>();
-            await leadOverallStatisticsService.Execute();
         }
     }
 
