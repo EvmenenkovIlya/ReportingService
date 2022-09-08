@@ -1,4 +1,5 @@
 ﻿using IncredibleBackendContracts.Enums;
+using MassTransit.Internals;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
 using ReportingService.Data.Repositories;
@@ -24,16 +25,23 @@ public class StatisticsService : IStatisticsService
 
     public async Task Execute()
     {
-        await CreateAccountStatistics();
+        await Task.WhenAll(
+                CreateAccountStatistics(),
+                CreateLeadsCountStatistics()
+            );
     }
 
     public async Task CreateAccountStatistics()
     {
-        var listCurrency = Enum.GetValues(typeof(Currency)).OfType<Currency>().ToList();
-        await Task.WhenAll(listCurrency.Select(async currency =>
+        var listCurrencies = Enum.GetValues(typeof(Currency)).OfType<Currency>().ToList();
+        await Task.WhenAll(listCurrencies.Select(async currency =>
         {
             await _accountsStatisticsRepository.AddStatistic(DateTime.Now.AddDays(-1), currency);
         }));
+    }
 
+    public async Task CreateLeadsCountStatistics()
+    {
+        await _statisticsRepository.AddStatistic();
     }
 }

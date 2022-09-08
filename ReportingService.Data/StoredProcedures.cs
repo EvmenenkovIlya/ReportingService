@@ -27,4 +27,5 @@ public class StoredProcedures
     public const string Statistic_Add = "Statistic_Add";
     public const string Statistic_GetAll = "Statistic_GetAll";
     public const string Statistic_GetByDate = "Statistic_GetByDate";
+    public const string Statistic_GetByPeriod = "Statistic_GetByPeriod";
 }

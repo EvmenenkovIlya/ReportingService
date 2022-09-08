@@ -24,7 +24,7 @@ namespace ReportingService.Business.Tests
         public async Task GetCelebrantsFromDateToNow_WhenValidDate_ListReceived()
         {
             //given
-            var date = DateTime.Now;
+            var date = 2;
             List<int> expectedResult = new List<int>() { 1, 2, 3 };
             var listDates = new List<DateTime>() { DateTime.Now.AddDays(-2), DateTime.Now.AddDays(-1), DateTime.Now };
             _mockLeadInfoRepository.Setup(o => o.GetCelebrateIdsByDate(It.Is<DateTime>(x => x.Date == listDates[0].Date))).ReturnsAsync(new List<int>() { expectedResult[0] });
@@ -35,7 +35,7 @@ namespace ReportingService.Business.Tests
             var actual = await _sut.GetCelebrantsFromDateToNow(date);
 
             //then
-            _mockLeadInfoRepository.Verify(o => o.GetCelebrateIdsByDate(date), Times.Once);
+            _mockLeadInfoRepository.Verify(o => o.GetCelebrateIdsByDate(It.Is<DateTime>(x => x.Date == DateTime.Now.Date )), Times.Once);
             Assert.All(actual, i => Assert.Contains(i, expectedResult));
         }
 
@@ -43,11 +43,11 @@ namespace ReportingService.Business.Tests
         public async Task GetCelebrantsFromDateToNow_WhenInvalidDate_ThrowBadRequestException()
         {
             //given
-            var date = DateTime.Now.AddDays(1);
+            var daysCount = -1;
             //when
 
             //then
-            await Assert.ThrowsAsync<BadRequestException>(() => _sut.GetCelebrantsFromDateToNow(date));
+            await Assert.ThrowsAsync<BadRequestException>(() => _sut.GetCelebrantsFromDateToNow(daysCount));
         }
     }
 }

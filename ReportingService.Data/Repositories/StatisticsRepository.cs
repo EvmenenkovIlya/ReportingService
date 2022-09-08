@@ -9,19 +9,11 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
     public StatisticsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
-    public async Task AddStatistic(StatisticsDto statisticDto)
+    public async Task AddStatistic()
     {
         await Connection.QuerySingleAsync
                    (StoredProcedures.Statistic_Add,
-                   param: new
-                   {
-                       statisticDto.AllLeadsCount,
-                       statisticDto.VipLeadsCount,
-                       statisticDto.DeletedLeadsCount,
-                       statisticDto.DeletedVipsCount,
-                       statisticDto.DateStatistic
-                   },
-                   commandType: CommandType.StoredProcedure
+                       commandType: CommandType.StoredProcedure
                    );
     }
 
@@ -40,5 +32,13 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
                 param: new { date },
                 commandType: CommandType.StoredProcedure
                 );
+    }
+
+    public async Task<List<StatisticsDto>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo)
+    {
+        return (await Connection.QueryAsync<StatisticsDto>(
+            StoredProcedures.Statistic_GetByPeriod,
+            param: new { dateFrom, dateTo },
+            commandType: CommandType.StoredProcedure)).ToList();
     }
 }
