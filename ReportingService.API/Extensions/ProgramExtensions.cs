@@ -1,5 +1,7 @@
-﻿using ReportingService.Business.Services;
+﻿using MassTransit;
+using ReportingService.Business.Services;
 using ReportingService.Data.Repositories;
+using T_Strore.Business.Consumers;
 
 namespace ReportingService.API.Extensions;
 public static class ProgramExtensions
@@ -25,5 +27,21 @@ public static class ProgramExtensions
     {
         services.AddAutoMapper(typeof(APIModelsMapperConfig));
         services.AddAutoMapper(typeof(BusinessModelsMapperConfig));
+    }
+
+    public static void AddMassTransit(this IServiceCollection services)
+    {
+        services.AddMassTransit(config =>
+        {
+            config.AddConsumer<TransactionCunsumer>();
+            config.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.ReceiveEndpoint("currency-rates", c =>
+                {
+                    c.ConfigureConsumer<TransactionCunsumer>(ctx);
+                });
+            });
+        });
+
     }
 }
