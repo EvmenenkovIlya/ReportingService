@@ -16,16 +16,6 @@ public class LeadOverallStatisticsService : ILeadOverallStatisticsService
         _logger = logger;
     }
 
-    public async Task Execute()
-    {
-        await CreateLeadsOverallStatistics();
-    }
-
-    public async Task CreateLeadsOverallStatistics()
-    {
-        var result = await _leadOverallStatisticRepository.GetLeadOverallStatisticsDto(DateTime.Now);
-    }
-
     public Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
     {
         var date = GetDateFromDaysCount(daysCount);

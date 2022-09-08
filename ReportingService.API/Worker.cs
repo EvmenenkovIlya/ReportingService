@@ -13,17 +13,17 @@ public class Worker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-       /* while (!stoppingToken.IsCancellationRequested)
+        while (!stoppingToken.IsCancellationRequested)
         {
             _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             await DoWorkAsync(stoppingToken);
             await Task.Delay(60000, stoppingToken);
-        }*/
+        }
     }
 
     private async Task DoWorkAsync(CancellationToken stoppingToken)
     {
-        /*_logger.LogInformation(
+        _logger.LogInformation(
             $"{nameof(Worker)} is working.");
 
         //add services
@@ -34,14 +34,14 @@ public class Worker : BackgroundService
 
             ILeadOverallStatisticsService leadOverallStatisticsService = scope.ServiceProvider.GetRequiredService<ILeadOverallStatisticsService>();
             await leadOverallStatisticsService.Execute();
-        }*/
+        }
     }
 
     public override async Task StopAsync(CancellationToken stoppingToken)
     {
-        /*_logger.LogInformation(
+        _logger.LogInformation(
             $"{nameof(Worker)} is stopping.");
 
-        await base.StopAsync(stoppingToken);*/
+        await base.StopAsync(stoppingToken);
     }
 }

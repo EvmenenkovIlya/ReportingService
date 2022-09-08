@@ -45,20 +45,6 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
                    .ToList();
     }
 
-    public async Task<List<LeadOverallStatisticsDto>> GetLeadOverallStatisticsDto(DateTime date)
-    {
-        _logger.LogInformation("Data layer: Connection to data base");
-
-        return (await Connection.QueryAsync<LeadOverallStatisticsDto>
-            (StoredProcedures.LeadOverallStatistic_GetLeadOverallStatistics,
-            param: new
-            {
-                date
-            },
-            commandType: CommandType.StoredProcedure))
-            .ToList();
-    }
-
     public async Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, DateTime date)
     {
         _logger.LogInformation("Data layer: Connection to data base");
