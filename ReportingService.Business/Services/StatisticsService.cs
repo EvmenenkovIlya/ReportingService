@@ -22,6 +22,11 @@ public class StatisticsService : IStatisticsService
         _accountsStatisticsRepository = accountsStatisticsRepository;
     }
 
+    public async Task Execute()
+    {
+        await CreateAccountStatistics();
+    }
+
     public async Task CreateAccountStatistics()
     {
         var listCurrency = Enum.GetValues(typeof(Currency)).OfType<Currency>().ToList();

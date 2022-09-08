@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReportingService.Business.Exceptions;
+using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
