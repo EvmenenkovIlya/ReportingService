@@ -4,12 +4,12 @@ using Microsoft.Extensions.Logging;
 
 namespace T_Strore.Business.Consumers;
 
-public class TransactionCunsumer : IConsumer<CurrencyRate>
+public class TransactionConsumer : IConsumer<CurrencyRate>
 {
 
-    private readonly ILogger<TransactionCunsumer> _logger;
+    private readonly ILogger<TransactionConsumer> _logger;
 
-    public TransactionCunsumer(ILogger<TransactionCunsumer> logger)
+    public TransactionConsumer(ILogger<TransactionConsumer> logger)
     {
         _logger = logger;
     }
@@ -18,6 +18,6 @@ public class TransactionCunsumer : IConsumer<CurrencyRate>
     {
         var dictionaryConvert = new Dictionary<string, decimal>(context.Message.Rates);
         _logger.LogInformation($"RateConsumer: Save actual rates in model");
-        CurrencyRateModel.CurrencyRates = dictionaryConvert;
+        //CurrencyRateModel.CurrencyRates = dictionaryConvert;
     }
 }

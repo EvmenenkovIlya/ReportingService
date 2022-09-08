@@ -33,12 +33,12 @@ public static class ProgramExtensions
     {
         services.AddMassTransit(config =>
         {
-            config.AddConsumer<TransactionCunsumer>();
+            config.AddConsumer<TransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.ReceiveEndpoint("currency-rates", c =>
                 {
-                    c.ConfigureConsumer<TransactionCunsumer>(ctx);
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
             });
         });
