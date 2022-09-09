@@ -1,10 +1,11 @@
-﻿using IncredibleBackendContracts.Models;
+﻿
 using MassTransit;
 using Microsoft.Extensions.Logging;
+using ReportingService.Business.Models;
 
 namespace T_Strore.Business.Consumers;
 
-public class TransactionCunsumer : IConsumer<CurrencyRate>
+public class TransactionCunsumer : IConsumer<TransactionTStoreModel>
 {
 
     private readonly ILogger<TransactionCunsumer> _logger;
@@ -14,10 +15,16 @@ public class TransactionCunsumer : IConsumer<CurrencyRate>
         _logger = logger;
     }
 
-    public async Task Consume(ConsumeContext<CurrencyRate> context)
+    public async Task Consume(ConsumeContext<TransactionTStoreModel> context)
     {
-        var dictionaryConvert = new Dictionary<string, decimal>(context.Message.Rates);
-        _logger.LogInformation($"RateConsumer: Save actual rates in model");
-        CurrencyRateModel.CurrencyRates = dictionaryConvert;
+        var transactionConvert = new TransactionTStoreModel()
+        {
+            Amount = context.Message.Amount,
+            Date = context.Message.Date,
+            AccountId = context.Message.AccountId,
+            TransactionType = context.Message.TransactionType,
+            Currency = context.Message.Currency
+        };
+
     }
 }

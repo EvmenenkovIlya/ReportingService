@@ -36,7 +36,7 @@ public static class ProgramExtensions
             config.AddConsumer<TransactionCunsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ReceiveEndpoint("currency-rates", c =>
+                cfg.ReceiveEndpoint("transaction-queue", c =>
                 {
                     c.ConfigureConsumer<TransactionCunsumer>(ctx);
                 });
