@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using ReportingService.Business;
 using ReportingService.Business.Services;
 using ReportingService.Data.Repositories;
 using T_Strore.Business.Consumers;
@@ -40,8 +41,38 @@ public static class ProgramExtensions
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
+
+                cfg.ReceiveEndpoint("lead-delete", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint("account-delete", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint("lead-update", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint("account-update", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint("lead-create", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
+                cfg.ReceiveEndpoint("account-create", c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
             });
         });
-
     }
 }

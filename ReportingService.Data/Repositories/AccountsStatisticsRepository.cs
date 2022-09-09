@@ -10,7 +10,7 @@ public class AccountsStatisticsRepository : BaseRepositories, IAccountsStatistic
     public AccountsStatisticsRepository(IDbConnection dbConnection)
             : base(dbConnection) { }
 
-    public async Task AddStatistic(DateTime date, Currency currency)
+    public async Task AddStatistic(DateTime date, TradingCurrency currency)
     {
         await Connection.QuerySingleAsync
         (StoredProcedures.AccountsStatistic_Add,

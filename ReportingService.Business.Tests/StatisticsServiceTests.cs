@@ -28,7 +28,7 @@ public class StatisticsServiceTests
     public async Task CreateAccountStatistics_WhenCall_ExecuteRepositoryMethod()
     {
         //given
-        var listCurrencies = Enum.GetValues(typeof(Currency)).OfType<Currency>().ToList();
+        var listCurrencies = Enum.GetValues(typeof(TradingCurrency)).OfType<TradingCurrency>().ToList();
 
         //when
         await _sut.CreateAccountStatistics();

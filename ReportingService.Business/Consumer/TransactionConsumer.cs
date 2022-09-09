@@ -1,4 +1,4 @@
-﻿using IncredibleBackendContracts.Models;
+﻿using IncredibleBackendContracts.ExchangeModels;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

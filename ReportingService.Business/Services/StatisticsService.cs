@@ -33,7 +33,7 @@ public class StatisticsService : IStatisticsService
 
     public async Task CreateAccountStatistics()
     {
-        var listCurrencies = Enum.GetValues(typeof(Currency)).OfType<Currency>().ToList();
+        var listCurrencies = Enum.GetValues(typeof(TradingCurrency)).OfType<TradingCurrency>().ToList();
         await Task.WhenAll(listCurrencies.Select(async currency =>
         {
             await _accountsStatisticsRepository.AddStatistic(DateTime.Now.AddDays(-1), currency);
