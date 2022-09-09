@@ -2,5 +2,5 @@
 
 public interface ILeadInfoService
 {
-    Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate);
+    Task<List<int>> GetCelebrantsFromDateToNow(int daysCount);
 }
