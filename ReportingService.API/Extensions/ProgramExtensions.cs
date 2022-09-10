@@ -42,7 +42,7 @@ public static class ProgramExtensions
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
 
-                cfg.ReceiveEndpoint("lead-delete", c =>
+                /*cfg.ReceiveEndpoint("lead-delete", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
@@ -70,7 +70,7 @@ public static class ProgramExtensions
                 cfg.ReceiveEndpoint("account-create", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });
+                });*/
 
             });
         });
