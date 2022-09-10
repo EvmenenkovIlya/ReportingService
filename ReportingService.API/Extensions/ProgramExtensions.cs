@@ -37,12 +37,12 @@ public static class ProgramExtensions
             config.AddConsumer<TransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ReceiveEndpoint("currency-rates", c =>
+                cfg.ReceiveEndpoint("transaction-queue", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
 
-                cfg.ReceiveEndpoint("lead-delete", c =>
+                /*cfg.ReceiveEndpoint("lead-delete", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
@@ -70,7 +70,7 @@ public static class ProgramExtensions
                 cfg.ReceiveEndpoint("account-create", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });
+                });*/
 
             });
         });

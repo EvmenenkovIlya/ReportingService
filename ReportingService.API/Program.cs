@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
 builder.Services.AddHostedService<Worker>();
+builder.Services.AddMassTransit();
 
 builder.Services.AddAutoMapper();
 
