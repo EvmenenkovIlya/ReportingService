@@ -22,18 +22,30 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
                    (StoredProcedures.LeadOverallStatistic_Add,
                    param: new
                    {
+                       leadStatisticDto.DateStatistics,
                        leadStatisticDto.LeadId,
-                       leadStatisticDto.TransferSum,
                        leadStatisticDto.DepositsSum,
                        leadStatisticDto.WithdrawSum,
-                       leadStatisticDto.DateStatistics,
+                       leadStatisticDto.TransferSum,
                        leadStatisticDto.DepositsCount,
                        leadStatisticDto.WithdrawalsCount,
                        leadStatisticDto.TransfersCount,
-                       leadStatisticDto.TransactionCountForTwoMonth
                    },
                    commandType: CommandType.StoredProcedure
                    );
+    }
+
+    public async Task<List<LeadOverallStatisticsDto>> GetOverallStatisiticsByDate(DateTime date)
+    {
+        _logger.LogInformation("Data layer: Connection to data base");
+        return (await Connection.QueryAsync<LeadOverallStatisticsDto>
+                   (StoredProcedures.LeadOverallStatistic_GetLeadOverallStatisticByDate,
+                   param: new
+                   {
+                       date
+                   },
+                   commandType: CommandType.StoredProcedure
+                   )).ToList();
     }
 
     public async Task<List<LeadOverallStatisticsDto>> GetAllLeadStatisticDto()
