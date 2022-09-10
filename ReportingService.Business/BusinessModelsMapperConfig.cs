@@ -2,7 +2,7 @@
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
 
-namespace ReportingService.API;
+namespace ReportingService.Business;
 
 // move to Business
 public class BusinessModelsMapperConfig : Profile

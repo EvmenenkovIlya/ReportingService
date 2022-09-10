@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReportingService.API.Controllers;
+using ReportingService.Business;
 using ReportingService.Business.Services;
 
 namespace ReportingService.API.Tests;

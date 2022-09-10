@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReportingService.API.Controllers;
+using ReportingService.Business;
 using ReportingService.Business.Services;
 
 namespace ReportingService.API.Tests;
@@ -28,17 +29,17 @@ public class LeadInfoControllerTests
     {
         // given
         var expectedList = new List<int>() { 1, 2, 3 };
-        var date = DateTime.Now;
-        _mockLeadInfoService.Setup(o => o.GetCelebrantsFromDateToNow(date)).ReturnsAsync(expectedList);
+        var daysCount = 0;
+        _mockLeadInfoService.Setup(o => o.GetCelebrantsFromDateToNow(daysCount)).ReturnsAsync(expectedList);
 
         // when
-        var actual = await _sut.GetCelebrantsFromDateToNow(date);
+        var actual = await _sut.GetCelebrantsFromDateToNow(daysCount);
 
         // then
         var actualResult = actual.Result as ObjectResult;
         var listResponse = actualResult.Value as List<int>;
         Assert.Equal(StatusCodes.Status200OK, actualResult.StatusCode);
         Assert.All(listResponse, i => Assert.Contains(i, expectedList));
-        _mockLeadInfoService.Verify(o => o.GetCelebrantsFromDateToNow(date), Times.Once);
+        _mockLeadInfoService.Verify(o => o.GetCelebrantsFromDateToNow(daysCount), Times.Once);
     }
 }

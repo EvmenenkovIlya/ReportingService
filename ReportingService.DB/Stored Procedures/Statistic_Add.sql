@@ -1,9 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Statistic_Add]
-	@DateStatistic date,
-	@RegularLeadsCount int,
-	@VipLeadsCount int,
-	@DeletedLeadsCount int,
-	@DeletedVipLeadsCount int
 	
 AS
 BEGIN
@@ -17,11 +12,11 @@ BEGIN
 	)
     VALUES 
 	(
-		@DateStatistic,
-		@RegularLeadsCount,
-		@VipLeadsCount,
-		@DeletedLeadsCount,
-		@DeletedVipLeadsCount
+		Getdate() - 1,
+		(Select Count([Id]) from LeadInfo where [Role] = 1 and [IsDeleted] = 0),
+		(Select Count([Id]) from LeadInfo where [Role] = 2 and [IsDeleted] = 0),
+		(Select Count([Id]) from LeadInfo where [Role] = 1 and [IsDeleted] = 1),
+		(Select Count([Id]) from LeadInfo where [Role] = 2 and [IsDeleted] = 1)
 	)
 SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]	
 

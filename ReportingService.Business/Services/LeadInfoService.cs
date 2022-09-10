@@ -3,6 +3,7 @@ using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using NLog.Web.LayoutRenderers;
 
 namespace ReportingService.Business.Services;
 
@@ -17,10 +18,10 @@ public class LeadInfoService : ILeadInfoService
         _logger = logger;
     }
 
-    public async Task<List<int>> GetCelebrantsFromDateToNow(DateTime fromDate)
+    public async Task<List<int>> GetCelebrantsFromDateToNow(int daysCount)
     {
-        ValidateDate(fromDate);
-        var listDates = GetDatesFromDateToNow(fromDate);
+        ValidateDate(daysCount);
+        var listDates = GetDatesFromDateToNow(daysCount);
         var results = await Task.WhenAll(listDates.Select(async date =>
         {
             var list = await _leadInfoRepository.GetCelebrateIdsByDate(date);
@@ -31,26 +32,25 @@ public class LeadInfoService : ILeadInfoService
         return result;
     }
 
-
     private List<TType> Concat<TType>(params List<TType>[] lists)
     {
         var result = lists.Aggregate(new List<TType>(), (x, y) => x.Concat(y).ToList());
         return result;
     }
 
-    private List<DateTime> GetDatesFromDateToNow(DateTime fromDate)
+    private List<DateTime> GetDatesFromDateToNow(int daysCount)
     {
+        DateTime fromDate = DateTime.Now.AddDays(-daysCount);
         return Enumerable.Range(0, (DateTime.Now - fromDate).Days + 1)
         .Select(i => fromDate.AddDays(i))
         .ToList();
     }
 
-    private void ValidateDate(DateTime fromDate)
+    private void ValidateDate(int daysCount)
     {
-        var today = DateTime.Now.Date;
-        if (fromDate.Date > today || (today - fromDate.Date).TotalDays > 366) 
+        if (daysCount > 366 || daysCount < 0) 
         {
-            throw new BadRequestException("Date must be less or equal than today");
+            throw new BadRequestException("Number of days most be bigger then 0 and less the 365");
         }
     }
 }
