@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using ReportingService.Business;
 using ReportingService.Business.Services;
+using ReportingService.Business.Services.Interfaces;
 using ReportingService.Data.Repositories;
 using T_Strore.Business.Consumers;
 
@@ -12,6 +13,7 @@ public static class ProgramExtensions
         services.AddScoped<ILeadInfoService, LeadInfoService>();
         services.AddScoped<IStatisticsService, StatisticsService>();
         services.AddScoped<ILeadOverallStatisticsService, LeadOverallStatisticsService>();
+        services.AddScoped<ITransactionsService, TransactionsService>();
     }
 
     public static void AddDataLayerRepositories(this IServiceCollection services)
@@ -22,6 +24,7 @@ public static class ProgramExtensions
         services.AddScoped<IStatisticsRepository, StatisticsRepository>();
         services.AddScoped<ITransactionsRepository, TransactionsRepository>();
         services.AddScoped<IAccountsStatisticsRepository, AccountsStatisticsRepository>();
+        services.AddScoped<ITransactionsRepository, TransactionsRepository>();
     }
 
     public static void AddAutoMapper(this IServiceCollection services)
@@ -37,10 +40,16 @@ public static class ProgramExtensions
             config.AddConsumer<TransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ReceiveEndpoint("transaction-queue", c =>
+                cfg.ReceiveEndpoint("test-queue", c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
+
+/*                cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });*/
+
 
                 /*cfg.ReceiveEndpoint("lead-delete", c =>
                 {

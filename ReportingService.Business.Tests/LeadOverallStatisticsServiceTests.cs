@@ -27,13 +27,13 @@ public  class LeadOverallStatisticsServiceTests
         int daysCount = 30;
         var date = DateTime.Now.AddDays(-daysCount);
         List<int> expectedResult = new List<int>() { 1, 2, 3 };
-        _mockLeadOverallStatisticRepository.Setup(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, date)).ReturnsAsync(expectedResult);
+        _mockLeadOverallStatisticRepository.Setup(o => o.GetLeadIdsWithNecessaryTransactionsCount(It.Is<int>(x => x == transactionsCount), It.Is<DateTime>(x => x.Date == date.Date))).ReturnsAsync(expectedResult);
 
         //when
         var actual = await _sut.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount);
 
         //then
-        _mockLeadOverallStatisticRepository.Verify(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, date), Times.Once);
+        _mockLeadOverallStatisticRepository.Verify(o => o.GetLeadIdsWithNecessaryTransactionsCount(It.Is<int>(x => x == transactionsCount), It.Is<DateTime>(x => x.Date == date.Date)), Times.Once);
         Assert.All(actual, i => Assert.Contains(i, expectedResult));
     }
 
@@ -41,17 +41,17 @@ public  class LeadOverallStatisticsServiceTests
     public async Task GetLeadsIdsWithNecessaryAmountDifference_WhenValidDate_ListReceived()
     {
         //given
-        int amountDifference = 1200;
+        decimal amountDifference = 1200;
         int daysCount = 30;
         var date = DateTime.Now.AddDays(-daysCount);
         List<int> expectedResult = new List<int>() { 1, 2, 3 };
-        _mockLeadOverallStatisticRepository.Setup(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, date)).ReturnsAsync(expectedResult);
+        _mockLeadOverallStatisticRepository.Setup(o => o.GetLeadsIdsWithNecessaryAmountDifference(It.Is<decimal>(x => x == amountDifference), It.Is<DateTime>(x => x.Date == date.Date))).ReturnsAsync(expectedResult);
 
         //when
         var actual = await _sut.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount);
 
         //then
-        _mockLeadOverallStatisticRepository.Verify(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, date), Times.Once);
+        _mockLeadOverallStatisticRepository.Verify(o => o.GetLeadsIdsWithNecessaryAmountDifference(It.Is<decimal>(x => x == amountDifference), It.Is<DateTime>(x => x.Date == date.Date)), Times.Once);
         Assert.All(actual, i => Assert.Contains(i, expectedResult));
     }
 }

@@ -9,6 +9,28 @@ public class TransactionsRepository : BaseRepositories, ITransactionsRepository
     public TransactionsRepository(IDbConnection dbConnection)
         : base(dbConnection) { }
 
+    public async Task AddTransaction(TransactionDto transaction)
+    {
+        await Connection.QuerySingleAsync<TransactionDto>
+            (StoredProcedures.Transaction_Add,
+            param: new
+            {
+                transaction.Id,
+                transaction.AccountId,
+                transaction.Date,
+                transaction.TransactionType,
+                transaction.Amount,
+                transaction.Currency,
+                transaction.Rate,
+                transaction.RecipientId,
+                transaction.RecipientAccountId,
+                transaction.RecipientAmount,
+                transaction.RecipientCurrency
+            },
+            commandType: CommandType.StoredProcedure
+            );
+    }
+
     public async Task<List<TransactionDto>> GetTransactionsByYesterday()
     {
         return (await Connection.QueryAsync<TransactionDto>

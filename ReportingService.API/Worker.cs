@@ -29,11 +29,11 @@ public class Worker : BackgroundService
         //add services
         using (IServiceScope scope = _serviceProvider.CreateScope())
         {
-            IStatisticsService statisticsService = scope.ServiceProvider.GetRequiredService<IStatisticsService>();
+            /*IStatisticsService statisticsService = scope.ServiceProvider.GetRequiredService<IStatisticsService>();
             await statisticsService.Execute();
 
             ILeadOverallStatisticsService leadOverallStatisticsService = scope.ServiceProvider.GetRequiredService<ILeadOverallStatisticsService>();
-            await leadOverallStatisticsService.Execute();
+            await leadOverallStatisticsService.Execute();*/
         }
     }
 
