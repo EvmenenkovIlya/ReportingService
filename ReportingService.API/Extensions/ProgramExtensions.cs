@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using IncredibleBackendContracts.Constants;
+using MassTransit;
 using ReportingService.Business;
 using ReportingService.Business.Services;
 using ReportingService.Business.Services.Interfaces;
@@ -40,15 +41,15 @@ public static class ProgramExtensions
             config.AddConsumer<TransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ReceiveEndpoint("test-queue", c =>
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransactionCreate, c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
                 });
 
-/*                cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
                 {
                     c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });*/
+                });
 
 
                 /*cfg.ReceiveEndpoint("lead-delete", c =>
