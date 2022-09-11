@@ -5,11 +5,12 @@ namespace ReportingService.Data.Dto;
 public class TransactionDto
 {
     public long Id { get; set; }
+    public long TransactionId { get; set; }
     public long AccountId { get; set; }
     public DateTime Date { get; set; }
     public TransactionType TransactionType { get; set; }
     public decimal Amount { get; set; }
-    public short Currency { get; set; }
+    public Currency Currency { get; set; }
     public decimal? Rate { get; set; }
     public int? RecipientId { get; set; }
     public int? RecipientAccountId { get; set; }

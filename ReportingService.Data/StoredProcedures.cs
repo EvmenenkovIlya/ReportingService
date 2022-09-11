@@ -5,6 +5,7 @@ public class StoredProcedures
     public const string Transaction_GetAll = "Transaction_GetAll";
     public const string Transaction_GetById = "Transaction_GetById";
     public const string Transaction_GetTransactionsByYesterday = "Transaction_GetTransactionsByYesterday";
+    public const string Transaction_Add = "Transaction_Add";
     public const string LeadInfo_Add = "LeadInfo_Add";
     public const string LeadInfo_GetAll = "LeadInfo_GetAll";
     public const string LeadInfo_GetById = "LeadInfo_GetById";

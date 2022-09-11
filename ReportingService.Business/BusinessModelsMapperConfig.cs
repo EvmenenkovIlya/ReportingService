@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IncredibleBackendContracts.Responses;
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
 
@@ -14,5 +15,7 @@ public class BusinessModelsMapperConfig : Profile
         CreateMap<LeadOverallStatisticsDto, LeadOverallStatistics>().ReverseMap();
         CreateMap<StatisticsDto, Statistics>().ReverseMap();
         CreateMap<TransactionDto, Transaction>().ReverseMap();
+        CreateMap<TransactionCreatedEvent, Transaction>()
+            .ForMember(o => o.TransactionId, opt => opt.MapFrom(scr => scr.Id));
     }
 }
