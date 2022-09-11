@@ -17,5 +17,7 @@ public class BusinessModelsMapperConfig : Profile
         CreateMap<TransactionDto, Transaction>().ReverseMap();
         CreateMap<TransactionCreatedEvent, Transaction>()
             .ForMember(o => o.TransactionId, opt => opt.MapFrom(scr => scr.Id));
+        CreateMap<TransferTransactionCreatedEvent, Transaction>()
+            .ForMember(o => o.TransactionId, opt => opt.MapFrom(scr => scr.Id));
     }
 }

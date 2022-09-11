@@ -15,7 +15,7 @@ public class TransactionsRepository : BaseRepositories, ITransactionsRepository
             (StoredProcedures.Transaction_Add,
             param: new
             {
-                transaction.Id,
+                transaction.TransactionId,
                 transaction.AccountId,
                 transaction.Date,
                 transaction.TransactionType,
