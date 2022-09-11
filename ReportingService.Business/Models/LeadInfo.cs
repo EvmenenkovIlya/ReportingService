@@ -18,4 +18,12 @@ public class LeadInfo
     public Role Role { get; set; }
     public DateTime RegistrationDate { get; set; }
     public bool IsDeleted { get; set; }
+
+    public override string ToString()
+    {
+        return $"Lead info: LeadId = {LeadId}, FirstName = {FirstName[0]}., LastName = {LastName[0]}., Patronymic = {Patronymic[0]}.," +
+               $"BirthDate = {BirthDate}, City = {City}, Role = {Role}, RegistrationDate = {RegistrationDate}, Email = {Email[0..3]}***, Phone = {Phone[0..3]}," +
+               $"Address = {Address[0..5]}"
+            ;
+    }
 }

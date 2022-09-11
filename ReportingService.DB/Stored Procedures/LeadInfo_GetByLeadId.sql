@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[LeadInfo_GetById]
-	@Id bigint
+﻿CREATE PROCEDURE [dbo].[LeadInfo_GetByLeadId]
+	@LeadId bigint
 AS
 BEGIN
 	SELECT 
@@ -19,5 +19,5 @@ BEGIN
 		[IsDeleted]
 		
 	FROM [dbo].[LeadInfo]
-	WHERE Id = @Id
+	WHERE [LeadId] = @LeadId
 END

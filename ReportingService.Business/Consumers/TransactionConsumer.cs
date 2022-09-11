@@ -2,7 +2,7 @@ using MassTransit;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
 
-namespace T_Strore.Business.Consumers;
+namespace ReportingService.Business.Consumers;
 
 public class TransactionConsumer : IConsumer<TransactionTStoreModel>
 

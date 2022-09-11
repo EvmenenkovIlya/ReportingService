@@ -10,8 +10,7 @@
 	@City tinyint,
 	@Address nvarchar(50),
 	@Role tinyint,
-	@RegistrationDate date,
-	@IsDeleted bit	
+	@RegistrationDate date
 	
 AS
 BEGIN
@@ -28,8 +27,7 @@ BEGIN
 		[City],
 		[Address],
 		[Role],
-		[RegistrationDate],
-		[IsDeleted]
+		[RegistrationDate]
 	)
     VALUES 
 	(
@@ -44,8 +42,7 @@ BEGIN
 		@City,
 		@Address,
 		@Role,
-		@RegistrationDate,
-		@IsDeleted	
+		@RegistrationDate
 	)
 SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]	
 

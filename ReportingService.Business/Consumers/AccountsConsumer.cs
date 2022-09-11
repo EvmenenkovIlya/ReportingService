@@ -4,7 +4,6 @@ using MassTransit;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
 using ReportingService.Business.Services;
-using T_Strore.Business.Consumers;
 
 namespace ReportingService.Business.Consumers;
 

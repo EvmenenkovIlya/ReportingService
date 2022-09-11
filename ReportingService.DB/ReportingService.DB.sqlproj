@@ -74,7 +74,7 @@
     <Build Include="Stored Procedures\Transaction_Add.sql" />
     <Build Include="Stored Procedures\Transaction_GetById.sql" />
     <Build Include="Stored Procedures\Transaction_GetAll.sql" />
-    <Build Include="Stored Procedures\LeadInfo_GetById.sql" />
+    <Build Include="Stored Procedures\LeadInfo_GetByLeadId.sql" />
     <Build Include="Stored Procedures\LeadInfo_GetAll.sql" />
     <Build Include="Stored Procedures\LeadInfo_Update.sql" />
     <Build Include="Stored Procedures\Leadinfo_GetcelebrateIdsByDate.sql" />
@@ -87,6 +87,7 @@
     <Build Include="Stored Procedures\Statistic_GetByPeriod.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
     <Build Include="Stored Procedures\Account_Update.sql" />
+    <Build Include="Stored Procedures\Lead_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\Account_Add.sql" />
