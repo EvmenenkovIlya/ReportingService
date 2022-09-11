@@ -79,7 +79,6 @@
     <Build Include="Stored Procedures\LeadInfo_Update.sql" />
     <Build Include="Stored Procedures\Leadinfo_GetcelebrateIdsByDate.sql" />
     <Build Include="Stored Procedures\Transaction_GetTransactionsByYesterday.sql" />
-    <Build Include="Stored Procedures\Account_GetCountByCurrency.sql" />
     <Build Include="dbo\Tables\AccountsStatistic.sql" />
     <Build Include="Stored Procedures\AccountsStatistic_Add.sql" />
     <Build Include="Stored Procedures\AccountsStatistic_GetByDate.sql" />
@@ -87,12 +86,13 @@
     <Build Include="Stored Procedures\AccountsStatistic_GetByPeriod.sql" />
     <Build Include="Stored Procedures\Statistic_GetByPeriod.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
+    <Build Include="Stored Procedures\Account_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\Account_Add.sql" />
     <Build Include="Stored Procedures\Account_GetAll.sql" />
     <Build Include="Stored Procedures\Account_GetById.sql" />
-    <Build Include="Stored Procedures\Account_Update.sql" />
+    <Build Include="Stored Procedures\Account_Delete.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_GetLeadOverallStatisticByDate.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_GetAll.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_GetById.sql" />

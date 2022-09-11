@@ -14,6 +14,7 @@ public class StoredProcedures
     public const string Account_GetAll = "Account_GetAll";
     public const string Account_GetById = "Account_GetById";
     public const string Account_Update = "Account_Update";
+    public const string Account_Delete = "Account_Delete";
     public const string AccountsStatistic_Add = "AccountsStatistic_Add";
     public const string AccountsStatistic_GetAll = "AccountsStatistic_GetAll";
     public const string AccountsStatistic_GetByDate = "AccountsStatistic_GetByDate";

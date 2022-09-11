@@ -1,5 +1,8 @@
-﻿using MassTransit;
+﻿using IncredibleBackendContracts.Constants;
+using IncredibleBackendContracts.Events;
+using MassTransit;
 using ReportingService.Business;
+using ReportingService.Business.Consumers;
 using ReportingService.Business.Services;
 using ReportingService.Data.Repositories;
 using T_Strore.Business.Consumers;
@@ -12,6 +15,7 @@ public static class ProgramExtensions
         services.AddScoped<ILeadInfoService, LeadInfoService>();
         services.AddScoped<IStatisticsService, StatisticsService>();
         services.AddScoped<ILeadOverallStatisticsService, LeadOverallStatisticsService>();
+        services.AddScoped<IAccountsService, AccountsService>();
     }
 
     public static void AddDataLayerRepositories(this IServiceCollection services)
@@ -34,44 +38,45 @@ public static class ProgramExtensions
     {
         services.AddMassTransit(config =>
         {
-            config.AddConsumer<TransactionConsumer>();
+            config.AddConsumer<AccountsConsumer>();
+            config.AddConsumer<LeadConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ReceiveEndpoint("transaction-queue", c =>
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountCreate, c =>
                 {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                    c.ConfigureConsumer<AccountsConsumer>(ctx);
                 });
 
-                /*cfg.ReceiveEndpoint("lead-delete", c =>
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountUpdate, c =>
                 {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                    c.ConfigureConsumer<AccountsConsumer>(ctx);
                 });
 
-                cfg.ReceiveEndpoint("account-delete", c =>
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountDelete, c =>
                 {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                    c.ConfigureConsumer<AccountsConsumer>(ctx);
                 });
 
-                cfg.ReceiveEndpoint("lead-update", c =>
-                {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });
+                //cfg.ReceiveEndpoint(RabbitEndpoint.LeadCreate, c =>
+                //{
+                //    c.ConfigureConsumer<LeadConsumer>(ctx);
+                //});
 
-                cfg.ReceiveEndpoint("account-update", c =>
-                {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });
+                //cfg.ReceiveEndpoint(RabbitEndpoint.LeadUpdate, c =>
+                //{
+                //    c.ConfigureConsumer<LeadConsumer>(ctx);
+                //});
 
-                cfg.ReceiveEndpoint("lead-create", c =>
-                {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });
+                //cfg.ReceiveEndpoint(RabbitEndpoint.LeadsRoleUpdateReporting, c =>
+                //{
+                //    c.ConfigureConsumer<LeadConsumer>(ctx);
+                //});
 
-                cfg.ReceiveEndpoint("account-create", c =>
-                {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
-                });*/
-
+                //cfg.ReceiveEndpoint(RabbitEndpoint.LeadDelete, c =>
+                //{
+                //    c.ConfigureConsumer<LeadConsumer>(ctx);
+                //});
+                cfg.ConfigureEndpoints(ctx);
             });
         });
     }

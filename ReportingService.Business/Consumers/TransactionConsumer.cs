@@ -1,5 +1,3 @@
-
-﻿using IncredibleBackendContracts.ExchangeModels;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;

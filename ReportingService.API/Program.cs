@@ -6,6 +6,7 @@ using ReportingService.API.Extensions;
 using ReportingService.API.Middleware;
 using NLog;
 using NLog.Web;
+using ReportingService.Business.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
-builder.Services.AddHostedService<Worker>();
+//builder.Services.AddHostedService<Worker>();
+
 builder.Services.AddMassTransit();
 
 builder.Services.AddAutoMapper();

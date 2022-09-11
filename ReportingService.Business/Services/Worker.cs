@@ -1,6 +1,12 @@
-using ReportingService.Business.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Quartz;
+using Quartz.Impl;
+using static Quartz.Logging.OperationName;
 
-namespace ReportingService.API;
+
+namespace ReportingService.Business.Services;
 
 public class Worker : BackgroundService
 {
@@ -15,6 +21,18 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
+            //IScheduler scheduler = await StdSchedulerFactory.GetDefaultScheduler();
+            //await scheduler.Start();
+            //IJobDetail job = JobBuilder.Create<StatisticsService>().Build();
+            //DateTimeOffset startTime = DateTimeOffset.Parse("01:00 AM");
+            //ITrigger trigger = TriggerBuilder.Create()
+            //    .WithIdentity("StatisticTrigger", "Statistic")
+            //    .StartAt(startTime)
+            //    .WithSimpleSchedule(x => x
+            //        .RepeatForever())
+            //    .Build();
+            //await scheduler.ScheduleJob(job, trigger);
+
             _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             await DoWorkAsync(stoppingToken);
             await Task.Delay(360000, stoppingToken);
@@ -33,7 +51,7 @@ public class Worker : BackgroundService
             await statisticsService.Execute();
 
             ILeadOverallStatisticsService leadOverallStatisticsService = scope.ServiceProvider.GetRequiredService<ILeadOverallStatisticsService>();
-            await leadOverallStatisticsService.Execute();
+           await leadOverallStatisticsService.Execute();
         }
     }
 

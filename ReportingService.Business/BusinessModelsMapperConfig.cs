@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using IncredibleBackendContracts.Events;
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
 
 namespace ReportingService.Business;
 
-// move to Business
 public class BusinessModelsMapperConfig : Profile
 {
     public BusinessModelsMapperConfig()
@@ -14,5 +14,11 @@ public class BusinessModelsMapperConfig : Profile
         CreateMap<LeadOverallStatisticsDto, LeadOverallStatistics>().ReverseMap();
         CreateMap<StatisticsDto, Statistics>().ReverseMap();
         CreateMap<TransactionDto, Transaction>().ReverseMap();
+
+        CreateMap<AccountCreatedEvent, Account>()
+            .ForMember(o => o.AccountId, opt => opt.MapFrom(src => src.Id));
+        CreateMap<LeadCreatedEvent, LeadInfo>();
+        CreateMap<LeadUpdatedEvent, LeadInfo>();
+
     }
 }
