@@ -4,6 +4,7 @@ namespace ReportingService.Business.Models;
 public class Transaction
 {
     public long Id { get; set; }
+    public long TransactionId { get; set; }
     public long AccountId { get; set; }
     public DateTime Date { get; set; }
     public TransactionType TransactionType { get; set; }

@@ -3,6 +3,7 @@ using MassTransit;
 using ReportingService.Business;
 using ReportingService.Business.Consumers;
 using ReportingService.Business.Services;
+using ReportingService.Business.Services.Interfaces;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.API.Extensions;
@@ -13,6 +14,7 @@ public static class ProgramExtensions
         services.AddScoped<ILeadInfoService, LeadInfoService>();
         services.AddScoped<IStatisticsService, StatisticsService>();
         services.AddScoped<ILeadOverallStatisticsService, LeadOverallStatisticsService>();
+        services.AddScoped<ITransactionsService, TransactionsService>();
         services.AddScoped<IAccountsService, AccountsService>();
     }
 
@@ -24,6 +26,7 @@ public static class ProgramExtensions
         services.AddScoped<IStatisticsRepository, StatisticsRepository>();
         services.AddScoped<ITransactionsRepository, TransactionsRepository>();
         services.AddScoped<IAccountsStatisticsRepository, AccountsStatisticsRepository>();
+        services.AddScoped<ITransactionsRepository, TransactionsRepository>();
     }
 
     public static void AddAutoMapper(this IServiceCollection services)
@@ -38,8 +41,20 @@ public static class ProgramExtensions
         {
             config.AddConsumer<AccountsConsumer>();
             config.AddConsumer<LeadsConsumer>();
+            config.AddConsumer<TransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
+
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransactionCreate, c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+                
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
+                {
+                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                });
+
                 cfg.ReceiveEndpoint(RabbitEndpoint.AccountCreate, c =>
                 {
                     c.ConfigureConsumer<AccountsConsumer>(ctx);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IncredibleBackendContracts.Responses;
 using IncredibleBackendContracts.Enums;
 using IncredibleBackendContracts.Events;
 using ReportingService.Business.Models;
@@ -15,6 +16,10 @@ public class BusinessModelsMapperConfig : Profile
         CreateMap<LeadOverallStatisticsDto, LeadOverallStatistics>().ReverseMap();
         CreateMap<StatisticsDto, Statistics>().ReverseMap();
         CreateMap<TransactionDto, Transaction>().ReverseMap();
+        CreateMap<TransactionCreatedEvent, Transaction>()
+            .ForMember(o => o.TransactionId, opt => opt.MapFrom(scr => scr.Id));
+        CreateMap<TransferTransactionCreatedEvent, Transaction>()
+            .ForMember(o => o.TransactionId, opt => opt.MapFrom(scr => scr.Id));
 
         CreateMap<AccountCreatedEvent, Account>()
             .ForMember(o => o.AccountId, opt => opt.MapFrom(src => src.Id));
