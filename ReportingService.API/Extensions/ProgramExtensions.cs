@@ -39,8 +39,15 @@ public static class ProgramExtensions
     {
         services.AddMassTransit(config =>
         {
-            config.AddConsumer<AccountsConsumer>();
-            config.AddConsumer<LeadsConsumer>();
+            config.AddConsumer<AccountCreatedEventConsumer>();
+            config.AddConsumer<AccountUpdatedEventsConsumer>();
+            config.AddConsumer<AccountDeletedEventsConsumer>();
+
+            config.AddConsumer<LeadCreatedEventsConsumer>();
+            config.AddConsumer<LeadUpdatedEventsConsumer>();
+            config.AddConsumer<LeadDeletedEventsConsumer>();
+            config.AddConsumer<LeadsRoleUpdatedEventsConsumer>();
+
             config.AddConsumer<TransactionConsumer>();
             config.AddConsumer<TransferTransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
@@ -58,37 +65,37 @@ public static class ProgramExtensions
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.AccountCreate, c =>
                 {
-                    c.ConfigureConsumer<AccountsConsumer>(ctx);
+                    c.ConfigureConsumer<AccountCreatedEventConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.AccountUpdate, c =>
                 {
-                    c.ConfigureConsumer<AccountsConsumer>(ctx);
+                    c.ConfigureConsumer<AccountUpdatedEventsConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.AccountDelete, c =>
                 {
-                    c.ConfigureConsumer<AccountsConsumer>(ctx);
+                    c.ConfigureConsumer<AccountDeletedEventsConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.LeadCreate, c =>
                 {
-                    c.ConfigureConsumer<LeadsConsumer>(ctx);
+                    c.ConfigureConsumer<LeadCreatedEventsConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.LeadUpdate, c =>
                 {
-                    c.ConfigureConsumer<LeadsConsumer>(ctx);
+                    c.ConfigureConsumer<LeadUpdatedEventsConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.LeadsRoleUpdateReporting, c =>
                 {
-                    c.ConfigureConsumer<LeadsConsumer>(ctx);
+                    c.ConfigureConsumer<LeadsRoleUpdatedEventsConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.LeadDelete, c =>
                 {
-                    c.ConfigureConsumer<LeadsConsumer>(ctx);
+                    c.ConfigureConsumer<LeadDeletedEventsConsumer>(ctx);
                 });
 
                 cfg.ConfigureEndpoints(ctx);

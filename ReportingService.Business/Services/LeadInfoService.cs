@@ -1,7 +1,9 @@
-﻿using ReportingService.Business.Exceptions;
+﻿using AutoMapper;
+using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
+using ReportingService.Data.Dto;
 
 namespace ReportingService.Business.Services;
 
@@ -9,11 +11,13 @@ public class LeadInfoService : ILeadInfoService
 {
     private readonly ILeadInfoRepository _leadInfoRepository;
     private readonly ILogger _logger;
+    private readonly IMapper _mapper;
 
-    public LeadInfoService(ILeadInfoRepository leadInfoRepository, ILogger<LeadInfoService> logger)
+    public LeadInfoService(ILeadInfoRepository leadInfoRepository, ILogger<LeadInfoService> logger, IMapper mapper)
     {
         _leadInfoRepository = leadInfoRepository;
         _logger = logger;
+        _mapper = mapper;
     }
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(int daysCount)
@@ -30,38 +34,46 @@ public class LeadInfoService : ILeadInfoService
         return result;
     }
 
-    public Task AddLeadInfo(LeadInfo leadInfo)
+    public async Task AddLeadInfo(LeadInfo leadInfo)
     {
-        throw new NotImplementedException();
+        var lead = _mapper.Map<LeadInfoDto>(leadInfo);
+        _logger.LogInformation("");
+        await _leadInfoRepository.AddLeadInfo(lead);
     }
 
     public Task<List<int>> GetCelebrateIdsByDate(DateTime date)
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
     public Task<List<LeadInfo>> GetAllLeadInfoDto()
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
     public Task<LeadInfo> GetLeadInfoDtoByLeadId(int leadId)
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
     public Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
     public Task DeleteLeadInfo(int leadId)
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
     public Task UpdateLeadsStatus(List<int> vipIds)
     {
+        _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
