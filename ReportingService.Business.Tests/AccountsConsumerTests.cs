@@ -13,18 +13,26 @@ namespace ReportingService.Business.Tests;
 
 public class AccountsConsumerTests
 {
-    private AccountsConsumer _sut;
+    private AccountDeletedEventsConsumer _sutDelete;
+    private AccountUpdatedEventsConsumer _sutUpdate;
+    private AccountCreatedEventConsumer _sutCreate;
     private Mock<IAccountsService> _mockAccountsService;
-    private Mock<ILogger<AccountsConsumer>> _mockLogger;
+    private Mock<ILogger<AccountDeletedEventsConsumer>> _mockLoggerDelete;
+    private Mock<ILogger<AccountUpdatedEventsConsumer>> _mockLoggerUpdate;
+    private Mock<ILogger<AccountCreatedEventConsumer>> _mockLoggerCreate;
     private Mapper _mapper;
 
 
     public AccountsConsumerTests()
     {
-        _mockLogger = new Mock<ILogger<AccountsConsumer>>();
+        _mockLoggerDelete = new Mock<ILogger<AccountDeletedEventsConsumer>>();
+        _mockLoggerUpdate = new Mock<ILogger<AccountUpdatedEventsConsumer>>();
+        _mockLoggerCreate = new Mock<ILogger<AccountCreatedEventConsumer>>();
         _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessModelsMapperConfig>()));
         _mockAccountsService = new Mock<IAccountsService>();
-        _sut = new AccountsConsumer(_mockLogger.Object, _mapper, _mockAccountsService.Object);
+        _sutDelete = new AccountDeletedEventsConsumer(_mockLoggerDelete.Object, _mapper, _mockAccountsService.Object);
+        _sutUpdate = new AccountUpdatedEventsConsumer(_mockLoggerUpdate.Object, _mapper, _mockAccountsService.Object);
+        _sutCreate = new AccountCreatedEventConsumer(_mockLoggerCreate.Object, _mapper, _mockAccountsService.Object);
     }
 
     [Fact]
@@ -33,7 +41,7 @@ public class AccountsConsumerTests
         //given
         AccountCreatedEvent createdAccount = new()
         {
-            Id = 1, 
+            Id = 1,
             Currency = Currency.USD,
             LeadId = 1,
             Status = AccountStatus.Active
@@ -41,7 +49,7 @@ public class AccountsConsumerTests
         var context = Mock.Of<ConsumeContext<AccountCreatedEvent>>(c => c.Message == createdAccount);
 
         //when
-        await _sut.Consume(context);
+        await _sutCreate.Consume(context);
 
         //then
         _mockAccountsService.Verify(c => c.AddAccount(It.Is<Account>(c =>
@@ -64,7 +72,7 @@ public class AccountsConsumerTests
         var context = Mock.Of<ConsumeContext<AccountUpdatedEvent>>(c => c.Message == updatedAccount);
 
         //when
-        await _sut.Consume(context);
+        await _sutUpdate.Consume(context);
 
         //then
         _mockAccountsService.Verify(c => c.UpdateAccount(It.Is<int>(c =>
@@ -82,7 +90,7 @@ public class AccountsConsumerTests
         var context = Mock.Of<ConsumeContext<AccountDeletedEvent>>(c => c.Message == deletedAccount);
 
         //when
-        await _sut.Consume(context);
+        await _sutDelete.Consume(context);
 
         //then
         _mockAccountsService.Verify(c => c.DeleteAccount(It.Is<int>(c =>
