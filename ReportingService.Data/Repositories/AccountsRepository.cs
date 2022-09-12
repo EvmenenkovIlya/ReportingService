@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ReportingService.Data.Dto;
 using System.Data;
+using IncredibleBackendContracts.Enums;
 
 namespace ReportingService.Data.Repositories;
 
@@ -15,9 +16,10 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
                    (StoredProcedures.Account_Add,
                    param: new
                    {
-                       accountDto.LeadId,
+                       accountDto.AccountId,
                        accountDto.Currency,
-                       accountDto.Status
+                       accountDto.Status,
+                       accountDto.LeadId
                    },
                    commandType: CommandType.StoredProcedure
                    );
@@ -29,30 +31,33 @@ public class AccountsRepository : BaseRepositories, IAccountsRepository
             (StoredProcedures.Account_GetAll, commandType: CommandType.StoredProcedure)).ToList();
     }
 
-    //public async Task<int> Account_GetCountByCurrency(List<Currency> currencies)
-    //{
-    //        new NotImplementedException();
-    //        return 1;
-    //}
-
-    public async Task<AccountDto> GetAccountById(int id)
+    public async Task DeleteAccount(int id)
     {
-        return await Connection.QuerySingleAsync<AccountDto>(
+        await Connection.QuerySingleOrDefaultAsync(
+            StoredProcedures.Account_Delete,
+            param: new
+            {
+                AccountId = id
+            },
+            commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task<AccountDto> GetAccountById(int accountId)
+    {
+        return await Connection.QuerySingleOrDefaultAsync<AccountDto>(
                 StoredProcedures.Account_GetById,
-                param: new { id },
+                param: new { AccountId = accountId },
                 commandType: CommandType.StoredProcedure);
     }
 
-    public async Task UpdateAccount(AccountDto accountDto)
+    public async Task UpdateAccount(int accountId, AccountStatus status)
     {
         await Connection.QuerySingleOrDefaultAsync(
             StoredProcedures.Account_Update,
                 param: new
                 {
-                    accountDto.Id,
-                    accountDto.LeadId,
-                    accountDto.Currency,
-                    accountDto.Status
+                    AccountId = accountId,
+                    Status = status
                 },
                 commandType: CommandType.StoredProcedure);
     }

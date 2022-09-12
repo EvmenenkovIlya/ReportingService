@@ -4,10 +4,12 @@ namespace ReportingService.Data.Repositories
 {
     public interface ILeadInfoRepository
     {
-        Task<string> AddLeadInformation(LeadInfoDto leadInformationDto);
+        Task AddLeadInfo(LeadInfoDto leadInfoDto);
         Task<List<int>> GetCelebrateIdsByDate(DateTime date);
-        Task<List<LeadInfoDto>> GetAllLeadInformationDto();
-        Task<LeadInfoDto> GetLeadInformationDtoById(int id);
-        Task<LeadInfoDto> UpdateLeadInformation(LeadInfoDto leadInformationDto);
+        Task<List<LeadInfoDto>> GetAllLeadInfoDto();
+        Task<LeadInfoDto> GetLeadInfoDtoByLeadId(int leadId);
+        Task UpdateLeadInfo(LeadInfoDto leadInformationDto);
+        Task DeleteLeadInfo(int leadId);
+        Task UpdateLeadsStatus(List<int> vipIds);
     }
 }

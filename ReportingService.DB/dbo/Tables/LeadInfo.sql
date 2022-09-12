@@ -13,7 +13,7 @@
 	Address nvarchar(50) NOT NULL,
 	Role tinyint NOT NULL,
 	RegistrationDate date NOT NULL,
-	IsDeleted bit NOT NULL
+	IsDeleted bit NOT NULL Default 0
   CONSTRAINT [PK_LEADINFORMATION] PRIMARY KEY CLUSTERED
   (
   [Id] ASC

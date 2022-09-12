@@ -6,6 +6,7 @@ using ReportingService.API.Extensions;
 using ReportingService.API.Middleware;
 using NLog;
 using NLog.Web;
+using ReportingService.Business.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,23 +16,21 @@ builder.Configuration.Bind(connectionOption);
 builder.Host.UseNLog();
 LogManager.Configuration.Variables[$"{builder.Environment: LOG_DIRECTORY}"] = "Logs";
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(connectionOption.REPORTING_CONNECTION_STRING));
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
-builder.Services.AddHostedService<Worker>();
+//builder.Services.AddHostedService<Worker>();   need to on this worker
+
 builder.Services.AddMassTransit();
 
 builder.Services.AddAutoMapper();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();

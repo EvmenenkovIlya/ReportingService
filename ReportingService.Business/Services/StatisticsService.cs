@@ -1,12 +1,13 @@
 ﻿using IncredibleBackendContracts.Enums;
 using MassTransit.Internals;
 using Microsoft.Extensions.Logging;
+using Quartz;
 using ReportingService.Business.Models;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
 
-public class StatisticsService : IStatisticsService
+public class StatisticsService : IStatisticsService, IJob
 {
     private readonly ILogger<StatisticsService> _logger;
     private readonly IStatisticsRepository _statisticsRepository;
@@ -26,9 +27,9 @@ public class StatisticsService : IStatisticsService
     public async Task Execute()
     {
         await Task.WhenAll(
-                CreateAccountStatistics(),
-                CreateLeadsCountStatistics()
-            );
+            CreateAccountStatistics(),
+            CreateLeadsCountStatistics()
+        );
     }
 
     public async Task CreateAccountStatistics()
@@ -43,5 +44,13 @@ public class StatisticsService : IStatisticsService
     public async Task CreateLeadsCountStatistics()
     {
         await _statisticsRepository.AddStatistic();
+    }
+
+    public async Task Execute(IJobExecutionContext context)
+    {
+        await Task.WhenAll(
+            CreateAccountStatistics(),
+            CreateLeadsCountStatistics()
+        );
     }
 }

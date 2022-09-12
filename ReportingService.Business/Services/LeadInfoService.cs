@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Options;
-using ReportingService.Business.Exceptions;
+﻿using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
-using System.Diagnostics;
 using Microsoft.Extensions.Logging;
-using NLog.Web.LayoutRenderers;
+using ReportingService.Business.Models;
 
 namespace ReportingService.Business.Services;
 
@@ -20,7 +18,7 @@ public class LeadInfoService : ILeadInfoService
 
     public async Task<List<int>> GetCelebrantsFromDateToNow(int daysCount)
     {
-        ValidateDate(daysCount);
+        ValidateDaysCount(daysCount);
         var listDates = GetDatesFromDateToNow(daysCount);
         var results = await Task.WhenAll(listDates.Select(async date =>
         {
@@ -31,6 +29,42 @@ public class LeadInfoService : ILeadInfoService
         _logger.LogInformation($"Db returned {results.Count()} lists with {result.Count} id");
         return result;
     }
+
+    public Task AddLeadInfo(LeadInfo leadInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<int>> GetCelebrateIdsByDate(DateTime date)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<LeadInfo>> GetAllLeadInfoDto()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<LeadInfo> GetLeadInfoDtoByLeadId(int leadId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteLeadInfo(int leadId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateLeadsStatus(List<int> vipIds)
+    {
+        throw new NotImplementedException();
+    }
+
 
     private List<TType> Concat<TType>(params List<TType>[] lists)
     {
@@ -46,7 +80,7 @@ public class LeadInfoService : ILeadInfoService
         .ToList();
     }
 
-    private void ValidateDate(int daysCount)
+    private void ValidateDaysCount(int daysCount)
     {
         if (daysCount > 366 || daysCount < 0) 
         {

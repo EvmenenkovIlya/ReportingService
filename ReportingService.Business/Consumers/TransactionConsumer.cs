@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
 using ReportingService.Business.Services.Interfaces;
 
-namespace T_Strore.Business.Consumers;
+namespace ReportingService.Business.Consumers;
 
 public class TransactionConsumer : IConsumer<TransferTransactionCreatedEvent>, IConsumer<TransactionCreatedEvent>
 

@@ -8,13 +8,15 @@ public class StoredProcedures
     public const string Transaction_Add = "Transaction_Add";
     public const string LeadInfo_Add = "LeadInfo_Add";
     public const string LeadInfo_GetAll = "LeadInfo_GetAll";
-    public const string LeadInfo_GetById = "LeadInfo_GetById";
+    public const string LeadInfo_GetByLeadId = "LeadInfo_GetByLeadId";
     public const string LeadInfo_Update = "LeadInfo_Update";
+    public const string LeadInfo_Delete = "LeadInfo_Delete";
     public const string Leadinfo_GetCelebrateIdsByDate = "Leadinfo_GetCelebrateIdsByDate";
     public const string Account_Add = "Account_Add";
     public const string Account_GetAll = "Account_GetAll";
     public const string Account_GetById = "Account_GetById";
     public const string Account_Update = "Account_Update";
+    public const string Account_Delete = "Account_Delete";
     public const string AccountsStatistic_Add = "AccountsStatistic_Add";
     public const string AccountsStatistic_GetAll = "AccountsStatistic_GetAll";
     public const string AccountsStatistic_GetByDate = "AccountsStatistic_GetByDate";

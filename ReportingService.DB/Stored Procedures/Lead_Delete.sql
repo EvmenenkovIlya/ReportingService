@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LeadInfo_Update]
+﻿CREATE PROCEDURE [dbo].[LeadInfo_Delete]
 	@LeadId int,
 	@FirstName nvarchar(20),
 	@LastName nvarchar(20),
@@ -10,7 +10,8 @@
 	@City tinyint,
 	@Address nvarchar(50),
 	@Role tinyint,
-	@RegistrationDate date
+	@RegistrationDate date,
+	@IsDeleted bit	
 	
 AS
 BEGIN
@@ -26,7 +27,8 @@ BEGIN
 		[City] = @City,
 		[Address] = @Address,
 		[Role] = @Role,
-		[RegistrationDate] = @RegistrationDate
+		[RegistrationDate] = @RegistrationDate,
+		[IsDeleted] = @IsDeleted
 
 	WHERE [LeadId] = @LeadId
 END

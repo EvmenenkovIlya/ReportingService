@@ -16,11 +16,6 @@ public class LeadInfoController : ControllerBase
         _logger = logger;
     }
 
-    /// <summary>
-    ///  0 - today
-    /// </summary>
-    /// <param name="daysCount"></param>
-    /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<int>), StatusCodes.Status200OK)]
     public async Task<ActionResult<List<int>>> GetCelebrantsFromDateToNow([FromQuery] int daysCount)
