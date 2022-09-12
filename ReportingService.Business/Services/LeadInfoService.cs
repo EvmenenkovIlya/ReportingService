@@ -2,6 +2,7 @@
 using ReportingService.Business.Exceptions;
 using ReportingService.Data.Repositories;
 using Microsoft.Extensions.Logging;
+using ReportingService.Business.Infarstracture;
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
 
@@ -24,59 +25,61 @@ public class LeadInfoService : ILeadInfoService
     {
         ValidateDaysCount(daysCount);
         var listDates = GetDatesFromDateToNow(daysCount);
+        _logger.LogInformation($"LeadInfoService try to get vips with {listDates.Count} requests to Database");
         var results = await Task.WhenAll(listDates.Select(async date =>
         {
             var list = await _leadInfoRepository.GetCelebrateIdsByDate(date);
             return list;
         }));
         var result = Concat(results);
-        _logger.LogInformation($"Db returned {results.Count()} lists with {result.Count} id");
+        _logger.LogInformation($"Database returned {results.Count()} lists with {result.Count} id");
         return result;
     }
 
     public async Task AddLeadInfo(LeadInfo leadInfo)
     {
         var lead = _mapper.Map<LeadInfoDto>(leadInfo);
-        _logger.LogInformation("");
+        _logger.LogInformation($"LeadInfoService try to add new Lead info with LeadId = {leadInfo.LeadId}");
         await _leadInfoRepository.AddLeadInfo(lead);
     }
 
-    public Task<List<int>> GetCelebrateIdsByDate(DateTime date)
+
+    public async Task<List<LeadInfo>> GetAllLeadInfo()
+    {
+        _logger.LogInformation($"LeadInfoService try to get all Leads");
+        var listDtos = await _leadInfoRepository.GetAllLeadInfoDto();
+        var result = _mapper.Map<List<LeadInfo>>(listDtos);
+        _logger.LogInformation($"LeadInfoRepository returned {result.Count} Leads");
+        return result;
+    }
+
+    public async Task<LeadInfo> GetLeadInfoByLeadId(int leadId)
+    {
+        _logger.LogInformation($"LeadInfoService try to get Lead with LeadId = {leadId}");
+        var dto = await _leadInfoRepository.GetLeadInfoDtoByLeadId(leadId);
+        Validator.CheckThatObjectNotNull(dto, ExceptionsErrorMessages.LeadInfoNotFound);
+        var result = _mapper.Map<LeadInfo>(dto);
+        _logger.LogInformation($"LeadInfoRepository returned LeadInfoDto with LeadId = {result.LeadId}");
+        return result;
+    }
+
+    public async Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
     {
         _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
-    public Task<List<LeadInfo>> GetAllLeadInfoDto()
+    public async Task DeleteLeadInfo(int leadId)
     {
         _logger.LogInformation("");
         throw new NotImplementedException();
     }
 
-    public Task<LeadInfo> GetLeadInfoDtoByLeadId(int leadId)
+    public async Task UpdateLeadsStatus(List<int> vipIds)
     {
         _logger.LogInformation("");
         throw new NotImplementedException();
     }
-
-    public Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
-    {
-        _logger.LogInformation("");
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteLeadInfo(int leadId)
-    {
-        _logger.LogInformation("");
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateLeadsStatus(List<int> vipIds)
-    {
-        _logger.LogInformation("");
-        throw new NotImplementedException();
-    }
-
 
     private List<TType> Concat<TType>(params List<TType>[] lists)
     {

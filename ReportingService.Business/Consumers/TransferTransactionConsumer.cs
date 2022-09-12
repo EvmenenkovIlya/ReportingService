@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using IncredibleBackendContracts.Events;
 using MassTransit;
 using Microsoft.Extensions.Logging;
