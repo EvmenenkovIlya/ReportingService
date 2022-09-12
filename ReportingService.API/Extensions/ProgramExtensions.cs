@@ -42,6 +42,7 @@ public static class ProgramExtensions
             config.AddConsumer<AccountsConsumer>();
             config.AddConsumer<LeadsConsumer>();
             config.AddConsumer<TransactionConsumer>();
+            config.AddConsumer<TransferTransactionConsumer>();
             config.UsingRabbitMq((ctx, cfg) =>
             {
 
@@ -52,7 +53,7 @@ public static class ProgramExtensions
                 
                 cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
                 {
-                    c.ConfigureConsumer<TransactionConsumer>(ctx);
+                    c.ConfigureConsumer<TransferTransactionConsumer>(ctx);
                 });
 
                 cfg.ReceiveEndpoint(RabbitEndpoint.AccountCreate, c =>
