@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NLog;
@@ -12,13 +13,15 @@ namespace ReportingService.Business.Tests
     {
         private readonly Mock<ILeadInfoRepository> _mockLeadInfoRepository;
         private readonly Mock<ILogger<LeadInfoService>> _mockLogger;
+        private readonly IMapper _mapper;
         private readonly LeadInfoService _sut;
 
         public LeadInfoServiceTests()
         {
             _mockLeadInfoRepository = new Mock<ILeadInfoRepository>();
             _mockLogger = new Mock<ILogger<LeadInfoService>>();
-            _sut = new LeadInfoService(_mockLeadInfoRepository.Object, _mockLogger.Object);
+            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessModelsMapperConfig>()));
+            _sut = new LeadInfoService(_mockLeadInfoRepository.Object, _mockLogger.Object, _mapper);
         }
 
         [Fact]
@@ -50,5 +53,7 @@ namespace ReportingService.Business.Tests
             //then
             await Assert.ThrowsAsync<BadRequestException>(() => _sut.GetCelebrantsFromDateToNow(daysCount));
         }
+
+
     }
 }

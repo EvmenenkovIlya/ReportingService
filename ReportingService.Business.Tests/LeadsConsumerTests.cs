@@ -13,18 +13,30 @@ namespace ReportingService.Business.Tests;
 
 public class LeadsConsumerTests
 {
-    private LeadsConsumer _sut;
+    private LeadCreatedEventsConsumer _sutCreate;
+    private LeadUpdatedEventsConsumer _sutUpdated;
+    private LeadDeletedEventsConsumer _sutDeleted;
+    private LeadsRoleUpdatedEventsConsumer _sutRoles;
     private Mock<ILeadInfoService> _mockleadInfoService;
-    private Mock<ILogger<LeadsConsumer>> _mockLogger;
+    private Mock<ILogger<LeadCreatedEventsConsumer>> _mockLoggerCreate;
+    private Mock<ILogger<LeadUpdatedEventsConsumer>> _mockLoggerUpdate;
+    private Mock<ILogger<LeadDeletedEventsConsumer>> _mockLoggerDelete;
+    private Mock<ILogger<LeadsRoleUpdatedEventsConsumer>> _mockLoggerRoles;
     private Mapper _mapper;
 
 
     public LeadsConsumerTests()
     {
-        _mockLogger = new Mock<ILogger<LeadsConsumer>>();
+        _mockLoggerCreate = new Mock<ILogger<LeadCreatedEventsConsumer>>();
+        _mockLoggerUpdate = new Mock<ILogger<LeadUpdatedEventsConsumer>>();
+        _mockLoggerDelete = new Mock<ILogger<LeadDeletedEventsConsumer>>();
+        _mockLoggerRoles = new Mock<ILogger<LeadsRoleUpdatedEventsConsumer>>();
         _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessModelsMapperConfig>()));
         _mockleadInfoService = new Mock<ILeadInfoService>();
-        _sut = new LeadsConsumer(_mockLogger.Object, _mockleadInfoService.Object, _mapper);
+        _sutCreate = new LeadCreatedEventsConsumer(_mockLoggerCreate.Object, _mockleadInfoService.Object, _mapper);
+        _sutUpdated = new LeadUpdatedEventsConsumer(_mockLoggerUpdate.Object, _mockleadInfoService.Object, _mapper);
+        _sutDeleted = new LeadDeletedEventsConsumer(_mockLoggerDelete.Object, _mockleadInfoService.Object, _mapper);
+        _sutRoles = new LeadsRoleUpdatedEventsConsumer(_mockLoggerRoles.Object, _mockleadInfoService.Object, _mapper);
     }
 
     [Fact]
@@ -48,7 +60,7 @@ public class LeadsConsumerTests
         var context = Mock.Of<ConsumeContext<LeadCreatedEvent>>(c => c.Message == leadCreatedEvent);
 
         //when
-        await _sut.Consume(context);
+        await _sutCreate.Consume(context);
 
         //then
         _mockleadInfoService.Verify(c => c.AddLeadInfo(It.Is<LeadInfo>(c =>
@@ -84,7 +96,7 @@ public class LeadsConsumerTests
         var context = Mock.Of<ConsumeContext<LeadUpdatedEvent>>(c => c.Message == leadUpdatedEvent);
 
         //when
-        await _sut.Consume(context);
+        await _sutUpdated.Consume(context);
 
         //then
         _mockleadInfoService.Verify(c => c.UpdateLeadInfo(It.Is<UpdateLeadInfo>(c =>
@@ -110,7 +122,7 @@ public class LeadsConsumerTests
         var context = Mock.Of<ConsumeContext<LeadDeletedEvent>>(c => c.Message == leadDeletedEvent);
 
         //when
-        await _sut.Consume(context);
+        await _sutDeleted.Consume(context);
 
         //then
         _mockleadInfoService.Verify(c => c.DeleteLeadInfo(It.Is<int>(c =>
@@ -128,7 +140,7 @@ public class LeadsConsumerTests
         var context = Mock.Of<ConsumeContext<LeadsRoleUpdatedEvent>>(c => c.Message == leadsRoleUpdatedEvent);
 
         //when
-        await _sut.Consume(context);
+        await _sutRoles.Consume(context);
 
         //then
         _mockleadInfoService.Verify(c => c.UpdateLeadsStatus(It.Is<List<int>>(c =>
