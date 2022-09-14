@@ -10,7 +10,6 @@ public class StatisticsServiceTests
 {
     private readonly Mock<ILogger<StatisticsService>> _mockLogger;
     private readonly Mock<IStatisticsRepository> _mockStatisticsRepository;
-    private readonly Mock<ITransactionsRepository> _mockTransactionsRepository;
     private readonly Mock<IAccountsStatisticsRepository> _mockAccountsStatisticsRepository;
     private readonly StatisticsService _sut;
 
@@ -18,10 +17,9 @@ public class StatisticsServiceTests
     {
         _mockLogger = new Mock<ILogger<StatisticsService>>();
         _mockStatisticsRepository = new Mock<IStatisticsRepository>();
-        _mockTransactionsRepository = new Mock<ITransactionsRepository>();
         _mockAccountsStatisticsRepository = new Mock<IAccountsStatisticsRepository>();
-        _sut = new StatisticsService(_mockLogger.Object, _mockStatisticsRepository.Object,
-            _mockTransactionsRepository.Object, _mockAccountsStatisticsRepository.Object);
+        _sut = new StatisticsService(_mockLogger.Object, _mockStatisticsRepository.Object
+            , _mockAccountsStatisticsRepository.Object);
     }
 
     [Fact]

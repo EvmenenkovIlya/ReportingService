@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
-//builder.Services.AddHostedService<Worker>();   need to on this worker
+builder.Services.AddHostedService<Worker>();   //need to on this worker
 
 builder.Services.AddMassTransit();
 
