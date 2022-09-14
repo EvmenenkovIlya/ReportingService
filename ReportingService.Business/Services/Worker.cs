@@ -1,9 +1,8 @@
+using Cronos;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Quartz;
-using Quartz.Impl;
-using static Quartz.Logging.OperationName;
+using ReportingService.Business.Infarstracture;
 
 
 namespace ReportingService.Business.Services;
@@ -12,30 +11,27 @@ public class Worker : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<Worker> _logger;
+    private readonly CronExpression _cronJob;
 
-    public Worker(IServiceProvider serviceProvider,
-    ILogger<Worker> logger) =>
-    (_serviceProvider, _logger) = (serviceProvider, logger);
+    public Worker(IServiceProvider serviceProvider, ILogger<Worker> logger)
+    {
+        _serviceProvider = serviceProvider;
+        _logger =  logger;
+        _cronJob = CronExpression.Parse(Constants.CronExpression, CronFormat.IncludeSeconds);
+    }
+    
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            //IScheduler scheduler = await StdSchedulerFactory.GetDefaultScheduler();
-            //await scheduler.Start();
-            //IJobDetail job = JobBuilder.Create<StatisticsService>().Build();
-            //DateTimeOffset startTime = DateTimeOffset.Parse("01:00 AM");
-            //ITrigger trigger = TriggerBuilder.Create()
-            //    .WithIdentity("StatisticTrigger", "Statistic")
-            //    .StartAt(startTime)
-            //    .WithSimpleSchedule(x => x
-            //        .RepeatForever())
-            //    .Build();
-            //await scheduler.ScheduleJob(job, trigger);
+            _logger.LogInformation("Statistic Worker running at: {time}", DateTimeOffset.Now);
 
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+            var now = DateTime.UtcNow;
+            var nextUtc = _cronJob.GetNextOccurrence(now);
+            var delayTimeSpan = (nextUtc.Value - now);
+            await Task.Delay(delayTimeSpan, stoppingToken);
             await DoWorkAsync(stoppingToken);
-            await Task.Delay(360000, stoppingToken);
         }
     }
 
@@ -44,7 +40,6 @@ public class Worker : BackgroundService
         _logger.LogInformation(
             $"{nameof(Worker)} is working.");
 
-        //add services
         using (IServiceScope scope = _serviceProvider.CreateScope())
         {
             IStatisticsService statisticsService = scope.ServiceProvider.GetRequiredService<IStatisticsService>();
