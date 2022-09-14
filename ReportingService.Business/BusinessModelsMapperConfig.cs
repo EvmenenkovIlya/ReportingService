@@ -30,5 +30,6 @@ public class BusinessModelsMapperConfig : Profile
         CreateMap<LeadUpdatedEvent, UpdateLeadInfo>()
             .ForMember(o => o.LeadId, opt => opt.MapFrom(src => src.Id))
             .ForMember(o => o.BirthDate, opt => opt.MapFrom(src => src.Birthday));
+        CreateMap<UpdateLeadInfo, LeadInfoDto>();
     }
 }

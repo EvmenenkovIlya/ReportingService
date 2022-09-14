@@ -89,9 +89,12 @@ public class LeadInfoRepository : BaseRepositories, ILeadInfoRepository
                 commandType: CommandType.StoredProcedure);
     }
 
-    public Task DeleteLeadInfo(int leadId)
+    public async Task DeleteLeadInfo(int leadId)
     {
-        throw new NotImplementedException();
+        _logger.LogInformation($"LeadInfoRepository: Delete leadInfo with LeadId = {leadId}");
+        await Connection.QuerySingleAsync
+            (StoredProcedures.LeadInfo_Delete,
+            commandType: CommandType.StoredProcedure);
     }
 
     public Task UpdateLeadsStatus(List<int> vipIds)

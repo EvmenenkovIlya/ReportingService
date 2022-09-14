@@ -209,21 +209,59 @@ public class LeadInfoServiceTests
         {
             new()
             {
+                Id = 2,
                 LeadId = 2,
+                FirstName = "Smith",
+                LastName = "Adam",
+                Patronymic = "Give me Patronymic later",
+                BirthDate = DateTime.Now.AddDays(-1),
+                RegistrationDate = DateTime.Now.AddDays(-1),
+                Email = "testfortest@email.com",
+                Phone = "+666353545",
+                Passport = "5555 666666",
+                Address = "Kolotushkin building, Pushkin Street",
+                City = City.Moscow,
+                IsDeleted = false,
+                Role = Role.Vip
             },
             new()
             {
-                LeadId = 1
+                Id = 1,
+                LeadId = 1,
+                FirstName = "Adam",
+                LastName = "Smith",
+                Patronymic = "Give me Patronymic later",
+                BirthDate = DateTime.Now,
+                RegistrationDate = DateTime.Now,
+                Email = "test@email.com",
+                Phone = "+5553535",
+                Passport = "5555 555555",
+                Address = "Pushkin Street, Kolotushkin building",
+                City = City.Chelyabinsk,
+                IsDeleted = true,
+                Role = Role.Regular
             }
         };
         var expectedLeadDto = leadsDto.Find(x => x.LeadId == leadId);
         _mockLeadInfoRepository.Setup(o => o.GetLeadInfoDtoByLeadId(leadId)).ReturnsAsync(expectedLeadDto);
 
         //when
-        await _sut.GetLeadInfoByLeadId(leadId);
+        var result = await _sut.GetLeadInfoByLeadId(leadId);
 
         //then
         _mockLeadInfoRepository.Verify(c => c.GetLeadInfoDtoByLeadId(leadId), Times.Once);
+        Assert.Multiple(() =>
+        {
+            Assert.Equal(leadsDto[1].LeadId, result.LeadId);
+            Assert.Equal(leadsDto[1].Address, result.Address);
+            Assert.Equal(leadsDto[1].FirstName, result.FirstName);
+            Assert.Equal(leadsDto[1].LastName, result.LastName);
+            Assert.Equal(leadsDto[1].Patronymic, result.Patronymic);
+            Assert.Equal(leadsDto[1].Passport, result.Passport);
+            Assert.Equal(leadsDto[1].Phone, result.Phone);
+            Assert.Equal(leadsDto[1].BirthDate, result.BirthDate);
+            Assert.Equal(leadsDto[1].RegistrationDate, result.RegistrationDate);
+        });
     }
 
     [Fact]
@@ -236,6 +274,6 @@ public class LeadInfoServiceTests
         await _sut.UpdateLeadsStatus(vipIds);
 
         //then
-
+        _mockLeadInfoRepository.Verify(c => c.UpdateLeadsStatus(vipIds), Times.Once);
     }
 }

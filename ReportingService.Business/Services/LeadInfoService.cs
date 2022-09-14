@@ -66,19 +66,20 @@ public class LeadInfoService : ILeadInfoService
     public async Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
     {
         _logger.LogInformation("");
-        throw new NotImplementedException();
+        var leadToUpdate = _mapper.Map<LeadInfoDto>(leadInformation);
+        await _leadInfoRepository.UpdateLeadInfo(leadToUpdate);
     }
 
     public async Task DeleteLeadInfo(int leadId)
     {
-        _logger.LogInformation("");
-        throw new NotImplementedException();
+        _logger.LogInformation($"LeadInfoService try to delete Lead with LeadId = {leadId}");
+        await _leadInfoRepository.DeleteLeadInfo(leadId);
     }
 
     public async Task UpdateLeadsStatus(List<int> vipIds)
     {
-        _logger.LogInformation("");
-        throw new NotImplementedException();
+        _logger.LogInformation($"LeadInfoService try to update Leads status count leads= {vipIds.Count}");
+        await _leadInfoRepository.UpdateLeadsStatus(vipIds);
     }
 
     private List<TType> Concat<TType>(params List<TType>[] lists)
