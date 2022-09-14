@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using ReportingService.Business.Infarstracture;
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
+using static MassTransit.ValidationResultExtensions;
 
 namespace ReportingService.Business.Services;
 
@@ -65,7 +66,7 @@ public class LeadInfoService : ILeadInfoService
 
     public async Task UpdateLeadInfo(UpdateLeadInfo leadInformation)
     {
-        _logger.LogInformation("");
+        _logger.LogInformation($"LeadInfoRepository try to update Lead with LeadId = {leadInformation.LeadId}");
         var leadToUpdate = _mapper.Map<LeadInfoDto>(leadInformation);
         await _leadInfoRepository.UpdateLeadInfo(leadToUpdate);
     }

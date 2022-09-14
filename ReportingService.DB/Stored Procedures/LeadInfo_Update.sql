@@ -18,7 +18,7 @@ BEGIN
 		[Phone] = @Phone,
 		[BirthDate] = @BirthDate,
 		[City] = @City,
-		[Address] = @Address,
+		[Address] = @Address
 
 	WHERE [LeadId] = @LeadId
 END
