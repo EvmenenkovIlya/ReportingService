@@ -1,4 +1,3 @@
-using ReportingService.API;
 using ReportingService.API.Infastructure;
 using System.Data.SqlClient;
 using System.Data;
@@ -23,9 +22,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
-builder.Services.AddHostedService<Worker>();   //need to on this worker
+builder.Services.AddHostedService<Worker>();   //need add creation of statistic
 
-builder.Services.AddMassTransit();
+builder.Services.AddConsumers();
 
 builder.Services.AddAutoMapper();
 
