@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ReportingService.Data.Dto;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ReportingService.Data.Repositories;
 
@@ -97,8 +98,19 @@ public class LeadInfoRepository : BaseRepositories, ILeadInfoRepository
             commandType: CommandType.StoredProcedure);
     }
 
-    public Task UpdateLeadsStatus(List<int> vipIds)
+    public async Task UpdateLeadsStatus(List<int> vipIds)
     {
-        throw new NotImplementedException();
+
+        DataTable data = new DataTable();
+        data.Columns.Add("id", typeof(int));
+        vipIds.ForEach(x => data.Rows.Add(x));
+        _logger.LogInformation("Data layer: Connection to data base");
+        await Connection.QuerySingleAsync
+            (StoredProcedures.LeadInfo_UpdateLeadsStatus,
+                param: new
+                {
+                    ids = data
+                },
+                commandType: CommandType.StoredProcedure);
     }
 }

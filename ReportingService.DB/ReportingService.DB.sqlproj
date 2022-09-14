@@ -63,6 +63,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="Stored Procedures" />
+    <Folder Include="dbo\Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Statistic.sql" />
@@ -88,6 +89,7 @@
     <Build Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
     <Build Include="Stored Procedures\Account_Update.sql" />
     <Build Include="Stored Procedures\Lead_Delete.sql" />
+    <Build Include="dbo\Types\intTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\Account_Add.sql" />
@@ -106,5 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ReportingService.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Stored Procedures\LeadInfo_UpdateLeadsStatus.sql" />
   </ItemGroup>
 </Project>
