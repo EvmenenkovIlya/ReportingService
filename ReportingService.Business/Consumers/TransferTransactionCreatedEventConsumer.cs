@@ -3,17 +3,17 @@ using IncredibleBackendContracts.Events;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
-using ReportingService.Business.Services.Interfaces;
+using ReportingService.Business.Services;
 
 namespace ReportingService.Business.Consumers;
 
-public class TransferTransactionConsumer : IConsumer<TransferTransactionCreatedEvent>
+public class TransferTransactionCreatedEventConsumer : IConsumer<TransferTransactionCreatedEvent>
 {
-    private readonly ILogger<TransferTransactionCreatedEvent> _logger;
+    private readonly ILogger<TransferTransactionCreatedEventConsumer> _logger;
     private readonly ITransactionsService _transactionService;
     private readonly IMapper _mapper;
 
-    public TransferTransactionConsumer(ILogger<TransferTransactionCreatedEvent> logger, ITransactionsService transactionService, IMapper mapper)
+    public TransferTransactionCreatedEventConsumer(ILogger<TransferTransactionCreatedEventConsumer> logger, ITransactionsService transactionService, IMapper mapper)
     {
         _logger = logger;
         _transactionService = transactionService;

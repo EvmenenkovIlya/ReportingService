@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Models;
-using ReportingService.Business.Services.Interfaces;
+using ReportingService.Business.Services;
 using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
 

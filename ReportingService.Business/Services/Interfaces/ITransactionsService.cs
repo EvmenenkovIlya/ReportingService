@@ -2,7 +2,7 @@
 
 using ReportingService.Business.Models;
 
-namespace ReportingService.Business.Services.Interfaces;
+namespace ReportingService.Business.Services;
 
 public interface ITransactionsService
 {
