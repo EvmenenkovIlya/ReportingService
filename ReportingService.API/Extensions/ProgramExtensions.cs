@@ -1,9 +1,8 @@
-﻿using IncredibleBackend.Messaging;
+﻿using IncredibleBackend.Messaging.Extentions;
 using IncredibleBackendContracts.Constants;
 using ReportingService.Business;
 using ReportingService.Business.Consumers;
 using ReportingService.Business.Services;
-using ReportingService.Business.Services.Interfaces;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.API.Extensions;
@@ -40,8 +39,8 @@ public static class ProgramExtensions
         services.RegisterConsumersAndProducers(
             (config) =>
             {
-                config.AddConsumer<TransactionConsumer>();
-                config.AddConsumer<TransferTransactionConsumer>();
+                config.AddConsumer<TransactionCreatedEventConsumer>();
+                config.AddConsumer<TransferTransactionCreatedEventConsumer>();
                 config.AddConsumer<AccountCreatedEventConsumer>();
                 config.AddConsumer<AccountUpdatedEventsConsumer>();
                 config.AddConsumer<AccountDeletedEventsConsumer>();
@@ -52,8 +51,8 @@ public static class ProgramExtensions
             },
             (cfg, ctx) =>
             {
-                cfg.RegisterConsumer<TransactionConsumer>(ctx, RabbitEndpoint.TransactionCreate);
-                cfg.RegisterConsumer<TransferTransactionConsumer>(ctx, RabbitEndpoint.TransferTransactionCreate);
+                cfg.RegisterConsumer<TransactionCreatedEventConsumer>(ctx, RabbitEndpoint.TransactionCreate);
+                cfg.RegisterConsumer<TransferTransactionCreatedEventConsumer>(ctx, RabbitEndpoint.TransferTransactionCreate);
                 cfg.RegisterConsumer<AccountCreatedEventConsumer>(ctx, RabbitEndpoint.AccountCreate);
                 cfg.RegisterConsumer<AccountUpdatedEventsConsumer>(ctx, RabbitEndpoint.AccountUpdate);
                 cfg.RegisterConsumer<AccountDeletedEventsConsumer>(ctx, RabbitEndpoint.AccountDelete);

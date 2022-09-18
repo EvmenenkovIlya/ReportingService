@@ -5,7 +5,6 @@ public class LeadOverallStatisticsDto
     public long Id { get; set; }
     public DateTime DateStatistics { get; set; }
     public int LeadId { get; set; }
-    public int TransactionCountForTwoMonth { get; set; }
     public decimal DepositsSum { get; set; }
     public decimal WithdrawSum { get; set; }
     public decimal TransferSum { get; set; }

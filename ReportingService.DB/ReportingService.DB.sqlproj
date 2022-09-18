@@ -90,6 +90,8 @@
     <Build Include="Stored Procedures\Account_Update.sql" />
     <Build Include="Stored Procedures\Lead_Delete.sql" />
     <Build Include="dbo\Types\intTable.sql" />
+    <Build Include="dbo\Types\LeadOverallStatisticTable.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_AddDayStatistic.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\Account_Add.sql" />
