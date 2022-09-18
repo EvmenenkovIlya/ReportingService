@@ -1,11 +1,10 @@
 ﻿using IncredibleBackendContracts.Enums;
 using Microsoft.Extensions.Logging;
-using Quartz;
 using ReportingService.Data.Repositories;
 
 namespace ReportingService.Business.Services;
 
-public class StatisticsService : IStatisticsService, IJob
+public class StatisticsService : IStatisticsService
 {
     private readonly ILogger<StatisticsService> _logger;
     private readonly IStatisticsRepository _statisticsRepository;
@@ -22,6 +21,7 @@ public class StatisticsService : IStatisticsService, IJob
 
     public async Task Execute()
     {
+        _logger.LogInformation($"StatisticsService starts working at {DateTime.Now}");
         await Task.WhenAll(
             CreateAccountStatistics(),
             CreateLeadsCountStatistics()
@@ -40,13 +40,5 @@ public class StatisticsService : IStatisticsService, IJob
     public async Task CreateLeadsCountStatistics()
     {
         await _statisticsRepository.AddStatistic();
-    }
-
-    public async Task Execute(IJobExecutionContext context)
-    {
-        await Task.WhenAll(
-            CreateAccountStatistics(),
-            CreateLeadsCountStatistics()
-        );
     }
 }

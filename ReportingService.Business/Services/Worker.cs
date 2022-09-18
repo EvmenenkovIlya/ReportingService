@@ -4,7 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ReportingService.Business.Infarstracture;
 
-
 namespace ReportingService.Business.Services;
 
 public class Worker : BackgroundService
@@ -17,21 +16,20 @@ public class Worker : BackgroundService
     {
         _serviceProvider = serviceProvider;
         _logger =  logger;
-        _cronJob = CronExpression.Parse(Constants.CronExpression, CronFormat.IncludeSeconds);
+        _cronJob = CronExpression.Parse(Constants.CronExpression, CronFormat.Standard);
     }
     
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        _logger.LogInformation("Statistic Worker running at: {time}", DateTimeOffset.Now);
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Statistic Worker running at: {time}", DateTimeOffset.Now);
-
             var now = DateTime.UtcNow;
-            var nextUtc = _cronJob.GetNextOccurrence(now);
-            var delayTimeSpan = (nextUtc.Value - now);
-            await Task.Delay(delayTimeSpan, stoppingToken);
-            await DoWorkAsync(stoppingToken);
+                var nextUtc = _cronJob.GetNextOccurrence(now);
+                var delayTimeSpan = (nextUtc.Value - now);
+                await Task.Delay(delayTimeSpan, stoppingToken);
+                await DoWorkAsync(stoppingToken);
         }
     }
 
@@ -54,7 +52,6 @@ public class Worker : BackgroundService
     {
         _logger.LogInformation(
             $"{nameof(Worker)} is stopping.");
-
         await base.StopAsync(stoppingToken);
     }
 }
