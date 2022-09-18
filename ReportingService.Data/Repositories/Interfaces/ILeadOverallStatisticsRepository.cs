@@ -1,10 +1,11 @@
 ﻿using ReportingService.Data.Dto;
+using System.Data;
 
 namespace ReportingService.Data.Repositories;
 
 public interface ILeadOverallStatisticsRepository
 {
-    Task AddLeadStatistic(LeadOverallStatisticsDto leadStatisticDto);
+    Task AddLeadStatistic(List<LeadOverallStatisticsDto> statistics);
     Task<List<LeadOverallStatisticsDto>> GetAllLeadStatisticDto();
     Task<LeadOverallStatisticsDto> GetLeadStatisticDtoById(int id);
     Task UpdateLeadStatisticDto(LeadOverallStatisticsDto leadStatisticDto);

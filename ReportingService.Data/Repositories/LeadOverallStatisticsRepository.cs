@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ReportingService.Data.Dto;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ReportingService.Data.Repositories;
 
@@ -15,24 +16,42 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
         _logger = logger;
     }
 
-    public async Task AddLeadStatistic(LeadOverallStatisticsDto leadStatisticDto)
+    public async Task AddLeadStatistic(List<LeadOverallStatisticsDto> statistics)
     {
-        _logger.LogInformation("Data layer: Connection to data base");
+        DataTable data = new DataTable();
+        data.Columns.Add("DateStatistics", typeof(DateTime));
+        data.Columns.Add("LeadId", typeof(int));
+        data.Columns.Add("DepositsSum", typeof(decimal));
+        data.Columns.Add("WithdrawSum", typeof(decimal));
+        data.Columns.Add("TransferSum", typeof(decimal));
+        data.Columns.Add("DepositsCount", typeof(int));
+        data.Columns.Add("WithdrawalsCount", typeof(int));
+        data.Columns.Add("TransfersCount", typeof(int));
+
+        statistics.ForEach(s =>
+        {
+            DataRow dr = data.NewRow();
+            dr["DateStatistics"] = s.DateStatistics;
+            dr["LeadId"] = s.LeadId;
+            dr["DepositsSum"] = s.DepositsSum;
+            dr["WithdrawSum"] = s.WithdrawSum;
+            dr["TransferSum"] = s.TransferSum;
+            dr["DepositsCount"] = s.DepositsCount;
+            dr["WithdrawalsCount"] = s.WithdrawalsCount;
+            dr["TransfersCount"] = s.TransfersCount;
+
+            data.Rows.Add(dr);
+        });
+
+
+
         await Connection.QuerySingleAsync
-                   (StoredProcedures.LeadOverallStatistic_Add,
-                   param: new
-                   {
-                       leadStatisticDto.DateStatistics,
-                       leadStatisticDto.LeadId,
-                       leadStatisticDto.DepositsSum,
-                       leadStatisticDto.WithdrawSum,
-                       leadStatisticDto.TransferSum,
-                       leadStatisticDto.DepositsCount,
-                       leadStatisticDto.WithdrawalsCount,
-                       leadStatisticDto.TransfersCount,
-                   },
-                   commandType: CommandType.StoredProcedure
-                   );
+            (StoredProcedures.LeadOverallStatistic_AddDayStatistic,
+                param: new
+                {
+                    Statistics = data
+                },
+                commandType: CommandType.StoredProcedure);
     }
 
     public async Task<List<LeadOverallStatisticsDto>> GetOverallStatisiticsByDate(DateTime date)
@@ -111,7 +130,6 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
                     leadStatisticDto.DepositsCount,
                     leadStatisticDto.WithdrawalsCount,
                     leadStatisticDto.TransfersCount,
-                    leadStatisticDto.TransactionCountForTwoMonth
                 },
                 commandType: CommandType.StoredProcedure
                 );
