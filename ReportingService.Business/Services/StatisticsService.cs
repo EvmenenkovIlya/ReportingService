@@ -37,7 +37,8 @@ public class StatisticsService : IStatisticsService
     public async Task<List<Statistics>> GetStatisticsByPeriod(DateTime dateFrom, DateTime dateTo)
     {
         Validator.ValidateDates(dateFrom, dateTo, ExceptionsErrorMessages.DateFromMoreThanDateTo);
-        var result = await _statisticsRepository.GetStatisticByPeriod(dateFrom, dateTo);
+        var dates = GetDatesFromDateToDate(dateFrom, dateTo);
+        var result = await _statisticsRepository.GetStatisticByPeriod(dates);
         return _mapper.Map<List<Statistics>>(result);
     }
 
@@ -53,5 +54,13 @@ public class StatisticsService : IStatisticsService
     public async Task CreateLeadsCountStatistics()
     {
         await _statisticsRepository.AddStatistic();
+    }
+
+    private List<DateTime> GetDatesFromDateToDate(DateTime dateFrom, DateTime dateTo)
+    {
+        
+        return Enumerable.Range(0, (dateTo - dateFrom).Days + 1)
+            .Select(i => dateFrom.AddDays(i).Date)
+            .ToList();
     }
 }

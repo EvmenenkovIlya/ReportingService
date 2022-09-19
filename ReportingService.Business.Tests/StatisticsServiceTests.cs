@@ -3,7 +3,6 @@ using IncredibleBackendContracts.Enums;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReportingService.Business.Exceptions;
-using ReportingService.Business.Models;
 using ReportingService.Business.Services;
 using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
@@ -15,6 +14,7 @@ public class StatisticsServiceTests
     private readonly Mock<ILogger<StatisticsService>> _mockLogger;
     private readonly Mock<IStatisticsRepository> _mockStatisticsRepository;
     private readonly Mock<IAccountsStatisticsRepository> _mockAccountsStatisticsRepository;
+
     private readonly StatisticsService _sut;
     private readonly IMapper _mapper;
 
@@ -75,6 +75,7 @@ public class StatisticsServiceTests
         //given
         var dateFrom = DateTime.Now.AddDays(-1);
         var dateTo = DateTime.Now;
+        var dates = new List<DateTime>() { dateFrom, dateTo };
         var statisticsDto = new List<StatisticsDto>() { 
             new()
             {
@@ -132,7 +133,7 @@ public class StatisticsServiceTests
             },
 
         };
-        _mockStatisticsRepository.Setup(o => o.GetStatisticByPeriod(dateFrom, dateTo)).ReturnsAsync(statisticsDto);
+        _mockStatisticsRepository.Setup(o => o.GetStatisticByPeriod(dates)).ReturnsAsync(statisticsDto);
 
         //when
         var result = await _sut.GetStatisticsByPeriod(dateFrom, dateTo);
@@ -143,9 +144,7 @@ public class StatisticsServiceTests
         //    Assert.Equal(statisticsDto.Count/2, result.Count);
 
         //});
-        if (1==2)
-        {}
-        _mockStatisticsRepository.Verify(o => o.GetStatisticByPeriod(dateFrom, dateTo), Times.Once);
+        _mockStatisticsRepository.Verify(o => o.GetStatisticByPeriod(It.Is<List<DateTime>>(x => x.Count == dates.Count)), Times.Once);
     }
 
 }
