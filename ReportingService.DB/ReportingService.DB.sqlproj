@@ -82,14 +82,14 @@
     <Build Include="Stored Procedures\Transaction_GetTransactionsByYesterday.sql" />
     <Build Include="dbo\Tables\AccountsStatistic.sql" />
     <Build Include="Stored Procedures\AccountsStatistic_Add.sql" />
-    <Build Include="Stored Procedures\AccountsStatistic_GetByDate.sql" />
-    <Build Include="Stored Procedures\AccountsStatistic_GetAll.sql" />
     <Build Include="Stored Procedures\AccountsStatistic_GetByPeriod.sql" />
     <Build Include="Stored Procedures\Statistic_GetByPeriod.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_Add.sql" />
     <Build Include="Stored Procedures\Account_Update.sql" />
     <Build Include="Stored Procedures\Lead_Delete.sql" />
     <Build Include="dbo\Types\intTable.sql" />
+    <Build Include="dbo\Types\LeadOverallStatisticTable.sql" />
+    <Build Include="Stored Procedures\LeadOverallStatistic_AddDayStatistic.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\Account_Add.sql" />
@@ -101,8 +101,6 @@
     <Build Include="Stored Procedures\LeadOverallStatistic_GetById.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_Update.sql" />
     <Build Include="Stored Procedures\Statistic_Add.sql" />
-    <Build Include="Stored Procedures\Statistic_GetAll.sql" />
-    <Build Include="Stored Procedures\Statistic_GetByDate.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_GetLeadIdsWithNecessaryTransactionsCount.sql" />
     <Build Include="Stored Procedures\LeadOverallStatistic_GetLeadsIdsWithNecessaryAmountDifference.sql" />
   </ItemGroup>

@@ -20,7 +20,7 @@ public class LeadInfoControllerTests
     {
         _mockLeadInfoService = new Mock<ILeadInfoService>();
         _logger = new Mock<ILogger<LeadInfoController>>();
-        _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessModelsMapperConfig>()));
+        _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<APIModelsMapperConfig>()));
         _sut = new LeadInfoController(_logger.Object, _mockLeadInfoService.Object);
     }
 

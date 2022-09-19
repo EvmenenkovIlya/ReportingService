@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using ReportingService.Business.Infarstracture;
 using ReportingService.Business.Models;
 using ReportingService.Data.Dto;
-using static MassTransit.ValidationResultExtensions;
 
 namespace ReportingService.Business.Services;
 

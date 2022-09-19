@@ -6,7 +6,5 @@ namespace ReportingService.Data.Repositories;
 public interface IAccountsStatisticsRepository
 {
     Task AddStatistic(DateTime date, TradingCurrency currency);
-    Task<List<AccountsStatisticsDto>> GetAllStatistic();
-    Task<List<AccountsStatisticsDto>> GetStatisticByDate(DateTime date);
-    Task<List<AccountsStatisticsDto>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo);
+    Task<Dictionary<DateTime, List<AccountsStatisticsDto>>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo);
 }

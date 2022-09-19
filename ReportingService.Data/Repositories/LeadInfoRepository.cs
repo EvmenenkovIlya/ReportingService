@@ -100,10 +100,10 @@ public class LeadInfoRepository : BaseRepositories, ILeadInfoRepository
 
     public async Task UpdateLeadsStatus(List<int> vipIds)
     {
-
         DataTable data = new DataTable();
         data.Columns.Add("id", typeof(int));
         vipIds.ForEach(x => data.Rows.Add(x));
+
         _logger.LogInformation("Data layer: Connection to data base");
         await Connection.QuerySingleAsync
             (StoredProcedures.LeadInfo_UpdateLeadsStatus,

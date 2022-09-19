@@ -3,14 +3,12 @@
 	@DateTo date
 AS
 BEGIN
-	SELECT 
-		[Id],
-		[DateStatistic],
-		[RegularLeadsCount],
-		[VipLeadsCount],
-		[DeletedLeadsCount],
-		[DeletedVipLeadsCount]
-		
-	FROM [dbo].[Statistic]
-	WHERE [DateStatistic] between @DateFrom and @DateTo
+	SELECT
+	[DateStatistic],
+	[RegularLeadsCount],
+	[VipLeadsCount],
+    [DeletedLeadsCount],
+    [DeletedVipLeadsCount]
+FROM [dbo].[Statistic]
+WHERE [Statistic].[DateStatistic] between @DateFrom and @DateTo
 END

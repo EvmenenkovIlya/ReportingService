@@ -2,10 +2,11 @@
 
 public class Statistics
 {
-    public DateTime DateStatistics { get; set; }
-    //public Dictionary<Currency,int> AllAccountsCount { get; set; }
-    //public Dictionary<Currency, int> ActiveAccountsCount { get; set; }
-    //public int ActiveLeadsCount { get; set; }
-    //public int AllLeadsCount { get; set; }
+    public DateTime DateStatistic { get; set; }
+    public int RegularLeadsCount { get; set; }
+    public int VipLeadsCount { get; set; }
+    public int DeletedLeadsCount { get; set; }
+    public int DeletedVipsCount { get; set; }
+    public List<AccountsStatistic> AccountsStatistic { get; set; }
 
 }

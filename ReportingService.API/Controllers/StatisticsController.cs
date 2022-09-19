@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ReportingService.API.Models;
 using ReportingService.Business.Services;
 
 namespace ReportingService.API.Controllers;
@@ -9,20 +11,19 @@ public class StatisticsController : ControllerBase
 {
     private readonly IStatisticsService _statisticsService;
     private readonly ILogger<StatisticsController> _logger;
+    private readonly IMapper _mapper;
 
-    public StatisticsController(ILogger<StatisticsController> logger, IStatisticsService statisticsService)
+    public StatisticsController(ILogger<StatisticsController> logger, IStatisticsService statisticsService, IMapper mapper)
     {
         _statisticsService = statisticsService;
         _logger = logger;
+        _mapper = mapper;
     }
 
-    [HttpGet]
-    [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<int>>> SaveAccountsStatisticFromYesterday()
+    [HttpGet("by-dates")]
+    public async Task<ActionResult<List<StatisticsResponse>>> GetStatisticsByDates([FromQuery] DateTime dateFrom, [FromQuery] DateTime dateTo)
     {
-        _logger.LogInformation($"Create statistic");
-        await _statisticsService.CreateAccountStatistics();
-        _logger.LogInformation($"Statistic Created");
-        return Ok();
+        var result = await _statisticsService.GetStatisticsByPeriod(dateFrom, dateTo);
+        return Ok(_mapper.Map<List<StatisticsResponse>>(result));
     }
 }

@@ -11,4 +11,12 @@ public static class Validator
             throw new BadRequestException(errorMessage);
         }
     }
+
+    public static void ValidateDates(DateTime dateFrom, DateTime dateTo, string errorMessage)
+    {
+        if (dateFrom.Date > dateTo.Date)
+        {
+            throw new BadRequestException(errorMessage);
+        }
+    }
 }

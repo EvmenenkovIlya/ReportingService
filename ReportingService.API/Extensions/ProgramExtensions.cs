@@ -1,4 +1,4 @@
-﻿using IncredibleBackend.Messaging;
+﻿using IncredibleBackend.Messaging.Extentions;
 using IncredibleBackendContracts.Constants;
 using ReportingService.Business;
 using ReportingService.Business.Consumers;

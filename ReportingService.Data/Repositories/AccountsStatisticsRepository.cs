@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using Dapper;
 using IncredibleBackendContracts.Enums;
 using ReportingService.Data.Dto;
@@ -23,27 +24,13 @@ public class AccountsStatisticsRepository : BaseRepositories, IAccountsStatistic
         );
     }
 
-    public async Task<List<AccountsStatisticsDto>> GetAllStatistic()
+    public async Task<Dictionary<DateTime, List<AccountsStatisticsDto>>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo)
     {
-        return (await Connection.QueryAsync<AccountsStatisticsDto>
-            (StoredProcedures.AccountsStatistic_GetAll,
-                commandType: CommandType.StoredProcedure))
-            .ToList();
-    }
-
-    public async Task<List<AccountsStatisticsDto>> GetStatisticByDate(DateTime date)
-    {
-        return (await Connection.QueryAsync<AccountsStatisticsDto>
-        (StoredProcedures.AccountsStatistic_GetByDate,
-            param: new { DatrStatistic = date.Date },
-            commandType: CommandType.StoredProcedure)).ToList();
-    }
-
-    public async Task<List<AccountsStatisticsDto>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo)
-    {
-        return (await Connection.QueryAsync<AccountsStatisticsDto>
+        var result = (await Connection.QueryAsync<AccountsStatisticsDto>
         (StoredProcedures.AccountsStatistic_GetByPeriod,
             param: new { dateFrom, dateTo },
             commandType: CommandType.StoredProcedure)).ToList();
+        var dict = result.GroupBy(x => x.DateStatistic).ToDictionary(g => g.Key, g => g.ToList());
+        return dict;
     }
 }

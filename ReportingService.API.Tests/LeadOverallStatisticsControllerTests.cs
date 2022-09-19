@@ -12,16 +12,16 @@ namespace ReportingService.API.Tests;
 public class LeadOverallStatisticsControllerTests
 {
     private LeadStatisticsController _sut;
-    private Mock<ILeadOverallStatisticsService> _mockLeadOverallStatisticsRepository;
+    private Mock<ILeadOverallStatisticsService> _mockLeadOverallStatisticsService;
     private Mock<ILogger<LeadStatisticsController>> _logger;
     private IMapper _mapper;
 
     public LeadOverallStatisticsControllerTests()
     {
-        _mockLeadOverallStatisticsRepository = new Mock<ILeadOverallStatisticsService>();
+        _mockLeadOverallStatisticsService = new Mock<ILeadOverallStatisticsService>();
         _logger = new Mock<ILogger<LeadStatisticsController>>();
         _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessModelsMapperConfig>()));
-        _sut = new LeadStatisticsController(_logger.Object, _mockLeadOverallStatisticsRepository.Object);
+        _sut = new LeadStatisticsController(_logger.Object, _mockLeadOverallStatisticsService.Object);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class LeadOverallStatisticsControllerTests
         int transactionsCount = 5;
         int daysCount = 30;
 
-        _mockLeadOverallStatisticsRepository.Setup(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount)).ReturnsAsync(expectedList);
+        _mockLeadOverallStatisticsService.Setup(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount)).ReturnsAsync(expectedList);
 
         // when
         var actual = await _sut.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount);
@@ -42,7 +42,7 @@ public class LeadOverallStatisticsControllerTests
         var bundleResponse = actualResult.Value as List<int>;
         Assert.Equal(StatusCodes.Status200OK, actualResult.StatusCode);
         Assert.All(bundleResponse, x => expectedList.Contains(x));
-        _mockLeadOverallStatisticsRepository.Verify(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount), Times.Once);
+        _mockLeadOverallStatisticsService.Verify(o => o.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount), Times.Once);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class LeadOverallStatisticsControllerTests
         int daysCount = 30;
         decimal amountDifference = 12000;
 
-        _mockLeadOverallStatisticsRepository.Setup(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount)).ReturnsAsync(expectedList);
+        _mockLeadOverallStatisticsService.Setup(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount)).ReturnsAsync(expectedList);
 
         // when
         var actual = await _sut.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount);
@@ -63,6 +63,6 @@ public class LeadOverallStatisticsControllerTests
         var bundleResponse = actualResult.Value as List<int>;
         Assert.Equal(StatusCodes.Status200OK, actualResult.StatusCode);
         Assert.All(bundleResponse, x => expectedList.Contains(x));
-        _mockLeadOverallStatisticsRepository.Verify(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount), Times.Once);
+        _mockLeadOverallStatisticsService.Verify(o => o.GetLeadsIdsWithNecessaryAmountDifference(amountDifference, daysCount), Times.Once);
     }
 }

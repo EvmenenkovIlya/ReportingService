@@ -2,6 +2,7 @@
 using ReportingService.Business.Exceptions;
 using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
+using System.Data;
 
 namespace ReportingService.Business.Services;
 
@@ -26,9 +27,12 @@ public class LeadOverallStatisticsService : ILeadOverallStatisticsService
     public async Task CreateLeadOverallsStatistics()
     {
         var statistics = await _leadOverallStatisticRepository.GetOverallStatisiticsByDate(DateTime.Now.AddDays(-1));
-        await Task.WhenAll(statistics.Select(async statistic =>
-            await _leadOverallStatisticRepository.AddLeadStatistic(statistic)
-        )) ;
+
+        //for (int i = 0; i <= 100000)
+
+        var s = statistics.GetRange(0, 10);
+
+        await _leadOverallStatisticRepository.AddLeadStatistic(s);
     }
 
     public Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)
