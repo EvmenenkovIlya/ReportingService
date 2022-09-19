@@ -30,7 +30,7 @@ public class AccountsServiceTests
         //given
         Account account = new()
         {
-            Currency = Currency.RUB,
+            Currency = TradingCurrency.RUB,
             LeadId = 1,
             Id = 1,
             Status = AccountStatus.Active,
@@ -83,8 +83,8 @@ public class AccountsServiceTests
     {
         //given
         List<AccountDto> accounts = new List<AccountDto>(){
-            new() { Currency = Currency.RUB, LeadId = 1, Id = 1, Status = AccountStatus.Active, AccountId = 1},
-            new() {Currency = Currency.USD, LeadId = 2, Id = 2, Status = AccountStatus.Frozen, AccountId = 2}
+            new() { Currency = TradingCurrency.RUB, LeadId = 1, Id = 1, Status = AccountStatus.Active, AccountId = 1},
+            new() {Currency = TradingCurrency.USD, LeadId = 2, Id = 2, Status = AccountStatus.Frozen, AccountId = 2}
         };
         _mockAccountsRepository.Setup(o => o.GetAllAccounts()).ReturnsAsync(accounts);
 
@@ -107,8 +107,8 @@ public class AccountsServiceTests
         //given
         var accountId = 1;
         List<AccountDto> accounts = new List<AccountDto>(){
-            new() { Currency = Currency.RUB, LeadId = 1, Id = 1, Status = AccountStatus.Active, AccountId = 1},
-            new() { Currency = Currency.USD, LeadId = 2, Id = 2, Status = AccountStatus.Frozen, AccountId = 2}
+            new() { Currency = TradingCurrency.RUB, LeadId = 1, Id = 1, Status = AccountStatus.Active, AccountId = 1},
+            new() { Currency = TradingCurrency.USD, LeadId = 2, Id = 2, Status = AccountStatus.Frozen, AccountId = 2}
         };
         var expectedAccountDto = accounts.Find(x => x.AccountId == accountId);
 

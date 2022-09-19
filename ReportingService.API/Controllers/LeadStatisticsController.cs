@@ -24,7 +24,7 @@ public class LeadStatisticsController : Controller
         _logger.LogInformation($"Controller: Request to get users who have made transactions greater than {transactionsCount}");
         var result = await _leadStatisticsService.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount);
 
-        _leadStatisticsService.CreateLeadOverallsStatistics();
+        await _leadStatisticsService.CreateLeadOverallsStatistics();
 
         _logger.LogInformation($"Controller: users who have made transactions greater than {transactionsCount} returned");
         return Ok(result);

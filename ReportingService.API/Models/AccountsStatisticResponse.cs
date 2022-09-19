@@ -1,9 +1,9 @@
 ﻿using IncredibleBackendContracts.Enums;
 
-namespace ReportingService.Data.Dto;
-public class AccountsStatisticsDto
+namespace ReportingService.API.Models;
+
+public class AccountsStatisticResponse
 {
-    public DateTime DateStatistic { get; set; }
     public Currency Currency { get; set; }
     public int ActiveAccountCount { get; set; }
     public int FrozenAccountCount { get; set; }

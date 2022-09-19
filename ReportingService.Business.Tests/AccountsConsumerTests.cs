@@ -42,7 +42,7 @@ public class AccountsConsumerTests
         AccountCreatedEvent createdAccount = new()
         {
             Id = 1,
-            Currency = Currency.USD,
+            Currency = TradingCurrency.USD,
             LeadId = 1,
             Status = AccountStatus.Active
         };
