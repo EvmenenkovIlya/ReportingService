@@ -26,15 +26,19 @@ public class StatisticsRepository : BaseRepositories, IStatisticsRepository
                    );
     }
 
-    public async Task<List<StatisticsDto>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo)
+    public async Task<List<StatisticsDto>> GetStatisticByPeriod(List<DateTime> dates)
     {
-        var accountsStatistic = await _accountsStatisticsRepository.GetStatisticByPeriod(dateFrom, dateTo);
-        _logger.LogInformation($"Get statistic by Period from {dateFrom} to {dateTo}");
-        var result =  (await Connection.QueryAsync<StatisticsDto>(
+        DataTable data = new DataTable();
+        data.Columns.Add("Date", typeof(DateTime));
+        dates.ForEach(x => data.Rows.Add(x));
+
+        var accountsStatistic = await _accountsStatisticsRepository.GetStatisticByPeriod(dates);
+        _logger.LogInformation($"Get statistic by Period from {dates.Min()} to {dates.Min()}");
+        var result = (await Connection.QueryAsync<StatisticsDto>(
             StoredProcedures.Statistic_GetByPeriod,
-            param: new { dateFrom, dateTo },
+            param: new { Date = data },
             commandType: CommandType.StoredProcedure)).ToList();
-        result.ForEach(x=>x.AccountsStatistics = accountsStatistic[x.DateStatistic]);
+        result.ForEach(x => x.AccountsStatistics = accountsStatistic[x.DateStatistic]);
         _logger.LogInformation($"Returned {result.Count} statistic");
         return result;
     }

@@ -1,6 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[AccountsStatistic_GetByPeriod]
-	@DateFrom date,
-	@DateTo date
+	@Date dateTable READONLY
 AS
 BEGIN
 	SELECT 
@@ -11,5 +10,5 @@ BEGIN
 		[FrozenAccountCount],
 		[DeletedAccountCount]		
 	FROM [dbo].[AccountsStatistic]
-	WHERE [DateStatistic] between @DateFrom and @DateTo
+	WHERE [DateStatistic] = (Select [Date] from @Date)
 END

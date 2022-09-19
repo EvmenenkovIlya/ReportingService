@@ -9,7 +9,9 @@ namespace ReportingService.Data.Repositories;
 public class AccountsStatisticsRepository : BaseRepositories, IAccountsStatisticsRepository
 {
     public AccountsStatisticsRepository(IDbConnection dbConnection)
-            : base(dbConnection) { }
+        : base(dbConnection)
+    {
+    }
 
     public async Task AddStatistic(DateTime date, TradingCurrency currency)
     {
@@ -24,11 +26,14 @@ public class AccountsStatisticsRepository : BaseRepositories, IAccountsStatistic
         );
     }
 
-    public async Task<Dictionary<DateTime, List<AccountsStatisticsDto>>> GetStatisticByPeriod(DateTime dateFrom, DateTime dateTo)
+    public async Task<Dictionary<DateTime, List<AccountsStatisticsDto>>> GetStatisticByPeriod(List<DateTime> dates)
     {
+        DataTable data = new DataTable();
+        data.Columns.Add("Date", typeof(DateTime));
+        dates.ForEach(x => data.Rows.Add(x));
         var result = (await Connection.QueryAsync<AccountsStatisticsDto>
         (StoredProcedures.AccountsStatistic_GetByPeriod,
-            param: new { dateFrom, dateTo },
+            param: new { Date = data },
             commandType: CommandType.StoredProcedure)).ToList();
         var dict = result.GroupBy(x => x.DateStatistic).ToDictionary(g => g.Key, g => g.ToList());
         return dict;

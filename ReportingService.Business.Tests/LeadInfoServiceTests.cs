@@ -265,6 +265,16 @@ public class LeadInfoServiceTests
     }
 
     [Fact]
+    public async Task GetLeadInfoByLeadId_WhenIdNotInDb_ThrowBadRequestException()
+    {
+        //given
+        var idNotInDb = 1;
+        //when
+        //then
+        await Assert.ThrowsAsync<BadRequestException>(() => _sut.GetLeadInfoByLeadId(idNotInDb));
+    }
+
+    [Fact]
     public async Task UpdateLeadsStatus_WhenValidRequestPassed_LeadsInfoUpdated()
     {
         //given
