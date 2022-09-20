@@ -24,8 +24,6 @@ public class LeadStatisticsController : Controller
         _logger.LogInformation($"Controller: Request to get users who have made transactions greater than {transactionsCount}");
         var result = await _leadStatisticsService.GetLeadIdsWithNecessaryTransactionsCount(transactionsCount, daysCount);
 
-        await _leadStatisticsService.CreateLeadOverallsStatistics();
-
         _logger.LogInformation($"Controller: users who have made transactions greater than {transactionsCount} returned");
         return Ok(result);
     }
@@ -39,5 +37,14 @@ public class LeadStatisticsController : Controller
 
         _logger.LogInformation($"Controller: users whose difference between deposits and withdrawals is {amountDifference}");
         return Ok(result);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+    public async Task<ActionResult> CreateLeadsStatistic()
+    {
+        await _leadStatisticsService.CreateLeadOverallsStatistics();
+ 
+        return Ok();
     }
 }

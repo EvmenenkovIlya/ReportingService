@@ -10,13 +10,11 @@ public class LeadsRoleUpdatedEventsConsumer : IConsumer<LeadsRoleUpdatedEvent>
 {
     private readonly ILogger<LeadsRoleUpdatedEventsConsumer> _logger;
     private readonly ILeadInfoService _leadInfoService;
-    private readonly IMapper _mapper;
 
-    public LeadsRoleUpdatedEventsConsumer(ILogger<LeadsRoleUpdatedEventsConsumer> logger, ILeadInfoService leadInfoService, IMapper mapper)
+    public LeadsRoleUpdatedEventsConsumer(ILogger<LeadsRoleUpdatedEventsConsumer> logger, ILeadInfoService leadInfoService)
     {
         _logger = logger;
         _leadInfoService = leadInfoService;
-        _mapper = mapper;
     }
 
     public async Task Consume(ConsumeContext<LeadsRoleUpdatedEvent> context)

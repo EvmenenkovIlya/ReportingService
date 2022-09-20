@@ -36,7 +36,7 @@ public class LeadsConsumerTests
         _sutCreate = new LeadCreatedEventsConsumer(_mockLoggerCreate.Object, _mockleadInfoService.Object, _mapper);
         _sutUpdated = new LeadUpdatedEventsConsumer(_mockLoggerUpdate.Object, _mockleadInfoService.Object, _mapper);
         _sutDeleted = new LeadDeletedEventsConsumer(_mockLoggerDelete.Object, _mockleadInfoService.Object, _mapper);
-        _sutRoles = new LeadsRoleUpdatedEventsConsumer(_mockLoggerRoles.Object, _mockleadInfoService.Object, _mapper);
+        _sutRoles = new LeadsRoleUpdatedEventsConsumer(_mockLoggerRoles.Object, _mockleadInfoService.Object);
     }
 
     [Fact]

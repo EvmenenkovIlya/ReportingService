@@ -44,8 +44,7 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
         });
 
 
-
-        await Connection.QuerySingleAsync
+        await Connection.ExecuteAsync
             (StoredProcedures.LeadOverallStatistic_AddDayStatistic,
                 param: new
                 {
