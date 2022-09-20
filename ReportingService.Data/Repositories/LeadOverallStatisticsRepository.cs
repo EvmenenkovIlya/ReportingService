@@ -19,7 +19,7 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
     public async Task AddLeadStatistic(List<LeadOverallStatisticsDto> statistics)
     {
         DataTable data = new DataTable();
-        data.Columns.Add("DateStatistics", typeof(DateTime));
+        data.Columns.Add("DateStatistic", typeof(DateTime));
         data.Columns.Add("LeadId", typeof(int));
         data.Columns.Add("DepositsSum", typeof(decimal));
         data.Columns.Add("WithdrawSum", typeof(decimal));
@@ -31,7 +31,7 @@ public class LeadOverallStatisticsRepository : BaseRepositories, ILeadOverallSta
         statistics.ForEach(s =>
         {
             DataRow dr = data.NewRow();
-            dr["DateStatistics"] = s.DateStatistics;
+            dr["DateStatistic"] = s.DateStatistics;
             dr["LeadId"] = s.LeadId;
             dr["DepositsSum"] = s.DepositsSum;
             dr["WithdrawSum"] = s.WithdrawSum;

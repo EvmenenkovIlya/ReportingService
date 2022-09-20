@@ -1,6 +1,6 @@
-﻿namespace ReportingService.Business.Models;
+﻿namespace ReportingService.API.Models;
 
-public class Statistics
+public class StatisticsResponse
 {
     public DateTime DateStatistic { get; set; }
     public int RegularLeadsCount { get; set; }
@@ -13,6 +13,6 @@ public class Statistics
     public int DepositsCount { get; set; }
     public int WithdrawalsCount { get; set; }
     public int TransfersCount { get; set; }
-    public List<AccountsStatistic> AccountsStatistic { get; set; }
-
+    public List<AccountsStatisticResponse> AccountsStatistic { get; set; }
 }
+
