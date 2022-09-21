@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReportingService.Business.Exceptions;
-using ReportingService.Data.Dto;
 using ReportingService.Data.Repositories;
-using System.Data;
 
 namespace ReportingService.Business.Services;
 
@@ -26,13 +24,8 @@ public class LeadOverallStatisticsService : ILeadOverallStatisticsService
 
     public async Task CreateLeadOverallsStatistics()
     {
-        var statistics = await _leadOverallStatisticRepository.GetOverallStatisiticsByDate(DateTime.Now.AddDays(-1));
-
-        //for (int i = 0; i <= 100000)
-
-        var s = statistics.GetRange(0, 10);
-
-        await _leadOverallStatisticRepository.AddLeadStatistic(s);
+        _logger.LogInformation($"LeadOverallStatisticsService start to write statistic for {DateTime.Now.AddDays(-1).Date}");
+        await _leadOverallStatisticRepository.GetOverallStatisticsByDate(DateTime.Now.AddDays(-1));
     }
 
     public Task<List<int>> GetLeadIdsWithNecessaryTransactionsCount(int transactionsCount, int daysCount)

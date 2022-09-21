@@ -44,7 +44,7 @@ public class Worker : BackgroundService
             await statisticsService.Execute();
 
             ILeadOverallStatisticsService leadOverallStatisticsService = scope.ServiceProvider.GetRequiredService<ILeadOverallStatisticsService>();
-           //await leadOverallStatisticsService.Execute();
+            await leadOverallStatisticsService.Execute();
         }
     }
 
