@@ -2,6 +2,17 @@
 	@Date date
 AS
 BEGIN
+INSERT INTO [dbo].[LeadOverallStatistic]
+	(
+		[DateStatistics],
+		[LeadId],
+		[DepositsSum],
+		[WithdrawSum],
+		[TransferSum],
+		[DepositsCount],
+		[WithdrawalsCount],
+		[TransfersCount]
+	)
 	select @Date as 'DateStatistics', t.LeadId, abs(t.DepositsSum) as 'DepositsSum', abs(w.WithdrawalsSum) as 'WithdrawSum', abs(tr.TransfersSum) as 'TransferSum', t.DepositsCount, w.WithdrawalsCount, tr.TransfersCount
   from 
   (select Id as 'LeadId', s.DepositsCount, s.DepositsSum from [dbo].LeadInfo
