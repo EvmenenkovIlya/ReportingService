@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayerRepositories();
 builder.Services.AddBusinessLayerServices();
-builder.Services.AddHostedService<Worker>();   //need add creation of statistic
+builder.Services.AddHostedService<Worker>(); 
 
 builder.Services.AddConsumers();
 
@@ -30,6 +30,7 @@ builder.Services.AddAutoMapper();
 
 var app = builder.Build();
 
+app.ConfigureHeathCheck();
 app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();

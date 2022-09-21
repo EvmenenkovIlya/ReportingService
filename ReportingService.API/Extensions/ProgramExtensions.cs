@@ -1,5 +1,8 @@
-﻿using IncredibleBackend.Messaging.Extentions;
+﻿using HealthChecks.UI.Client;
+using IncredibleBackend.Messaging.Extentions;
 using IncredibleBackendContracts.Constants;
+using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ReportingService.Business;
 using ReportingService.Business.Consumers;
 using ReportingService.Business.Services;
@@ -15,6 +18,15 @@ public static class ProgramExtensions
         services.AddScoped<ILeadOverallStatisticsService, LeadOverallStatisticsService>();
         services.AddScoped<ITransactionsService, TransactionsService>();
         services.AddScoped<IAccountsService, AccountsService>();
+        services.AddHealthChecks();
+    }
+
+    public static void ConfigureHeathCheck(this WebApplication app)
+    {
+        app.MapHealthChecks("/health", new HealthCheckOptions
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
     }
 
     public static void AddDataLayerRepositories(this IServiceCollection services)
@@ -51,15 +63,42 @@ public static class ProgramExtensions
             },
             (cfg, ctx) =>
             {
-                cfg.RegisterConsumer<TransactionCreatedEventConsumer>(ctx, RabbitEndpoint.TransactionCreate);
-                cfg.RegisterConsumer<TransferTransactionCreatedEventConsumer>(ctx, RabbitEndpoint.TransferTransactionCreate);
-                cfg.RegisterConsumer<AccountCreatedEventConsumer>(ctx, RabbitEndpoint.AccountCreate);
-                cfg.RegisterConsumer<AccountUpdatedEventsConsumer>(ctx, RabbitEndpoint.AccountUpdate);
-                cfg.RegisterConsumer<AccountDeletedEventsConsumer>(ctx, RabbitEndpoint.AccountDelete);
-                cfg.RegisterConsumer<LeadCreatedEventsConsumer>(ctx, RabbitEndpoint.LeadCreate);
-                cfg.RegisterConsumer<LeadUpdatedEventsConsumer>(ctx, RabbitEndpoint.LeadUpdate);
-                cfg.RegisterConsumer<LeadDeletedEventsConsumer>(ctx, RabbitEndpoint.LeadDelete);
-                cfg.RegisterConsumer<LeadsRoleUpdatedEventsConsumer>(ctx, RabbitEndpoint.LeadsRoleUpdateReporting);
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransactionCreate, c =>
+                {
+                    c.ConfigureConsumer<TransactionCreatedEventConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.TransferTransactionCreate, c =>
+                {
+                    c.ConfigureConsumer<TransferTransactionCreatedEventConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountCreate, c =>
+                {
+                    c.ConfigureConsumer<AccountCreatedEventConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountUpdate, c =>
+                {
+                    c.ConfigureConsumer<AccountUpdatedEventsConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.AccountDelete, c =>
+                {
+                    c.ConfigureConsumer<AccountDeletedEventsConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.LeadCreate, c =>
+                {
+                    c.ConfigureConsumer<LeadCreatedEventsConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.LeadUpdate, c =>
+                {
+                    c.ConfigureConsumer<LeadUpdatedEventsConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.LeadDelete, c =>
+                {
+                    c.ConfigureConsumer<LeadDeletedEventsConsumer>(ctx);
+                });
+                cfg.ReceiveEndpoint(RabbitEndpoint.LeadsRoleUpdateReporting, c =>
+                {
+                    c.ConfigureConsumer<LeadsRoleUpdatedEventsConsumer>(ctx);
+                });
             }, null);
     }
 }

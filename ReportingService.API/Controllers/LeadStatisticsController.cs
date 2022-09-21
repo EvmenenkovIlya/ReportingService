@@ -39,12 +39,12 @@ public class LeadStatisticsController : Controller
         return Ok(result);
     }
 
-    [HttpGet]
-    [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-    public async Task<ActionResult> CreateLeadsStatistic()
-    {
-        await _leadStatisticsService.CreateLeadOverallsStatistics();
- 
-        return Ok();
-    }
+    //[HttpGet]
+    //[ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+    //public async Task<ActionResult> CreateLeadsStatistic()
+    //{
+    //    await _leadStatisticsService.CreateLeadOverallsStatistics();
+
+    //    return Ok();
+    //}
 }

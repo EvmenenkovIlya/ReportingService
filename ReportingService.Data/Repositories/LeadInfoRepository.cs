@@ -93,8 +93,12 @@ public class LeadInfoRepository : BaseRepositories, ILeadInfoRepository
     public async Task DeleteLeadInfo(int leadId)
     {
         _logger.LogInformation($"LeadInfoRepository: Delete leadInfo with LeadId = {leadId}");
-        await Connection.QuerySingleAsync
+        await Connection.QuerySingleOrDefaultAsync
             (StoredProcedures.LeadInfo_Delete,
+                param: new
+                {
+                    LeadId = leadId
+                },
             commandType: CommandType.StoredProcedure);
     }
 
