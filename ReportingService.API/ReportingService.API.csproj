@@ -10,7 +10,7 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="IncredibleBackend" Version="2.2.3" />
+    <PackageReference Include="IncredibleBackend" Version="2.2.4" />
     <PackageReference Include="IncredibleBackend.Rmq" Version="1.1.7" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.0" />

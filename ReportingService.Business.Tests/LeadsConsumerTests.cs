@@ -133,7 +133,7 @@ public class LeadsConsumerTests
     public async Task LeadsRoleUpdateEventConsumed_WhenValidRequestPassed_LeadInfoDeleted()
     {
         //given
-        LeadsRoleUpdatedEvent leadsRoleUpdatedEvent = new(new List<int>() { 1, 2, 3 });
+        LeadsRoleUpdatedEvent leadsRoleUpdatedEvent = new(){Ids = new List<int>(){1, 2, 3}};
         var context = Mock.Of<ConsumeContext<LeadsRoleUpdatedEvent>>(c => c.Message == leadsRoleUpdatedEvent);
 
         //when

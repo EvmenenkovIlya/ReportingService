@@ -18,7 +18,6 @@ public class Worker : BackgroundService
         _logger =  logger;
         _cronJob = CronExpression.Parse(Constants.CronExpression, CronFormat.Standard);
     }
-    
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
